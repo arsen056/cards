@@ -53,9 +53,9 @@ function App() {
         </SuperCheckbox>
       </div>
 
-      <SuperInputText placeholder='Input' error={error} value={inputValue} onChangeText={setInputValue} onEnter={onEnter}/>
+      <SuperInputText placeholder='Please press enter' error={error} value={inputValue} onChangeText={setInputValue} onEnter={onEnter}/>
       <div>
-        {values.length ? values.map(e => <p>{e}</p>) : 'List empty'}
+        {values.length ? values.map((e,i) => <p key={i}>{e}</p>) : 'List empty'}
       </div>
     </div>
   );
