@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Profile.module.css'
 import avatar from '../../assets/avatar.png'
+import {EditableSpan} from "./editableSpan/EditableSpan";
 
 export const Profile = () => {
+  const [name, setName] = useState<string>('Ivan')
+
   return (
     <div className={s.profileWrapper}>
       <div id='profile-container' className={s.profileContainer}>
@@ -11,10 +14,7 @@ export const Profile = () => {
           <img src={avatar} alt="avatar"/>
         </div>
 
-        <h3 id='nickname' className={s.name}>
-          Ivan
-          <img src="" alt=""/>
-        </h3>
+        <EditableSpan title={name} changeTitle={setName}/>
 
         <div id='email' className={s.email}>j&johnson@gmail.com</div>
 
