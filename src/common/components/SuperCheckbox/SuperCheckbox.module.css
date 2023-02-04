@@ -1,26 +1,31 @@
 .label {
+    cursor: pointer;
+
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
 
 .checkbox {
-    appearance: none;
+    cursor: pointer;
+
     width: 18px;
     height: 18px;
+    margin-right: 8px;
+
+    vertical-align: middle;
+
     background-repeat: no-repeat;
     background-position: center center;
-    vertical-align: middle;
-    margin-right: 8px;
-    border-radius: 3px;
     border: 2px solid #06c;
-    cursor: pointer;
+    border-radius: 3px;
+
+    appearance: none;
 }
 
 .checkbox:checked {
-    appearance: none;
+    background-image: url('src/assets/checked.svg');
 
-    background-image: url('checked.svg');
+    appearance: none;
 }
 
 .checkbox:focus {

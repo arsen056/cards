@@ -1,34 +1,41 @@
-import React, {ButtonHTMLAttributes, DetailedHTMLProps, FC} from 'react'
-import styled from "styled-components";
+import React, { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react'
+
+import styled from 'styled-components'
 
 // тип пропсов обычной кнопки, children в котором храниться название кнопки там уже описан
-type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement>
+type DefaultButtonPropsType = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>
 
 type SuperBtnStyledPropsType = DefaultButtonPropsType & {
-    xType?: string
+  xType?: string
 }
 
-export const SuperButton:FC<any> = (props) => {
-    return (
-        <Btn {...props}/>
-    )
+export const SuperButton: FC<any> = props => {
+  return <Btn {...props} />
 }
 
 const Btn = styled.button<SuperBtnStyledPropsType>`
   position: relative;
   padding: 10px 20px;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
   font-size: 18px;
   border-radius: 10px;
   border: none;
   font-weight: 600;
   letter-spacing: 1.5px;
   background-color: red;
-  
-  ${props => props.disabled ? disabled : props.xType === 'red' ? red :
-          props.xType === 'secondary' ? secondary : dflt}
+
+  ${props =>
+    props.disabled
+      ? disabled
+      : props.xType === 'red'
+      ? red
+      : props.xType === 'secondary'
+      ? secondary
+      : dflt}
 `
 
 const red = `

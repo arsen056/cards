@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
-import {profileReducer} from "../reducers/profileReducer";
+import {profileReducer} from "../features/Profile/profileReducer";
 import thunk from "redux-thunk";
-import {appReducer} from "../reducers/appReducer";
+import {appReducer} from "./appReducer";
 
 const rootReducers = combineReducers({profile: profileReducer, app: appReducer})
 
