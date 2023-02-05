@@ -33,18 +33,6 @@
   color: #AFAFAF;
 }
 
-.avatarWrapper {
-  width: 96px;
-  height: 96px;
-
-}
-
-.avatarWrapper img {
-  width: 100%;
-
-  border-radius: 50%;
-}
-
 .btn {
   cursor: pointer;
 

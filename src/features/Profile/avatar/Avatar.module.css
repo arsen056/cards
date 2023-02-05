@@ -1,0 +1,27 @@
+.avatarWrapper {
+  position: relative;
+
+  width: 96px;
+  height: 96px;
+}
+
+.avatarWrapper img {
+  width: 100%;
+
+  border-radius: 50%;
+}
+
+.editAvatar {
+  cursor: pointer;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: 32px;
+  height: 32px;
+
+  background-image: url('../../../assets/icons/avatar-edit.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}

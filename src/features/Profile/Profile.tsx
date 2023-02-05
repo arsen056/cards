@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import s from './Profile.module.css'
-import avatar from '../../assets/avatar.png'
 import {EditableSpan} from "./editableSpan/EditableSpan";
+import {Avatar} from "./avatar/Avatar";
 
 export const Profile = () => {
   const [name, setName] = useState<string>('Ivan')
@@ -10,10 +10,7 @@ export const Profile = () => {
     <div className={s.profileWrapper}>
       <div id='profile-container' className={s.profileContainer}>
         <h2 id='profile-title' className={s.title}>Personal Information</h2>
-        <div id='profile-avatar' className={s.avatarWrapper}>
-          <img src={avatar} alt="avatar"/>
-        </div>
-
+        <Avatar/>
         <EditableSpan title={name} changeTitle={setName}/>
 
         <div id='email' className={s.email}>j&johnson@gmail.com</div>
