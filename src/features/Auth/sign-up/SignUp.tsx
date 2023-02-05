@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {useFormik} from "formik";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Navigate, NavLink} from "react-router-dom";
 import {FormControl, FormGroup, Grid, Input, InputAdornment, InputLabel, TextField} from "@mui/material";
 import {SuperButton} from "../../../common/components/SuperButton";
-import {AppRootStateType} from "../../../app/store";
+import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {IconButton} from '@mui/material';
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import s from './SignUp.module.css'
-import {signUpTC} from "./signUp-reducer";
-import {ThunkDispatch} from "redux-thunk";
-import {AnyAction} from "redux";
+import {signUpTC} from "./signUpReducer";
+import {Loader} from "../../../common/components/Loader/Loader";
 
 
 type FormikErrorType = {
@@ -19,9 +18,13 @@ type FormikErrorType = {
     confirmPassword?: string
 }
 
-export const SignUp = () => {
-    const dispatch = useDispatch<ThunkDispatch<AppRootStateType, any, AnyAction>>()
+export const SignUp = memo(() => {
+    const dispatch = AppDispatch()
     const signUp = useSelector<AppRootStateType>(state => state.signUp.signUp)
+    const isLoggedIn = useSelector<AppRootStateType>(state => state.app.isLoggedIn)
+    const status = useSelector<AppRootStateType>(state => state.app.status)
+    const error = useSelector<AppRootStateType, string>(state => state.app.error)
+    console.log(error)
     const [password, setShowPassword] = useState<boolean>(true)
     const [confirmPassword, setConfirmPassword] = useState<boolean>(true)
 
@@ -44,8 +47,8 @@ export const SignUp = () => {
             }
             if (!values.password) {
                 errors.password = 'Password is required!'
-            } else if (values.password.length < 3) {
-                errors.password = 'Password need to be more than 3 symbols'
+            } else if (values.password.length < 8) {
+                errors.password = 'Password need to be more than 7 symbols'
             }
             if (!values.confirmPassword) {
                 errors.confirmPassword = 'Confirm password is required!'
@@ -61,13 +64,23 @@ export const SignUp = () => {
                 password: values.password
             }
             dispatch(signUpTC(data))
-            formik.resetForm()
         },
-        })
+    })
 
-    if (signUp) {
+    if (isLoggedIn) {
         return <Navigate to={'/profile'}/>
     }
+    if (signUp) {
+        return <Navigate to={'/login'}/>
+    }
+    if (status === 'loading') {
+        return <Loader/>
+    }
+
+   // if (error !== '') {
+   //     console.log(error)
+   //    return <div style={{color: "red"}}>{error}</div>
+   // }
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'} marginTop={5}>
@@ -137,4 +150,4 @@ export const SignUp = () => {
             </div>
         </Grid>
     </Grid>
-}
+})
