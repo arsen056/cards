@@ -1,6 +1,8 @@
 .profileWrapper {
   display: flex;
   justify-content: center;
+
+  padding: 20px 0;
 }
 
 .profileContainer {
@@ -33,24 +35,18 @@
   color: #AFAFAF;
 }
 
+.back {
+  cursor: pointer;
 
-/* No used */
-/*.btn {*/
-/*  cursor: pointer;*/
+  margin: 20px 0;
+  padding-left: 23px;
 
-/*  padding: 10px 40px;*/
+  font-size: 14px;
+  font-weight: 400;
 
-/*  font-size: 16px;*/
-/*  font-weight: 500;*/
-
-/*  background-color: #FCFCFC;*/
-/*  border: none;*/
-/*  border-radius: 30px;*/
-/*  box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);*/
-/*}*/
-
-/*.btn:hover {*/
-/*  color: #FFFFFF;*/
-
-/*  background-color: #000000;*/
-/*}*/
+  background-color: transparent;
+  background-image: url(../../assets/icons/back.svg);
+  background-repeat: no-repeat;
+  background-position: left;
+  border: 0;
+}
