@@ -1,11 +1,14 @@
+import {Dispatch} from "redux";
+import {registerAPI, RegisterParamsType} from "./signUp-api";
+
 
 
 const initialState = {
+    // status: 'loading' as RequestStatusType,
     signUp : false
 }
-type InitialStateType = typeof initialState
 
-export const signUpReducer = (state: InitialStateType  = initialState, action: signUpActionsType): InitialStateType => {
+export const signUpReducer = (state: InitialStateType  = initialState, action: SignUpActionsType): InitialStateType => {
     switch (action.type) {
         case 'REGISTRATION':
             return {...state, signUp: action.value}
@@ -18,43 +21,26 @@ export const signUpReducer = (state: InitialStateType  = initialState, action: s
 export const signUpAC = (value: boolean) =>
     ({type: 'REGISTRATION', value} as const)
 
-
 // thunks
-// export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
-//     dispatch(setAppStatusAC('loading'))
-//     authApi.login(data)
-//         .then((res) => {
-//             if (res.data.resultCode === 0) {
-//                 dispatch(setIsLoggedInAC(true))
-//                 dispatch(setAppStatusAC('succeeded'))
-//             } else {
-//                 handleServerAppError(res.data, dispatch)
-//             }})
-//         .catch((error) => {
-//             handleServerNetworkError(error, dispatch)
-//         })
-// }
-
-// export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
-//     dispatch(setAppStatusAC('loading'))
-//     authApi.logout()
-//         .then((res) => {
-//             if (res.data.resultCode === 0) {
-//                 dispatch(setIsLoggedInAC(false))
-//                 dispatch(setAppStatusAC('succeeded'))
-//                 dispatch(clearTodolistsAC())
-//             } else {
-//                 handleServerAppError(res.data, dispatch)
-//             }})
-//         .catch((error) => {
-//             handleServerNetworkError(error, dispatch)
-//         })
-// }
-
-
+export const signUpTC = (data: RegisterParamsType) => (dispatch: Dispatch) => {
+    // dispatch(setAppStatusAC('loading'))
+    registerAPI.registration(data)
+        .then((res) => {
+                console.log(res)
+            dispatch(signUpAC(true))
+                // dispatch(setIsLoggedInAC(true))
+                // dispatch(setAppStatusAC('succeeded'))
+                // dispatch(setAppStatusAC('succeeded'))
+            })
+        .catch((error) => {
+          console.log(error)
+        })
+}
 
 // types
-type signUpActionsType = ReturnType<typeof signUpAC>
+type InitialStateType = typeof initialState
+type SignUpActionsType = ReturnType<typeof signUpAC>
+
 
 
 

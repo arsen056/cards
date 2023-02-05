@@ -5,8 +5,12 @@ import {Navigate, NavLink} from "react-router-dom";
 import {FormControl, FormGroup, Grid, Input, InputAdornment, InputLabel, TextField} from "@mui/material";
 import {SuperButton} from "../../../common/components/SuperButton";
 import {AppRootStateType} from "../../../app/store";
-import { IconButton } from '@mui/material';
+import {IconButton} from '@mui/material';
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import s from './SignUp.module.css'
+import {signUpTC} from "./signUp-reducer";
+import {ThunkDispatch} from "redux-thunk";
+import {AnyAction} from "redux";
 
 
 type FormikErrorType = {
@@ -16,7 +20,7 @@ type FormikErrorType = {
 }
 
 export const SignUp = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<ThunkDispatch<AppRootStateType, any, AnyAction>>()
     const signUp = useSelector<AppRootStateType>(state => state.signUp.signUp)
     const [password, setShowPassword] = useState<boolean>(true)
     const [confirmPassword, setConfirmPassword] = useState<boolean>(true)
@@ -46,26 +50,32 @@ export const SignUp = () => {
             if (!values.confirmPassword) {
                 errors.confirmPassword = 'Confirm password is required!'
             } else if (values.confirmPassword !== values.password) {
-                errors.confirmPassword = 'Check our value!'
+                errors.confirmPassword = 'Check your password!'
             }
             return errors
         },
 
         onSubmit: values => {
-            // dispatch(loginTC(values))
-            alert ('Super registration!')
+            const data = {
+                email: values.email,
+                password: values.password
+            }
+            dispatch(signUpTC(data))
             formik.resetForm()
         },
-    })
+        })
 
     if (signUp) {
         return <Navigate to={'/profile'}/>
     }
 
     return <Grid container justifyContent={'center'}>
-        <Grid item justifyContent={'center'}>
-            <form onSubmit={formik.handleSubmit}>
-                <FormControl>
+        <Grid item justifyContent={'center'} marginTop={5}>
+            <div className={s.title}>
+                <h1>Sign Up</h1>
+            </div>
+            <form onSubmit={formik.handleSubmit} className={s.form}>
+                <FormControl className={s.formControl}>
                     <FormGroup>
                         <TextField
                             variant="standard"
@@ -74,7 +84,7 @@ export const SignUp = () => {
                             {...formik.getFieldProps("email")}
                         />
                         {formik.errors.email ? <div style={{color: "red"}}>{formik.errors.email}</div> : ''}
-                        <FormControl variant="standard">
+                        <FormControl variant="standard" style={{marginTop: 15}}>
                             <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                             <Input
                                 id="input-password"
@@ -87,14 +97,14 @@ export const SignUp = () => {
                                             aria-label="toggle password visibility"
                                             onClick={(e) => showPassword(e.currentTarget.id)}
                                         >
-                                            {password ? <Visibility /> : <VisibilityOff /> }
+                                            {password ? <Visibility/> : <VisibilityOff/>}
                                         </IconButton>
                                     </InputAdornment>
                                 }
                             />
                         </FormControl>
                         {formik.errors.password ? <div style={{color: "red"}}>{formik.errors.password}</div> : ''}
-                        <FormControl variant="standard">
+                        <FormControl variant="standard" style={{marginTop: 25}}>
                             <InputLabel htmlFor="standard-adornment-password">Confirm Password</InputLabel>
                             <Input
                                 id="input-confirmPassword"
@@ -107,21 +117,24 @@ export const SignUp = () => {
                                             aria-label="toggle password visibility"
                                             onClick={(e) => showPassword(e.currentTarget.id)}
                                         >
-                                            {confirmPassword ? <Visibility /> : <VisibilityOff /> }
+                                            {confirmPassword ? <Visibility/> : <VisibilityOff/>}
                                         </IconButton>
                                     </InputAdornment>
                                 }
                             />
                         </FormControl>
-                        {formik.errors.confirmPassword ? <div style={{color: "red"}}>{formik.errors.confirmPassword}</div> : ''}
-                        <SuperButton type={'submit'} variant={'contained'} color={'primary'}>
+                        {formik.errors.confirmPassword ?
+                            <div style={{color: "red"}}>{formik.errors.confirmPassword}</div> : ''}
+                        <SuperButton type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: 50}}>
                             Sign Up
                         </SuperButton>
                     </FormGroup>
                 </FormControl>
             </form>
-            <p>Already have an account?</p>
-            <NavLink to="/login">Sign In</NavLink>
+            <div className={s.signInBlock}>
+                <p>Already have an account?</p>
+                <NavLink to="/login" className={s.signInLink}>Sign In</NavLink>
+            </div>
         </Grid>
     </Grid>
 }

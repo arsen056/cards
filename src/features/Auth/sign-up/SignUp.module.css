@@ -1,0 +1,25 @@
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+.formControl {
+    width: 400px;
+}
+
+.signInBlock {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signInLink {
+    font-weight: bolder;
+    color: #0066cb;
+}
+
+a:hover {
+    color: black;
+}
+
