@@ -1,8 +1,6 @@
 import React from 'react'
-
 import '../App.css'
 import { Navigate, Route, Routes } from 'react-router-dom'
-
 import { Error404 } from '../common/components/Error404'
 import { ForgotPassword } from '../features/Auth/forgot-password/ForgotPassword'
 import { NewPassword } from '../features/Auth/new-password/NewPassword'
