@@ -32,7 +32,7 @@ export const appReducer = (state=initState, action: AppActionsType) => {
 export const setStatus = (status: AppStatusType) => ({type: 'APP/SET_STATUS', status} as const)
 export const setLoggedIn = (isLogged: boolean) => ({type: 'APP/SET_LOGGED_IN', isLogged} as const)
 export const setIsInit = (init: boolean) => ({type: 'APP/SET_IS_INIT', init} as const)
-export const setError = (error: AppStatusType) => ({type: 'APP/SET_ERROR', error} as const)
+export const setError = (error: string) => ({type: 'APP/SET_ERROR', error} as const)
 
 export type AppActionsType = ReturnType<typeof setStatus>
   | ReturnType<typeof setLoggedIn>
