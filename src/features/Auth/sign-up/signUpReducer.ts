@@ -26,8 +26,7 @@ export const signUpTC = (data: RegisterParamsType): AppThunk => async dispatch =
         await registerAPI.registration(data)
         dispatch(signUpAC(true))
     } catch (e: any) {
-        // console.log(e.response.data.error)
-        setError(e.response.data.error)
+        dispatch(setError(e.response.data.error))
     } finally {
         dispatch(setStatus('success'))
     }

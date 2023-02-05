@@ -77,15 +77,14 @@ export const SignUp = memo(() => {
         return <Loader/>
     }
 
-   // if (error !== '') {
-   //     console.log(error)
-   //    return <div style={{color: "red"}}>{error}</div>
-   // }
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'} marginTop={5}>
             <div className={s.title}>
                 <h1>Sign Up</h1>
+            </div>
+            <div>
+                {error !== 'Error' ? <div style={{color: "red", textAlign: 'center'}}>{error}</div> : ''}
             </div>
             <form onSubmit={formik.handleSubmit} className={s.form}>
                 <FormControl className={s.formControl}>
