@@ -3,7 +3,7 @@ import s from './Profile.module.css'
 import {EditableSpan} from "./editableSpan/EditableSpan";
 import {Avatar} from "./avatar/Avatar";
 import {SuperButton} from "../../common/components/SuperButton";
-import {useNavigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {editName, ProfileStateType} from "./profileReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
@@ -13,21 +13,21 @@ import {AppStatusType} from "../../app/appReducer";
 export const Profile = () => {
   const user = useSelector<AppRootStateType, ProfileStateType>(state => state.profile)
   const loading = useSelector<AppRootStateType, AppStatusType>(state => state.app.status)
+  const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.app.isLoggedIn)
 
-  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const editNameHandler = (name: string) => {
     dispatch(editName(name))
   }
 
-  // useEffect(() => {
-  //   dispatch(fetchProfile())
-  // }, [])
+  if (!isLoggedIn) {
+    return <Navigate to='/'/>
+  }
 
-// isLoggedIn ? redirect to login
+  const back = () => {
 
-  const back = () => navigate(-1)
+  }
 
   return (
     <div className='container'>
