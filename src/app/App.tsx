@@ -7,10 +7,12 @@ import { NewPassword } from '../features/Auth/new-password/NewPassword'
 import { SignIn } from '../features/Auth/sign-in/SignIn'
 import { SignUp } from '../features/Auth/sign-up/SignUp'
 import { Profile } from '../features/Profile/Profile'
+import {Header} from "../common/components/header/Header";
 
 function App() {
   return (
     <div className="App">
+      <Header/>
       <Routes>
         <Route path="/" element={<Navigate to={'/login'} />} />
         <Route path="/login" element={<SignIn />} />
