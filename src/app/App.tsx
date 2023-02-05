@@ -9,7 +9,9 @@ import { SignUp } from '../features/Auth/sign-up/SignUp'
 import { Profile } from '../features/Profile/Profile'
 import {Header} from "../common/components/header/Header";
 
+
 function App() {
+
   return (
     <div className="App">
       <Header/>
