@@ -6,3 +6,5 @@ import {appReducer} from "./appReducer";
 const rootReducers = combineReducers({profile: profileReducer, app: appReducer})
 
 export const store = legacy_createStore(rootReducers, applyMiddleware(thunk))
+
+export type AppRootStateType = ReturnType<typeof rootReducers>
