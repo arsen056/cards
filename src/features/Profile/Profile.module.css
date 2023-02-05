@@ -33,22 +33,24 @@
   color: #AFAFAF;
 }
 
-.btn {
-  cursor: pointer;
 
-  padding: 10px 40px;
+/* No used */
+/*.btn {*/
+/*  cursor: pointer;*/
 
-  font-size: 16px;
-  font-weight: 500;
+/*  padding: 10px 40px;*/
 
-  background-color: #FCFCFC;
-  border: none;
-  border-radius: 30px;
-  box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
-}
+/*  font-size: 16px;*/
+/*  font-weight: 500;*/
 
-.btn:hover {
-  color: #FFFFFF;
+/*  background-color: #FCFCFC;*/
+/*  border: none;*/
+/*  border-radius: 30px;*/
+/*  box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);*/
+/*}*/
 
-  background-color: #000000;
-}
+/*.btn:hover {*/
+/*  color: #FFFFFF;*/
+
+/*  background-color: #000000;*/
+/*}*/

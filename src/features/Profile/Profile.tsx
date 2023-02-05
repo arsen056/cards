@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import s from './Profile.module.css'
 import {EditableSpan} from "./editableSpan/EditableSpan";
 import {Avatar} from "./avatar/Avatar";
+import {SuperButton} from "../../common/components/SuperButton";
 
 export const Profile = () => {
   const [name, setName] = useState<string>('Ivan')
@@ -15,7 +16,8 @@ export const Profile = () => {
 
         <div id='email' className={s.email}>j&johnson@gmail.com</div>
 
-        <button id='profile-logout-btn' className={s.btn}>Log out</button>
+        {/*<button id='profile-logout-btn' className={s.btn}>Log out</button>*/}
+        <SuperButton id='profile-logout-btn' xType={'logOut'}>Log out</SuperButton>
       </div>
     </div>
   );
