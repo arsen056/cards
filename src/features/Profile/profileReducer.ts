@@ -1,6 +1,8 @@
 import {AppThunk} from "../../app/store";
 import {SignInAPI} from "../Auth/sign-in/SignInAPI";
-import {setError, setStatus} from "../../app/appReducer";
+import {setStatus} from "../../app/appReducer";
+import {errorUtils} from "../../common/utils/errorUtils";
+import {AxiosError} from "axios";
 
 
 const initState = {name: 'Arsen', email: 'example@mail.ru'} as ProfileStateType
@@ -38,9 +40,9 @@ export const fetchProfile = (): AppThunk => async dispatch => {
     setStatus('loading')
     const res = await SignInAPI.me()
     dispatch(setProfile(res.data))
-
-  } catch (e: any) {
-    setError(e.message)
+  } catch (e) {
+    const err = e as Error | AxiosError<{ error: string }>
+    errorUtils(err, dispatch)
   } finally {
     setStatus('success')
   }
