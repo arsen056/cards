@@ -1,8 +1,8 @@
 const initState: AppStateType = {
   status: 'idle',
-  isLoggedIn: false,
+  isLoggedIn: true,
   isInit: false,
-  error: 'Error'
+  error: ''
 }
 
 export type AppStateType = {
