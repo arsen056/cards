@@ -23,7 +23,7 @@
 }
 
 .checkbox:checked {
-    background-image: url('src/assets/checked.svg');
+    background-image: url('../../../assets/checked.svg');
 
     appearance: none;
 }

@@ -3,8 +3,13 @@ import {ProfileActionsType, profileReducer} from "../features/Profile/profileRed
 import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppActionsType, appReducer} from "./appReducer";
 import {useDispatch} from "react-redux";
+import {loginReducer} from "../features/Auth/sign-in/loginReducer";
 
-const rootReducers = combineReducers({profile: profileReducer, app: appReducer})
+const rootReducers = combineReducers({
+    profile: profileReducer,
+    app: appReducer,
+    login: loginReducer
+})
 
 export type AppDispatchType = ThunkDispatch<AppRootStateType, any, ProfileActionsType>
 export const AppDispatch = () => useDispatch<AppDispatchType>()
