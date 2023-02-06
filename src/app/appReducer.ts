@@ -35,6 +35,6 @@ export const setIsInit = (init: boolean) => ({type: 'APP/SET_IS_INIT', init} as 
 export const setError = (error: string) => ({type: 'APP/SET_ERROR', error} as const)
 
 export type AppActionsType = ReturnType<typeof setStatus>
-    | ReturnType<typeof setLoggedIn>
-    | ReturnType<typeof setIsInit>
-    | ReturnType<typeof setError>
+  | ReturnType<typeof setLoggedIn>
+  | ReturnType<typeof setIsInit>
+  | ReturnType<typeof setError>

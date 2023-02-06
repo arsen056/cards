@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react'
 
 import styled from 'styled-components'
+import logoutIcon from '../../assets/icons/logout.svg'
 
 // тип пропсов обычной кнопки, children в котором храниться название кнопки там уже описан
 type DefaultButtonPropsType = DetailedHTMLProps<
@@ -10,6 +11,7 @@ type DefaultButtonPropsType = DetailedHTMLProps<
 
 type SuperBtnStyledPropsType = DefaultButtonPropsType & {
   xType?: string
+  fullWidth?: boolean
 }
 
 export const SuperButton: FC<any> = props => {
@@ -18,39 +20,40 @@ export const SuperButton: FC<any> = props => {
 
 const Btn = styled.button<SuperBtnStyledPropsType>`
   position: relative;
-  padding: 10px 20px;
+  padding: 10px 40px;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 18px;
-  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 30px;
   border: none;
-  font-weight: 600;
   letter-spacing: 1.5px;
-  background-color: red;
+  
+  ${props => props.fullWidth 
+    ? `width: 100%` : ``}
+  
 
   ${props =>
     props.disabled
       ? disabled
-      : props.xType === 'red'
-      ? red
+      : props.xType === 'logOut'
+      ? logOut
       : props.xType === 'secondary'
       ? secondary
       : dflt}
 `
 
-const red = `
-    background-color: #CC1439;
-    color: #FFF;
-    &:active {
-      border-radius: 50px;
-      box-shadow: 0 0 10px 0 #0066CC inset, 0 0 10px 4px #0066CC;
-      color: #0066CC;
-    }
-    
+const logOut = `
+  background-color: transparent;  
+  box-shadow: 0px 2px 10px rgba(109, 109, 109, 0.25), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+  padding-left: 53px;
+  background-image: url(${logoutIcon});
+  background-repeat: no-repeat;
+  background-position: 30px 12px; 
+  
     &:hover {
-      background-color: transparent;
-      color: #F137A6;
-      box-shadow: 0 0 10px 0 #f137a6 inset, 0 0 10px 4px #f137a6;
+      color: #FFFFFF;    
+      background-color: #366EFF;
     }
 `
 
@@ -62,6 +65,7 @@ const secondary = `
     color: #0066CC;
     box-shadow: 0 0 20px rgb(0 0 0 / 10%);
     transition: .5s;
+    
     &:hover {
       color: #0066CC;
       background-color: #E5F0FA;
