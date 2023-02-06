@@ -3,10 +3,12 @@ import s from './Header.module.css'
 import {Logo} from "./logo/Logo";
 import {Avatar} from "./avatar/Avatar";
 import {SuperButton} from "../SuperButton";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../../app/store";
 
 export const Header = () => {
 
-  const isLoggedIn = false // Будет браться из стейта
+  const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.app.isLoggedIn)
 
   return (
     <header id='header' className={s.header}>
