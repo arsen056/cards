@@ -1,6 +1,8 @@
 import {registerAPI, RegisterParamsType} from "./signUp-api";
-import {setError, setStatus} from "../../../app/appReducer";
+import {setStatus} from "../../../app/appReducer";
 import {AppThunk} from "../../../app/store";
+import {errorUtils} from "../../../common/utils/errorUtils";
+import {AxiosError} from "axios";
 
 
 const initialState = {
@@ -25,8 +27,9 @@ export const signUpTC = (data: RegisterParamsType): AppThunk => async dispatch =
     try {
         await registerAPI.registration(data)
         dispatch(signUpAC(true))
-    } catch (e: any) {
-        dispatch(setError(e.response.data.error))
+    } catch (e) {
+        const err = e as Error | AxiosError<{ error: string }>
+        errorUtils(err, dispatch)
     } finally {
         dispatch(setStatus('success'))
     }

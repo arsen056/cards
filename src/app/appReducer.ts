@@ -2,7 +2,7 @@ const initState: AppStateType = {
     status: 'idle',
     isLoggedIn: false,
     isInit: false,
-    error: 'Error'
+    error: ''
 }
 
 export type AppStateType = {
@@ -21,7 +21,6 @@ export const appReducer = (state = initState, action: AppActionsType) => {
         case "APP/SET_LOGGED_IN":
             return {...state, isLoggedIn: action.isLogged}
         case "APP/SET_ERROR":
-            debugger
             return {...state, error: action.error}
         case "APP/SET_IS_INIT":
             return {...state, isInit: action.init}

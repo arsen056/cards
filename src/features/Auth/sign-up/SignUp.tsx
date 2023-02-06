@@ -12,6 +12,7 @@ import {signUpTC} from "./signUpReducer";
 import {Loader} from "../../../common/components/Loader/Loader";
 
 
+
 type FormikErrorType = {
     email?: string
     password?: string
@@ -19,14 +20,16 @@ type FormikErrorType = {
 }
 
 export const SignUp = memo(() => {
+
     const dispatch = AppDispatch()
     const signUp = useSelector<AppRootStateType>(state => state.signUp.signUp)
     const isLoggedIn = useSelector<AppRootStateType>(state => state.app.isLoggedIn)
     const status = useSelector<AppRootStateType>(state => state.app.status)
     const error = useSelector<AppRootStateType, string>(state => state.app.error)
-    console.log(error)
     const [password, setShowPassword] = useState<boolean>(true)
     const [confirmPassword, setConfirmPassword] = useState<boolean>(true)
+
+
 
     const showPassword = (p: string) => {
         p === 'password' ? setShowPassword(!password) : setConfirmPassword(!confirmPassword)
@@ -84,7 +87,7 @@ export const SignUp = memo(() => {
                 <h1>Sign Up</h1>
             </div>
             <div>
-                {error !== 'Error' ? <div style={{color: "red", textAlign: 'center'}}>{error}</div> : ''}
+                {error !== '' ? <div style={{color: "red", textAlign: 'center'}}>{error}</div> : ''}
             </div>
             <form onSubmit={formik.handleSubmit} className={s.form}>
                 <FormControl className={s.formControl}>
