@@ -7,11 +7,9 @@ type BoxPropsType = {
 
 export const Box: FC<BoxPropsType> = ({children, title}) => {
   return (
-    <div className={s.wrapperCenter}>
-      <div className={s.box}>
-        {title && <h2 className={s.title}>{title}</h2>}
-        {children}
-      </div>
+    <div className={s.box}>
+      {title && <h2 className={s.title}>{title}</h2>}
+      {children}
     </div>
   )
 };
