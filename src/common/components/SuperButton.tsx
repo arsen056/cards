@@ -84,12 +84,9 @@ const dflt = `
       color: #DDEEFF;
       background-color: #006DDB;
       box-shadow: 0px 15px 20px rgb(46 229 157 / 40%);
-      transform: translateY(-4px);
+      
     }
-    
-    &:active {
-      top: 2px;
-    }
+
 `
 
 const disabled = `
