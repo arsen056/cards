@@ -10,7 +10,7 @@ import {Visibility, VisibilityOff} from "@mui/icons-material";
 import s from './SignUp.module.css'
 import {signUpTC} from "./signUpReducer";
 import {Loader} from "../../../common/components/Loader/Loader";
-
+import {Box} from "../../../common/components/box/Box";
 
 
 type FormikErrorType = {
@@ -78,75 +78,81 @@ export const SignUp = memo(() => {
     }
 
 
-    return <Grid container justifyContent={'center'}>
-        <Grid item justifyContent={'center'} marginTop={5}>
-            <div className={s.title}>
-                <h1>Sign Up</h1>
-            </div>
-            <div>
-                {error !== '' ? <div style={{color: "red", textAlign: 'center'}}>{error}</div> : ''}
-            </div>
-            <form onSubmit={formik.handleSubmit} className={s.form}>
-                <FormControl className={s.formControl}>
-                    <FormGroup>
-                        <TextField
-                            variant="standard"
-                            label="Email"
-                            margin="normal"
-                            {...formik.getFieldProps("email")}
-                        />
-                        {formik.errors.email ? <div style={{color: "red"}}>{formik.errors.email}</div> : ''}
-                        <FormControl variant="standard" style={{marginTop: 15}}>
-                            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                            <Input
-                                id="input-password"
-                                type={password ? 'password' : 'text'}
-                                {...formik.getFieldProps("password")}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            id="password"
-                                            aria-label="toggle password visibility"
-                                            onClick={(e) => showPassword(e.currentTarget.id)}
-                                        >
-                                            {password ? <Visibility/> : <VisibilityOff/>}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                        </FormControl>
-                        {formik.errors.password ? <div style={{color: "red"}}>{formik.errors.password}</div> : ''}
-                        <FormControl variant="standard" style={{marginTop: 25}}>
-                            <InputLabel htmlFor="standard-adornment-password">Confirm Password</InputLabel>
-                            <Input
-                                id="input-confirmPassword"
-                                type={confirmPassword ? 'password' : 'text'}
-                                {...formik.getFieldProps("confirmPassword")}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            id="confirmPassword"
-                                            aria-label="toggle password visibility"
-                                            onClick={(e) => showPassword(e.currentTarget.id)}
-                                        >
-                                            {confirmPassword ? <Visibility/> : <VisibilityOff/>}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                        </FormControl>
-                        {formik.errors.confirmPassword ?
-                            <div style={{color: "red"}}>{formik.errors.confirmPassword}</div> : ''}
-                        <SuperButton type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: 50}}>
-                            Sign Up
-                        </SuperButton>
-                    </FormGroup>
-                </FormControl>
-            </form>
-            <div className={s.signInBlock}>
-                <p>Already have an account?</p>
-                <NavLink to="/login" className={s.signInLink}>Sign In</NavLink>
-            </div>
-        </Grid>
-    </Grid>
+    return (
+        <div className={s.wrapper}>
+            <Box title={'Sign Up'}>
+                <Grid container justifyContent={'center'}>
+                    <Grid item justifyContent={'center'} marginTop={5}>
+                        <div>
+                            {error !== '' ? <div style={{color: "red", textAlign: 'center', padding: "6px"}}>{error}</div> : ''}
+                        </div>
+                        <form onSubmit={formik.handleSubmit} className={s.form}>
+                            <FormControl className={s.formControl}>
+                                <FormGroup>
+                                    <TextField
+                                        sx={{m: 1, width: '347px'}}
+                                        variant="standard"
+                                        label="Email"
+                                        margin="normal"
+                                        {...formik.getFieldProps("email")}
+                                    />
+                                    {formik.errors.email ? <div style={{color: "red", padding: "6px"}}>{formik.errors.email}</div> : ''}
+                                    <FormControl sx={{m: 1, width: '347px'}} variant="standard">
+                                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                                        <Input
+                                            id="input-password"
+                                            type={password ? 'password' : 'text'}
+                                            {...formik.getFieldProps("password")}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        id="password"
+                                                        aria-label="toggle password visibility"
+                                                        onClick={(e) => showPassword(e.currentTarget.id)}
+                                                    >
+                                                        {password ? <Visibility/> : <VisibilityOff/>}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                    </FormControl>
+                                    {formik.errors.password ?
+                                        <div style={{color: "red", padding: "6px"}}>{formik.errors.password}</div> : ''}
+                                    <FormControl variant="standard" sx={{m: 1, width: '347px'}}>
+                                        <InputLabel htmlFor="standard-adornment-password">Confirm Password</InputLabel>
+                                        <Input
+                                            id="input-confirmPassword"
+                                            type={confirmPassword ? 'password' : 'text'}
+                                            {...formik.getFieldProps("confirmPassword")}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        id="confirmPassword"
+                                                        aria-label="toggle password visibility"
+                                                        onClick={(e) => showPassword(e.currentTarget.id)}
+                                                    >
+                                                        {confirmPassword ? <Visibility/> : <VisibilityOff/>}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                    </FormControl>
+                                    {formik.errors.confirmPassword ?
+                                        <div style={{color: "red", padding: "6px"}}>{formik.errors.confirmPassword}</div> : ''}
+                                    <SuperButton type={'submit'} variant={'contained'} color={'primary'}
+                                                 style={{marginTop: 50}}>
+                                        Sign Up
+                                    </SuperButton>
+                                </FormGroup>
+                            </FormControl>
+                        </form>
+                        <div className={s.signInBlock}>
+                            <p>Already have an account?</p>
+                            <NavLink to="/login" className={s.signInLink}>Sign In</NavLink>
+                        </div>
+                    </Grid>
+                </Grid>
+            </Box>
+        </div>
+    )
 })

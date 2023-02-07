@@ -1,7 +1,7 @@
-.title {
+/*.title {
     display: flex;
     justify-content: center;
-}
+}*/
 
 .form {
     display: flex;
@@ -10,15 +10,11 @@
     margin-top: 10px;
 }
 
-.signInContainer {
+.wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 
-    width: 90%;
-    height: 100%;
-    margin: 0 auto;
+    padding: 20px 0;
 }
 
 .signUpBlock {
@@ -31,6 +27,7 @@
 .checkboxField {
     margin-bottom: 20px;
     margin-top: 20px;
+    padding: 6px;
 }
 
 .passRecovery {

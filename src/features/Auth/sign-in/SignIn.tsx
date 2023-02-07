@@ -11,6 +11,7 @@ import {FormControl, Grid, IconButton, Input, InputAdornment, InputLabel, TextFi
 import {signInTC} from "./loginReducer";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {Loader} from "../../../common/components/Loader/Loader";
+import {Box} from "../../../common/components/box/Box";
 
 type FormikErrorType = {
     email?: string
@@ -66,65 +67,68 @@ export const SignIn = () => {
 
 
     return (
-        <Grid container justifyContent={'center'}>
-            <Grid item justifyContent={'center'} marginTop={5}>
-                <div className={s.title}>
-                    <h1>Sign in</h1>
-                </div>
-                <div>
-                    {error !== '' ? <div style={{color: "red", textAlign: 'center'}}>{error}</div> : ''}
-                </div>
-                <form onSubmit={(event) => {
-                    formik.handleSubmit()
-                    event.preventDefault()
-                }} className={s.form}>
-                    <TextField
-                        sx={{m: 1, width: '347px'}}
-                        id="email"
-                        label="Email"
-                        variant="standard"
-                        margin="normal"
-                        {...formik.getFieldProps("email")}
-                    />
-                    {formik.errors.email ? <div style={{color: "red"}}>{formik.errors.email}</div> : null}
+        <div className={s.wrapper}>
+            <Box title={'Sign in'}>
+                <Grid container justifyContent={'center'}>
+                    <Grid item justifyContent={'center'} marginTop={5}>
+                        <div>
+                            {error !== '' ? <div style={{color: "red", textAlign: 'center'}}>{error}</div> : ''}
+                        </div>
+                        <form onSubmit={(event) => {
+                            formik.handleSubmit()
+                            event.preventDefault()
+                        }} className={s.form}>
+                            <TextField
+                                sx={{m: 1, width: '347px'}}
+                                id="email"
+                                label="Email"
+                                variant="standard"
+                                margin="normal"
+                                {...formik.getFieldProps("email")}
+                            />
+                            {formik.errors.email ? <div style={{color: "red", padding: "6px"}}>{formik.errors.email}</div> : null}
 
 
-                    <FormControl sx={{m: 1, width: '347px'}} variant="standard">
-                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                        <Input
-                            id="show-password"
-                            type={password ? 'password' : 'text'}
-                            {...formik.getFieldProps("password")}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        id="password"
-                                        aria-label="toggle password visibility"
-                                        onClick={(e) => showPassword(e.currentTarget.id)}
-                                    >
-                                        {password ? <Visibility/> : <VisibilityOff/>}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                    </FormControl>
-                    {formik.errors.password ? <div style={{color: "red"}}>{formik.errors.password}</div> : ''}
+                            <FormControl sx={{m: 1, width: '347px'}} variant="standard">
+                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                                <Input
+                                    id="show-password"
+                                    type={password ? 'password' : 'text'}
+                                    {...formik.getFieldProps("password")}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                id="password"
+                                                aria-label="toggle password visibility"
+                                                onClick={(e) => showPassword(e.currentTarget.id)}
+                                            >
+                                                {password ? <Visibility/> : <VisibilityOff/>}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+                            {formik.errors.password ? <div style={{color: "red", padding: "6px"}}>{formik.errors.password}</div> : ''}
 
-                    <div className={s.checkboxField}>
-                        <SuperCheckbox {...formik.getFieldProps('rememberMe')}>Remember me</SuperCheckbox>
-                    </div>
-                    <p className={s.passRecovery}>
-                        <NavLink to="/forgot-password">Forgot Password?</NavLink>
-                    </p>
-                    <SuperButton type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: 50}}>
-                        Sign in
-                    </SuperButton>
-                </form>
-                <div className={s.signUpBlock}>
-                    <p>Already have an account?</p>
-                    <NavLink to="/register" className={s.signUpLink}>Sign Up</NavLink>
-                </div>
-            </Grid>
-        </Grid>
+                            <div className={s.checkboxField}>
+                                <SuperCheckbox {...formik.getFieldProps('rememberMe')}>Remember me</SuperCheckbox>
+                            </div>
+                            <p className={s.passRecovery}>
+                                <NavLink to="/forgot-password">Forgot Password?</NavLink>
+                            </p>
+                            <SuperButton type={'submit'} variant={'contained'} color={'primary'}
+                                         style={{marginTop: 50}}>
+                                Sign in
+                            </SuperButton>
+                        </form>
+                        <div className={s.signUpBlock}>
+                            <p>Already have an account?</p>
+                            <NavLink to="/register" className={s.signUpLink}>Sign Up</NavLink>
+                        </div>
+                    </Grid>
+                </Grid>
+            </Box>
+        </div>
     )
 }
+

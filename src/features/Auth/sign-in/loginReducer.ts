@@ -3,6 +3,7 @@ import {AppThunk} from "../../../app/store";
 import {setError, setIsInit, setStatus} from "../../../app/appReducer";
 import axios, {AxiosError} from "axios";
 import {errorUtils} from "../../../common/utils/errorUtils";
+import {setProfile} from "../../Profile/profileReducer";
 
 const initialState = {
     isLoggedIn: false
@@ -26,15 +27,15 @@ export const signInAC = (value: boolean) => ({type: 'login/SET-IS-LOGGED-IN', va
 export const signInTC = (data: LoginParamsType): AppThunk => async dispatch => {
     dispatch(setStatus('loading'))
     try {
-        await SignInAPI.login(data)
+       const res = await SignInAPI.login(data)
         dispatch(signInAC(true))
+        dispatch (setProfile(res.data))
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
         errorUtils(err, dispatch)
     } finally {
         dispatch(setStatus('success'))
     }
-
 }
 
 
