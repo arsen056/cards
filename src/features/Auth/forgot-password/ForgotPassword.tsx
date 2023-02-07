@@ -36,13 +36,13 @@ export const ForgotPassword = () => {
     },
   })
 
-  if (forgotStatus) {
+  if (!forgotStatus) {
     return <Navigate to={'/check-email'}/>
   }
 
   return (
     <form onSubmit={formik.handleSubmit} className={s.wrapper}>
-      <Box title={`${appStatus === 'loading'? '' : 'Forgot your password?'}   `}>
+      <Box title={appStatus === 'loading'? '' : 'Forgot your password?'}>
         {appStatus === 'loading' ? <Loader/>
           : <>
             <TextField

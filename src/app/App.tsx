@@ -25,8 +25,7 @@ function App() {
         <Route path="/register" element={<SignUp />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/check-email" element={<CheckEmail />} />
-        <Route path="/NewPassword" element={<NewPassword />} />
-
+        <Route path="/set-new-password/:token" element={<NewPassword />} />
         <Route path="/404" element={<Error404 />} />
         <Route path="/*" element={<Navigate to="/404" />} />
       </Routes>
