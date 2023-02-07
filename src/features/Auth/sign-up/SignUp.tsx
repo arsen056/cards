@@ -77,7 +77,6 @@ export const SignUp = memo(() => {
         return <Loader/>
     }
 
-
     return (
         <div className={s.wrapper}>
             <Box title={'Sign Up'}>
