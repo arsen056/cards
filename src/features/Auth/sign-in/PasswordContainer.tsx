@@ -1,7 +1,7 @@
-import React from 'react'
-import { FieldInputProps } from 'formik/dist/types'
-import s from './PasswordContainer.module.css'
-import showPass from '../../../assets/eye.svg'
+import React, {useState} from 'react'
+import {FieldInputProps} from 'formik/dist/types'
+import {FormControl, IconButton, Input, InputAdornment, InputLabel} from "@mui/material";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {SuperInputText} from "../../../common/components/SuperInputText/SuperInputText";
 
 type PasswordContainerType = FieldInputProps<string> & {
@@ -9,23 +9,31 @@ type PasswordContainerType = FieldInputProps<string> & {
 }
 
 export const PasswordContainer: React.FC<PasswordContainerType> = ({ ...restProps }) => {
-    const [visiblePass, setVisiblePass] = React.useState(false)
+    const [password, setShowPassword] = useState<boolean>(true)
 
-    const visiblePassHandler = () => {
-        setVisiblePass(visible => !visible)
+    const showPassword = () => {
+        setShowPassword(visible => !visible)
     }
 
     return (
-        <div className={s.passwordContainer}>
-            <SuperInputText
-                type={visiblePass ? 'text' : 'password'}
-                placeholder={restProps.placeholder}
-                {...restProps}
-            />
+        <FormControl  sx={{ m: 1, width: '347px' }} variant="standard">
+            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+            <Input
+                id="show-password"
+                type={password ? 'password' : 'text'}
+                endAdornment={
+                    <InputAdornment position="end">
+                        <IconButton
+                            id="password"
+                            aria-label="toggle password visibility"
+                            onClick={showPassword}
+                        >
+                            {password ? <Visibility/> : <VisibilityOff/>}
+                        </IconButton>
+                    </InputAdornment>
 
-            <div className={visiblePass ? s.active : s.showPass} onClick={visiblePassHandler}>
-                <img src={showPass} alt="show password" />
-            </div>
-        </div>
+                }
+            />
+        </FormControl>
     )
 }

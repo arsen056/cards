@@ -1,15 +1,18 @@
 import {useFormik} from 'formik'
 import {Navigate, NavLink} from 'react-router-dom'
 
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import s from './Login.module.css'
-import {useDispatch, useSelector} from 'react-redux'
+import {useSelector} from 'react-redux'
 
 import {PasswordContainer} from "./PasswordContainer";
-import {AppRootStateType} from "../../../app/store";
+import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {SuperCheckbox} from "../../../common/components/SuperCheckbox/SuperCheckbox";
 import {SuperButton} from "../../../common/components/SuperButton";
-import {SuperInputText} from "../../../common/components/SuperInputText/SuperInputText";
+import {FormControl, Grid, IconButton, Input, InputAdornment, InputLabel, TextField} from "@mui/material";
+import {signInTC} from "./loginReducer";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {Loader} from "../../../common/components/Loader/Loader";
 
 type FormikErrorType = {
     email?: string
@@ -17,8 +20,10 @@ type FormikErrorType = {
     rememberMe?: boolean
 }
 export const SignIn = () => {
-    const dispatch = useDispatch()
+    const dispatch = AppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+    const error = useSelector<AppRootStateType, string>(state => state.app.error)
+    const status = useSelector<AppRootStateType>(state => state.app.status)
 
     const formik = useFormik({
         initialValues: {
@@ -26,68 +31,108 @@ export const SignIn = () => {
             password: '',
             rememberMe: false,
         },
-        validate: values => {
+        validate: (values) => {
             const errors: FormikErrorType = {}
-
             if (!values.email) {
-                errors.email = 'Required'
+                errors.email = 'Email is required!'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             }
-            if (values.password.length < 9) {
-                errors.password = 'Password should be more 8 letters'
+            if (!values.password) {
+                errors.password = 'Password is required!'
+            } else if (values.password.length < 8) {
+                errors.password = 'Password need to be more than 7 symbols'
             }
-
             return errors
         },
         onSubmit: values => {
-            // dispatch(loginTC(values))
-            formik.resetForm() //зачистить поле
+            dispatch(signInTC(values))
+            formik.resetForm()
         },
     })
-    if (isLoggedIn) {
-        return <Navigate to={'/profile'}/>
+
+    if (status === 'loading') {
+        return <Loader/>
     }
 
+    useEffect(() => {
+        if (isLoggedIn) {
+           <Navigate to={'/profile'}/>
+        }
+    })
+
+
+    const [password, setShowPassword] = useState<boolean>(true)
+
+    const showPassword = (p: string) => {
+        setShowPassword(visible => !visible)
+    }
+
+
     return (
-        <div className={s.signInContainer}>
-            <div className={s.page}>
-                <h3 className={s.h1}>Sign in</h3>
-                <form onSubmit={formik.handleSubmit}>
-                    <div className={s.field}>
-                        <label className={formik.touched.email && formik.errors.email ? s.errorField : ''}>
-                            Email
-                            <SuperInputText type={'text'} {...formik.getFieldProps('email')} />
-                            <div
-                                className={s.error}>{formik.touched.email && formik.errors.email && formik.errors.email}</div>
-                        </label>
-                    </div>
-                    <div className={s.field}>
-                        <label className={formik.touched.password && formik.errors.password ? s.errorField : ''}>
-                            Password
-                            <PasswordContainer {...formik.getFieldProps('password')} />
-                            <div
-                                className={s.error}>{formik.touched.password && formik.errors.password && formik.errors.password}</div>
-                        </label>
-                    </div>
+        <Grid container justifyContent={'center'}>
+            <Grid item justifyContent={'center'} marginTop={5}>
+                <div className={s.title}>
+                    <h1>Sign in</h1>
+                </div>
+                <div>
+                    {error !== '' ? <div style={{color: "red", textAlign: 'center'}}>{error}</div> : ''}
+                </div>
+                <form onSubmit={formik.handleSubmit} className={s.form}>
+                    <TextField
+                        sx={{m: 1, width: '347px'}}
+                        id="email"
+                        label="Email"
+                        variant="standard"
+                        margin="normal"
+                        {...formik.getFieldProps("email")}
+                    />
+                    {formik.errors.email ? <div style={{color: "red"}}>{formik.errors.email}</div> : null}
+
+
+
+                    <FormControl  sx={{ m: 1, width: '347px' }} variant="standard">
+                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                        <Input
+                            id="show-password"
+                            type={password ? 'password' : 'text'}
+                            {...formik.getFieldProps("password")}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        id="password"
+                                        aria-label="toggle password visibility"
+                                        onClick={(e) => showPassword(e.currentTarget.id)}
+                                    >
+                                        {password ? <Visibility/> : <VisibilityOff/>}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+                    {formik.errors.password ? <div style={{color: "red"}}>{formik.errors.password}</div> : ''}
+
+
+                    {/*<div>*/}
+                    {/*    <PasswordContainer {...formik.getFieldProps('password')} />*/}
+                    {/*    {formik.errors.password ? <div style={{color: "red"}}>{formik.errors.password}</div> : null}*/}
+                    {/*</div>*/}
                     <div className={s.checkboxField}>
                         <SuperCheckbox {...formik.getFieldProps('rememberMe')}>Remember me</SuperCheckbox>
                     </div>
-
                     <p className={s.passRecovery}>
-                        <NavLink to="/recoveryPassword">Forgot Password?</NavLink>
+                        <NavLink to="/forgot-password">Forgot Password?</NavLink>
                     </p>
-                    <div className={s.sendBtn}>
-                        <SuperButton xType={'default'} type="submit">
-                            Sign in
-                        </SuperButton>
-                    </div>
+                    <SuperButton type={'submit'} variant={'contained'} color={'primary'} style={{marginTop: 50}}>
+                        Sign in
+                    </SuperButton>
                 </form>
-                <p className={s.question}>Already have an account?</p>
-                <NavLink to="/signUp" className={s.link}>Sign Up</NavLink>
-            </div>
-
-        </div>
+                <div className={s.signUpBlock}>
+                    <p>Already have an account?</p>
+                    <NavLink to="/register" className={s.signUpLink}>Sign Up</NavLink>
+                </div>
+            </Grid>
+        </Grid>
     )
 }
 
