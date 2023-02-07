@@ -29,8 +29,6 @@ export const SignUp = memo(() => {
     const [password, setShowPassword] = useState<boolean>(true)
     const [confirmPassword, setConfirmPassword] = useState<boolean>(true)
 
-
-
     const showPassword = (p: string) => {
         p === 'password' ? setShowPassword(!password) : setConfirmPassword(!confirmPassword)
     }
