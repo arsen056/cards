@@ -1,18 +1,15 @@
 import {useFormik} from 'formik'
-import {Navigate, NavLink} from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 
 import React, {useEffect, useState} from 'react'
 import s from './Login.module.css'
 import {useSelector} from 'react-redux'
-
-import {PasswordContainer} from "./PasswordContainer";
 import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {SuperCheckbox} from "../../../common/components/SuperCheckbox/SuperCheckbox";
 import {SuperButton} from "../../../common/components/SuperButton";
 import {FormControl, Grid, IconButton, Input, InputAdornment, InputLabel, TextField} from "@mui/material";
 import {signInTC} from "./loginReducer";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {Loader} from "../../../common/components/Loader/Loader";
 
 type FormikErrorType = {
     email?: string
@@ -24,6 +21,8 @@ export const SignIn = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const error = useSelector<AppRootStateType, string>(state => state.app.error)
     const status = useSelector<AppRootStateType>(state => state.app.status)
+    const [password, setShowPassword] = useState<boolean>(true)
+    const novigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -49,20 +48,15 @@ export const SignIn = () => {
             dispatch(signInTC(values))
             formik.resetForm()
         },
+        enableReinitialize: true
     })
-
-    if (status === 'loading') {
-        return <Loader/>
-    }
 
     useEffect(() => {
         if (isLoggedIn) {
-           <Navigate to={'/profile'}/>
+            novigate('/profile')
         }
-    })
+    }, [isLoggedIn])
 
-
-    const [password, setShowPassword] = useState<boolean>(true)
 
     const showPassword = (p: string) => {
         setShowPassword(visible => !visible)
@@ -78,7 +72,10 @@ export const SignIn = () => {
                 <div>
                     {error !== '' ? <div style={{color: "red", textAlign: 'center'}}>{error}</div> : ''}
                 </div>
-                <form onSubmit={formik.handleSubmit} className={s.form}>
+                <form onSubmit={(event) => {
+                    formik.handleSubmit()
+                    event.preventDefault()
+                }} className={s.form}>
                     <TextField
                         sx={{m: 1, width: '347px'}}
                         id="email"
@@ -90,8 +87,7 @@ export const SignIn = () => {
                     {formik.errors.email ? <div style={{color: "red"}}>{formik.errors.email}</div> : null}
 
 
-
-                    <FormControl  sx={{ m: 1, width: '347px' }} variant="standard">
+                    <FormControl sx={{m: 1, width: '347px'}} variant="standard">
                         <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                         <Input
                             id="show-password"
@@ -112,11 +108,6 @@ export const SignIn = () => {
                     </FormControl>
                     {formik.errors.password ? <div style={{color: "red"}}>{formik.errors.password}</div> : ''}
 
-
-                    {/*<div>*/}
-                    {/*    <PasswordContainer {...formik.getFieldProps('password')} />*/}
-                    {/*    {formik.errors.password ? <div style={{color: "red"}}>{formik.errors.password}</div> : null}*/}
-                    {/*</div>*/}
                     <div className={s.checkboxField}>
                         <SuperCheckbox {...formik.getFieldProps('rememberMe')}>Remember me</SuperCheckbox>
                     </div>

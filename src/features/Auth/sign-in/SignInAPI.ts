@@ -14,6 +14,9 @@ export const SignInAPI = {
   me() {
     return instance.post<ResponseUserType>('auth/me')
   },
+  logout() {
+    return instance.delete(`auth/me`, {})
+  }
 }
 
 export type ResponseUserType = {

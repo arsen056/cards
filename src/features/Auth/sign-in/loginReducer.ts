@@ -1,11 +1,8 @@
 import {LoginParamsType, SignInAPI} from "./SignInAPI";
 import {AppThunk} from "../../../app/store";
-import {initializeAppTC, setError, setStatus} from "../../../app/appReducer";
+import {setError, setIsInit, setStatus} from "../../../app/appReducer";
 import axios, {AxiosError} from "axios";
 import {errorUtils} from "../../../common/utils/errorUtils";
-import {fetchProfile} from "../../Profile/profileReducer";
-import {registerAPI} from "../sign-up/signUp-api";
-import {signUpAC} from "../sign-up/signUpReducer";
 
 const initialState = {
     isLoggedIn: false
@@ -27,7 +24,6 @@ export const signInAC = (value: boolean) => ({type: 'login/SET-IS-LOGGED-IN', va
 
 // thunks
 export const signInTC = (data: LoginParamsType): AppThunk => async dispatch => {
-
     dispatch(setStatus('loading'))
     try {
         await SignInAPI.login(data)
@@ -39,30 +35,25 @@ export const signInTC = (data: LoginParamsType): AppThunk => async dispatch => {
         dispatch(setStatus('success'))
     }
 
+}
 
-    /*  dispatch(setStatus('loading'))
-    SignInAPI.login(data).then(res => {
-                if (!res.data.error) {
-                    dispatch(signInAC(true))
-                } else {
-                    if (res.data.error) {
-                        dispatch(setError(res.data.error))
-                    }
-                }
-                if (!res.data.error) {
-                    dispatch(signInAC(true))
-                    dispatch(initializeAppTC())
-                }
-            })
-          /!*  .catch(e => {
-              if (axios.isAxiosError(e)) {
-                const error = e.response ? e.response.data.error : e.message
-                dispatch(setError(error))
-              }
-            })*!/
-        .finally (() => {
-        dispatch(setStatus('success'))
-    })*/
+
+export const logoutTC = (): AppThunk => async dispatch => {
+    try {
+        const res = await SignInAPI.logout()
+        dispatch(signInAC(false))
+        dispatch(setIsInit(false))
+    } catch (e) {
+        const err = e as Error | AxiosError<{ error: string }>
+        if (axios.isAxiosError(err)) {
+            const error = err.response?.data ? err.response.data.error : err.message
+            dispatch(setError(error))
+        } else {
+            dispatch(setError(`Native error ${err.message}`))
         }
+    }
+}
+
+
 // types
 export type SignInACType = ReturnType<typeof signInAC>
