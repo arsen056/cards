@@ -20,7 +20,6 @@ type FormikErrorType = {
 }
 
 export const SignUp = memo(() => {
-
     const dispatch = AppDispatch()
     const signUp = useSelector<AppRootStateType>(state => state.signUp.signUp)
     const isLoggedIn = useSelector<AppRootStateType>(state => state.app.isLoggedIn)

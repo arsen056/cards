@@ -10,6 +10,7 @@ import {SuperButton} from "../../../common/components/SuperButton";
 import {FormControl, Grid, IconButton, Input, InputAdornment, InputLabel, TextField} from "@mui/material";
 import {signInTC} from "./loginReducer";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {Loader} from "../../../common/components/Loader/Loader";
 
 type FormikErrorType = {
     email?: string
@@ -22,7 +23,6 @@ export const SignIn = () => {
     const dispatch = AppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const error = useSelector<AppRootStateType, string>(state => state.app.error)
-    const status = useSelector<AppRootStateType>(state => state.app.status)
     const [password, setShowPassword] = useState<boolean>(true)
     const navigate = useNavigate()
 
