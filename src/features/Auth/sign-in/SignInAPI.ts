@@ -2,15 +2,15 @@ import {instance} from "../../../API/instance";
 
 export const SignInAPI = {
   login(email: string, password: string, rememberMe: boolean) {
-    return instance.post<ResponseUserType>('auth/login', {email, password, rememberMe})
+    return instance.post<ProfileType>('auth/login', {email, password, rememberMe})
   },
 
   me() {
-    return instance.post<ResponseUserType>('auth/me')
+    return instance.post<ProfileType>('auth/me')
   },
 }
 
-export type ResponseUserType = {
+export type ProfileType = {
   _id: string;
   email: string;
   rememberMe: boolean;
@@ -23,4 +23,5 @@ export type ResponseUserType = {
   __v: number;
   token: string;
   tokenDeathTime: number;
+  avatar?: string;
 }
