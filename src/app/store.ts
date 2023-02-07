@@ -4,8 +4,7 @@ import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppActionsType, appReducer} from "./appReducer";
 import {useDispatch} from "react-redux";
 import {SignUpActionsType, signUpReducer} from "../features/Auth/sign-up/signUpReducer";
-import {SignInACType} from "../features/Auth/sign-in/loginReducer2";
-import {loginReducer} from "../features/Auth/sign-in/loginReducer";
+import {loginReducer, SignInACType} from "../features/Auth/sign-in/loginReducer";
 
 const rootReducers = combineReducers({
     profile: profileReducer,
