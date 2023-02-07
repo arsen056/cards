@@ -3,13 +3,9 @@ import {ProfileActionsType, profileReducer} from "../features/Profile/profileRed
 import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppActionsType, appReducer} from "./appReducer";
 import {useDispatch} from "react-redux";
-import {loginReducer} from "../features/Auth/sign-in/loginReducer";
+import {SignUpActionsType, signUpReducer} from "../features/Auth/sign-up/signUpReducer";
 
-const rootReducers = combineReducers({
-    profile: profileReducer,
-    app: appReducer,
-    login: loginReducer
-})
+const rootReducers = combineReducers({profile: profileReducer, app: appReducer, signUp: signUpReducer})
 
 export type AppDispatchType = ThunkDispatch<AppRootStateType, any, ProfileActionsType>
 export const AppDispatch = () => useDispatch<AppDispatchType>()
@@ -18,4 +14,4 @@ export const store = legacy_createStore(rootReducers, applyMiddleware(thunk))
 
 export type AppRootStateType = ReturnType<typeof rootReducers>
 
-export type ActionsRootTypes = ProfileActionsType | AppActionsType
+export type ActionsRootTypes = ProfileActionsType | AppActionsType | SignUpActionsType

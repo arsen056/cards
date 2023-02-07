@@ -1,32 +1,32 @@
 const initState: AppStateType = {
-  status: 'idle',
-  isLoggedIn: false,
-  isInit: false,
-  error: 'Error'
+    status: 'idle',
+    isLoggedIn: false,
+    isInit: false,
+    error: ''
 }
 
 export type AppStateType = {
-  status: AppStatusType
-  isLoggedIn: boolean,
-  isInit: boolean
-  error: string
+    status: AppStatusType
+    isLoggedIn: boolean,
+    isInit: boolean
+    error: string
 }
 
 export type AppStatusType = 'idle' | 'loading' | 'success'
 
-export const appReducer = (state=initState, action: AppActionsType) => {
-  switch (action.type) {
-    case "APP/SET_STATUS":
-      return {...state, status: action.status}
-    case "APP/SET_LOGGED_IN":
-      return {...state, isLoggedIn: action.isLogged}
-    case "APP/SET_ERROR":
-      return {...state, error: action.error}
-    case "APP/SET_IS_INIT":
-      return {...state, isInit: action.init}
-    default:
-      return state
-  }
+export const appReducer = (state = initState, action: AppActionsType) => {
+    switch (action.type) {
+        case "APP/SET_STATUS":
+            return {...state, status: action.status}
+        case "APP/SET_LOGGED_IN":
+            return {...state, isLoggedIn: action.isLogged}
+        case "APP/SET_ERROR":
+            return {...state, error: action.error}
+        case "APP/SET_IS_INIT":
+            return {...state, isInit: action.init}
+        default:
+            return state
+    }
 }
 
 export const setStatus = (status: AppStatusType) => ({type: 'APP/SET_STATUS', status} as const)
