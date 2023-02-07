@@ -36,7 +36,7 @@ export const ForgotPassword = () => {
     },
   })
 
-  if (!forgotStatus) {
+  if (forgotStatus) {
     return <Navigate to={'/check-email'}/>
   }
 
@@ -56,10 +56,10 @@ export const ForgotPassword = () => {
               onChange={formik.handleChange}
               helperText={formik.errors.email}
             />
-            <p>Enter your email address and we will send you further instructions </p>
+            <p className={s.description}>Enter your email address and we will send you further instructions </p>
             <SuperButton type='submit'>Send Instructions</SuperButton>
-            <p>Did you remember your password?</p>
-            <Link to='/login'>Try logging in</Link>
+            <p className={s.description}>Did you remember your password?</p>
+            <Link to='/login' className={s.link}>Try logging in</Link>
           </>
         }
       </Box>

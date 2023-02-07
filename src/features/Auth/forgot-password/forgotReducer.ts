@@ -29,6 +29,7 @@ export const forgotPassword = (email: string): AppThunk => async dispatch => {
   dispatch(setStatus('loading'))
   try {
     await ForgotAPI.forgotPass(email);
+    dispatch(setForgotStatus(true))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
     errorUtils(err, dispatch)
