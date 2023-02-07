@@ -25,6 +25,7 @@ export const SignIn = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const error = useSelector<AppRootStateType, string>(state => state.app.error)
     const [password, setShowPassword] = useState<boolean>(true)
+    const status = useSelector<AppRootStateType>(state => state.app.status)
     const navigate = useNavigate()
 
     const formik = useFormik({
@@ -60,6 +61,9 @@ export const SignIn = () => {
         }
     }, [isLoggedIn])
 
+    if (status === 'loading') {
+        return <Loader/>
+    }
 
     const showPassword = (p: string) => {
         setShowPassword(visible => !visible)
