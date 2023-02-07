@@ -16,13 +16,15 @@ type FormikErrorType = {
     password?: string
     rememberMe?: boolean
 }
+
 export const SignIn = () => {
+    console.log('Sign')
     const dispatch = AppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const error = useSelector<AppRootStateType, string>(state => state.app.error)
     const status = useSelector<AppRootStateType>(state => state.app.status)
     const [password, setShowPassword] = useState<boolean>(true)
-    const novigate = useNavigate()
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -53,7 +55,7 @@ export const SignIn = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            novigate('/profile')
+            navigate('/profile')
         }
     }, [isLoggedIn])
 
@@ -126,4 +128,3 @@ export const SignIn = () => {
         </Grid>
     )
 }
-

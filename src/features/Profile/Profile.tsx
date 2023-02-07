@@ -16,7 +16,7 @@ export const Profile = () => {
     const user = useSelector<AppRootStateType, ProfileStateType>(state => state.profile)
     const loading = useSelector<AppRootStateType, AppStatusType>(state => state.app.status)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
-    const novigate = useNavigate()
+    const navigate = useNavigate()
     const dispatch = AppDispatch()
 
     const editNameHandler = (name: string) => {
@@ -24,9 +24,8 @@ export const Profile = () => {
     }
 
     useEffect(() => {
-
         if (!isLoggedIn) {
-            novigate('/')
+            navigate('/')
         }
     }, [isLoggedIn])
 
