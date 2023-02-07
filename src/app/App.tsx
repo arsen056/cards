@@ -8,6 +8,7 @@ import { SignIn } from '../features/Auth/sign-in/SignIn'
 import { SignUp } from '../features/Auth/sign-up/SignUp'
 import { Profile } from '../features/Profile/Profile'
 import {Header} from "../common/components/header/Header";
+import {CheckEmail} from "../features/Auth/forgot-password/CheckEmail";
 
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/NewPassword" element={<NewPassword />} />
-
+        <Route path="/check-email" element={<CheckEmail />} />
+        <Route path="/set-new-password/:token" element={<NewPassword />} />
         <Route path="/404" element={<Error404 />} />
         <Route path="/*" element={<Navigate to="/404" />} />
       </Routes>
