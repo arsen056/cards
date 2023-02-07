@@ -1,3 +1,10 @@
+import {Dispatch} from "redux";
+import {SignInAPI} from "../features/Auth/sign-in/SignInAPI";
+import {setProfile} from "../features/Profile/profileReducer";
+import {AxiosError} from "axios";
+import {errorUtils} from "../common/utils/errorUtils";
+import {signInAC} from "../features/Auth/sign-in/loginReducer";
+
 const initState: AppStateType = {
     status: 'idle',
     isLoggedIn: false,
@@ -33,6 +40,17 @@ export const setStatus = (status: AppStatusType) => ({type: 'APP/SET_STATUS', st
 export const setLoggedIn = (isLogged: boolean) => ({type: 'APP/SET_LOGGED_IN', isLogged} as const)
 export const setIsInit = (init: boolean) => ({type: 'APP/SET_IS_INIT', init} as const)
 export const setError = (error: string) => ({type: 'APP/SET_ERROR', error} as const)
+
+export const initializeAppTC = () => async (dispatch: Dispatch) => {
+    try {
+        await SignInAPI.me()
+        dispatch(signInAC(true))
+    } catch  {
+
+    } finally {
+        dispatch(setIsInit(true))
+    }
+}
 
 export type AppActionsType = ReturnType<typeof setStatus>
   | ReturnType<typeof setLoggedIn>

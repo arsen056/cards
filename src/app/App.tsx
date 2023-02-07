@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import '../App.css'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Error404 } from '../common/components/Error404'
@@ -9,9 +9,16 @@ import { SignUp } from '../features/Auth/sign-up/SignUp'
 import { Profile } from '../features/Profile/Profile'
 import {Header} from "../common/components/header/Header";
 import {CheckEmail} from "../features/Auth/forgot-password/CheckEmail";
+import {AppDispatch} from "./store";
+import {initializeAppTC} from "./appReducer";
 
 
 function App() {
+    const dispatch = AppDispatch()
+
+    useEffect(() => {
+        dispatch(initializeAppTC())
+    }, [])
 
   return (
     <div className="App">
