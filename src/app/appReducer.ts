@@ -1,9 +1,7 @@
 import {Dispatch} from "redux";
 import {SignInAPI} from "../features/Auth/sign-in/SignInAPI";
-import {setProfile} from "../features/Profile/profileReducer";
-import {AxiosError} from "axios";
-import {errorUtils} from "../common/utils/errorUtils";
 import {signInAC} from "../features/Auth/sign-in/loginReducer";
+import {Navigate} from "react-router-dom";
 
 const initState: AppStateType = {
     status: 'idle',
