@@ -49,7 +49,7 @@ export const ForgotPassword = () => {
               error={!!formik.errors.email}
               value={formik.values.email}
               onChange={formik.handleChange}
-              helperText={formik.errors.email}
+              helperText={formik.errors.email ? formik.errors.email : ' '}
             />
             <p className={s.description}>Enter your email address and we will send you further instructions </p>
             <SuperButton type='submit'>Send Instructions</SuperButton>
