@@ -16,3 +16,8 @@
   font-size: 30px;
   font-weight: 630;
 }
+
+.loader {
+  width: 100%;
+  padding: 60px 0;
+}

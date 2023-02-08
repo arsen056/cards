@@ -15,13 +15,13 @@ export const Box: FC<BoxPropsType> = ({children, title}) => {
 
   return (
     <div className={s.box}>
-      {appStatus === 'loading' ? <Loader/> :
-        <>
+      {appStatus === 'loading'
+        ? <div className={s.loader}><Loader/></div>
+        : <>
           {title && <h2 className={s.title}>{title}</h2>}
           {children}
         </>
       }
-
     </div>
   )
 };

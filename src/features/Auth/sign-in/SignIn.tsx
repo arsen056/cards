@@ -10,7 +10,6 @@ import {SuperButton} from "../../../common/components/SuperButton";
 import {FormControl, Grid, IconButton, Input, InputAdornment, InputLabel, TextField} from "@mui/material";
 import {signInTC} from "./loginReducer";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {Loader} from "../../../common/components/Loader/Loader";
 import {Box} from "../../../common/components/box/Box";
 
 type FormikErrorType = {
@@ -23,7 +22,6 @@ export const SignIn = () => {
     const dispatch = AppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const [password, setShowPassword] = useState<boolean>(true)
-    const status = useSelector<AppRootStateType>(state => state.app.status)
     const navigate = useNavigate()
 
     const formik = useFormik({
@@ -58,10 +56,6 @@ export const SignIn = () => {
             navigate('/profile')
         }
     }, [isLoggedIn])
-
-    if (status === 'loading') {
-        return <Loader/>
-    }
 
     const showPassword = (p: string) => {
         setShowPassword(visible => !visible)

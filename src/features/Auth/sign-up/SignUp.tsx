@@ -9,7 +9,6 @@ import {IconButton} from '@mui/material';
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import s from './SignUp.module.css'
 import {signUpTC} from "./signUpReducer";
-import {Loader} from "../../../common/components/Loader/Loader";
 import {Box} from "../../../common/components/box/Box";
 
 type FormikErrorType = {
@@ -22,7 +21,6 @@ export const SignUp = memo(() => {
     const dispatch = AppDispatch()
     const signUp = useSelector<AppRootStateType>(state => state.signUp.signUp)
     const isLoggedIn = useSelector<AppRootStateType>(state => state.app.isLoggedIn)
-    const status = useSelector<AppRootStateType>(state => state.app.status)
     const [password, setShowPassword] = useState<boolean>(true)
     const [confirmPassword, setConfirmPassword] = useState<boolean>(true)
 
@@ -70,9 +68,6 @@ export const SignUp = memo(() => {
     }
     if (signUp) {
         return <Navigate to={'/login'}/>
-    }
-    if (status === 'loading') {
-        return <Loader/>
     }
 
     return (
