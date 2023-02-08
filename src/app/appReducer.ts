@@ -2,8 +2,6 @@ import {Dispatch} from "redux";
 import {SignInAPI} from "../features/Auth/sign-in/SignInAPI";
 import {signInAC} from "../features/Auth/sign-in/loginReducer";
 import {setProfile} from "../features/Profile/profileReducer";
-import {AxiosError} from "axios";
-import {errorUtils} from "../common/utils/errorUtils";
 
 const initState: AppStateType = {
   status: 'idle',
@@ -49,8 +47,7 @@ export const initializeAppTC = () => async (dispatch: Dispatch) => {
     dispatch(setLoggedIn(true))
     dispatch(setProfile(res.data))
   } catch (e) {
-    const err = e as Error | AxiosError<{ error: string }>
-    errorUtils(err, dispatch)
+
   } finally {
     dispatch(setIsInit(true))
     dispatch(setStatus('success'))

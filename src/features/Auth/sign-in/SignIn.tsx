@@ -22,7 +22,6 @@ type FormikErrorType = {
 export const SignIn = () => {
     const dispatch = AppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
-    const error = useSelector<AppRootStateType, string>(state => state.app.error)
     const [password, setShowPassword] = useState<boolean>(true)
     const status = useSelector<AppRootStateType>(state => state.app.status)
     const navigate = useNavigate()
@@ -68,15 +67,11 @@ export const SignIn = () => {
         setShowPassword(visible => !visible)
     }
 
-
     return (
         <div className={s.wrapper}>
             <Box title={'Sign in'}>
                 <Grid container justifyContent={'center'}>
                     <Grid item justifyContent={'center'} marginTop={5}>
-                        <div>
-                            {error !== '' ? <div style={{color: "red", textAlign: 'center'}}>{error}</div> : ''}
-                        </div>
                         <form onSubmit={(event) => {
                             formik.handleSubmit()
                             event.preventDefault()
