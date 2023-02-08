@@ -7,7 +7,7 @@ export const ForgotAPI = {
       from: 'test-front-admin <@>',
       message: '<div style="background-color: lime; padding: 15px">\n' +
         'password recovery link: \n' +
-        '<a href=\'http://localhost:3000/#/set-new-password/$token$\'>\n' +
+        '<a href=\'https://arsen056.github.io/cards/#/set-new-password/$token$\'>\n' +
         'link</a>\n' +
         '</div>'
     }
