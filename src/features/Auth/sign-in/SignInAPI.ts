@@ -7,29 +7,27 @@ export type LoginParamsType = {
 }
 
 export const SignInAPI = {
-    login(data: LoginParamsType) {
-        return instance.post<ResponseUserType>('auth/login', data)
-    },
-    me() {
-        return instance.post<ResponseUserType>('auth/me')
-    },
-    logout() {
-        return instance.delete(`auth/me`, {})
-    }
+  login(email: string, password: string, rememberMe: boolean) {
+    return instance.post<ProfileType>('auth/login', {email, password, rememberMe})
+  },
+
+  me() {
+    return instance.post<ProfileType>('auth/me')
+  },
 }
 
-export type ResponseUserType = {
-    _id: string;
-    email: string;
-    rememberMe: boolean;
-    isAdmin: boolean;
-    name: string;
-    verified: boolean;
-    publicCardPacksCount: number;
-    created: string;
-    updated: string;
-    __v: number;
-    token: string;
-    tokenDeathTime: number;
-    error?: string
+export type ProfileType = {
+  _id: string;
+  email: string;
+  rememberMe: boolean;
+  isAdmin: boolean;
+  name: string;
+  verified: boolean;
+  publicCardPacksCount: number;
+  created: string;
+  updated: string;
+  __v: number;
+  token: string;
+  tokenDeathTime: number;
+  avatar?: string;
 }
