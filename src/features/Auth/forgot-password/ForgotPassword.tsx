@@ -8,14 +8,11 @@ import {useFormik} from "formik";
 import {AppDispatch, AppRootStateType} from "../../../app/store";
 import {forgotPassword} from "./forgotReducer";
 import {useSelector} from "react-redux";
-import {Loader} from "../../../common/components/Loader/Loader";
-import {AppStatusType} from "../../../app/appReducer";
 
 export const ForgotPassword = () => {
 
   const dispatch = AppDispatch();
   const forgotStatus = useSelector<AppRootStateType, boolean>(state => state.forgot.forgotStatus)
-  const appStatus = useSelector<AppRootStateType, AppStatusType>(state => state.app.status)
 
   const formik = useFormik({
     initialValues: {
@@ -42,9 +39,7 @@ export const ForgotPassword = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} className={s.wrapper}>
-      <Box title={appStatus === 'loading'? '' : 'Forgot your password?'}>
-        {appStatus === 'loading' ? <Loader/>
-          : <>
+      <Box title={'Forgot your password?'}>
             <TextField
               name='email'
               fullWidth
@@ -60,8 +55,6 @@ export const ForgotPassword = () => {
             <SuperButton type='submit'>Send Instructions</SuperButton>
             <p className={s.description}>Did you remember your password?</p>
             <Link to='/login' className={s.link}>Try logging in</Link>
-          </>
-        }
       </Box>
     </form>
   )

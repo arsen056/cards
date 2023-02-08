@@ -1,6 +1,6 @@
 import {LoginParamsType, SignInAPI} from "./SignInAPI";
 import {AppThunk} from "../../../app/store";
-import {setError, setIsInit, setStatus} from "../../../app/appReducer";
+import {setError, setIsInit, setLoggedIn, setStatus} from "../../../app/appReducer";
 import axios, {AxiosError} from "axios";
 import {errorUtils} from "../../../common/utils/errorUtils";
 import {setProfile} from "../../Profile/profileReducer";
@@ -28,6 +28,7 @@ export const signInTC = (data: LoginParamsType): AppThunk => async dispatch => {
     try {
        const res = await SignInAPI.login(data)
         dispatch(signInAC(true))
+        dispatch(setLoggedIn(true))
         dispatch (setProfile(res.data))
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
@@ -52,7 +53,6 @@ export const logoutTC = (): AppThunk => async dispatch => {
         }
     }
 }
-
 
 // types
 export type SignInACType = ReturnType<typeof signInAC>

@@ -42,15 +42,18 @@ export const setIsInit = (init: boolean) => ({type: 'APP/SET_IS_INIT', init} as 
 export const setError = (error: string) => ({type: 'APP/SET_ERROR', error} as const)
 
 export const initializeAppTC = () => async (dispatch: Dispatch) => {
+  dispatch(setStatus('loading'))
   try {
     const res = await SignInAPI.me()
     dispatch(signInAC(true))
+    dispatch(setLoggedIn(true))
     dispatch(setProfile(res.data))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
     errorUtils(err, dispatch)
   } finally {
     dispatch(setIsInit(true))
+    dispatch(setStatus('success'))
   }
 }
 
