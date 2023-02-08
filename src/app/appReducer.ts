@@ -1,36 +1,39 @@
 import {Dispatch} from "redux";
 import {SignInAPI} from "../features/Auth/sign-in/SignInAPI";
 import {signInAC} from "../features/Auth/sign-in/loginReducer";
+import {setProfile} from "../features/Profile/profileReducer";
+import {AxiosError} from "axios";
+import {errorUtils} from "../common/utils/errorUtils";
 
 const initState: AppStateType = {
-    status: 'idle',
-    isLoggedIn: false,
-    isInit: false,
-    error: ''
+  status: 'idle',
+  isLoggedIn: false,
+  isInit: false,
+  error: ''
 }
 
 export type AppStateType = {
-    status: AppStatusType
-    isLoggedIn: boolean,
-    isInit: boolean
-    error: string
+  status: AppStatusType
+  isLoggedIn: boolean,
+  isInit: boolean
+  error: string
 }
 
 export type AppStatusType = 'idle' | 'loading' | 'success'
 
 export const appReducer = (state = initState, action: AppActionsType) => {
-    switch (action.type) {
-        case "APP/SET_STATUS":
-            return {...state, status: action.status}
-        case "APP/SET_LOGGED_IN":
-            return {...state, isLoggedIn: action.isLogged}
-        case "APP/SET_ERROR":
-            return {...state, error: action.error}
-        case "APP/SET_IS_INIT":
-            return {...state, isInit: action.init}
-        default:
-            return state
-    }
+  switch (action.type) {
+    case "APP/SET_STATUS":
+      return {...state, status: action.status}
+    case "APP/SET_LOGGED_IN":
+      return {...state, isLoggedIn: action.isLogged}
+    case "APP/SET_ERROR":
+      return {...state, error: action.error}
+    case "APP/SET_IS_INIT":
+      return {...state, isInit: action.init}
+    default:
+      return state
+  }
 }
 
 export const setStatus = (status: AppStatusType) => ({type: 'APP/SET_STATUS', status} as const)
@@ -39,14 +42,16 @@ export const setIsInit = (init: boolean) => ({type: 'APP/SET_IS_INIT', init} as 
 export const setError = (error: string) => ({type: 'APP/SET_ERROR', error} as const)
 
 export const initializeAppTC = () => async (dispatch: Dispatch) => {
-    try {
-        await SignInAPI.me()
-        dispatch(signInAC(true))
-    } catch  {
-
-    } finally {
-        dispatch(setIsInit(true))
-    }
+  try {
+    const res = await SignInAPI.me()
+    dispatch(signInAC(true))
+    dispatch(setProfile(res.data))
+  } catch (e) {
+    const err = e as Error | AxiosError<{ error: string }>
+    errorUtils(err, dispatch)
+  } finally {
+    dispatch(setIsInit(true))
+  }
 }
 
 export type AppActionsType = ReturnType<typeof setStatus>
