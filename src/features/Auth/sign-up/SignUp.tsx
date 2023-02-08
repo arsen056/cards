@@ -139,8 +139,8 @@ export const SignUp = memo(() => {
                   </FormControl>
 
                   <div style={{color: "red", padding: "6px"}}>
-                    {formik.errors.password && formik.values.password.trim()
-                      ? formik.errors.password
+                    {formik.errors.confirmPassword && formik.values.confirmPassword.trim()
+                      ? formik.errors.confirmPassword
                       : <span>&nbsp;</span>}
                   </div>
 
