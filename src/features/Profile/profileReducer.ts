@@ -5,7 +5,7 @@ import {errorUtils} from "../../common/utils/errorUtils";
 import {AxiosError} from "axios";
 import {ProfileAPI} from "./ProfileAPI";
 
-const initState = {name: 'Arsen', email: 'example@mail.ru'} as ProfileType
+const initState = {name: 'Name', email: 'Email'} as ProfileType
 
 export const profileReducer = (state = initState, action: ProfileActionsType) => {
   switch (action.type) {
@@ -38,7 +38,7 @@ export const changeProfile = (name: string, avatar: string): AppThunk => async d
   setStatus('loading')
   try {
     const res = await ProfileAPI.changeProfile(name, avatar)
-    dispatch(setProfile(res.data.updatedUser))
+    dispatch(editName(res.data.updatedUser.name))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
     errorUtils(err, dispatch)
