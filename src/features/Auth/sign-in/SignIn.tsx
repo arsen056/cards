@@ -20,7 +20,6 @@ type FormikErrorType = {
 }
 
 export const SignIn = () => {
-    console.log('Sign')
     const dispatch = AppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const error = useSelector<AppRootStateType, string>(state => state.app.error)

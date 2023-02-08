@@ -1,19 +1,23 @@
 import {instance} from "../../../API/instance";
 
 export type LoginParamsType = {
-    email: string
-    password: string
-    rememberMe: boolean
+  email: string
+  password: string
+  rememberMe: boolean
 }
 
 export const SignInAPI = {
-  login(email: string, password: string, rememberMe: boolean) {
-    return instance.post<ProfileType>('auth/login', {email, password, rememberMe})
+  login(data: LoginParamsType) {
+    return instance.post<ProfileType>('auth/login', data)
   },
 
   me() {
     return instance.post<ProfileType>('auth/me')
   },
+
+  logout() {
+    return instance.delete(`auth/me`, {})
+  }
 }
 
 export type ProfileType = {

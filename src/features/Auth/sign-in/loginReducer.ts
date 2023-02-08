@@ -22,7 +22,6 @@ export const loginReducer = (state: initialStateType = initialState, action: Sig
 // actions
 export const signInAC = (value: boolean) => ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
-
 // thunks
 export const signInTC = (data: LoginParamsType): AppThunk => async dispatch => {
     dispatch(setStatus('loading'))
@@ -38,10 +37,9 @@ export const signInTC = (data: LoginParamsType): AppThunk => async dispatch => {
     }
 }
 
-
 export const logoutTC = (): AppThunk => async dispatch => {
     try {
-        const res = await SignInAPI.logout()
+        await SignInAPI.logout()
         dispatch(signInAC(false))
         dispatch(setIsInit(false))
     } catch (e) {
