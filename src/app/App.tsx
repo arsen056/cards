@@ -9,19 +9,22 @@ import { SignUp } from '../features/Auth/sign-up/SignUp'
 import { Profile } from '../features/Profile/Profile'
 import {Header} from "../common/components/header/Header";
 import {CheckEmail} from "../features/Auth/forgot-password/CheckEmail";
-import {AppDispatch} from "./store";
+import {AppDispatch, AppRootStateType} from "./store";
 import {initializeAppTC} from "./appReducer";
 import {ErrorSnackbar} from "../common/components/ErrorSnackbar/ErrorSnackbar";
+import {useSelector} from "react-redux";
+import {LoaderBackDrop} from "../common/components/Loader/LoaderBackDrop";
 
 
 function App() {
     const dispatch = AppDispatch()
+  const isInit = useSelector<AppRootStateType, boolean>(state => state.app.isInit)
 
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [])
 
-  return (
+  return ( isInit ?
     <div className="App">
       <Header/>
       <ErrorSnackbar/>
@@ -37,6 +40,7 @@ function App() {
         <Route path="/*" element={<Navigate to="/404" />} />
       </Routes>
     </div>
+      : <LoaderBackDrop/>
   )
 }
 
