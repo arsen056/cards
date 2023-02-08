@@ -78,8 +78,11 @@ export const SignIn = () => {
                                 margin="normal"
                                 {...formik.getFieldProps("email")}
                             />
-                            {formik.errors.email ? <div style={{color: "red", padding: "6px"}}>{formik.errors.email}</div> : null}
-
+                            <div style={{color: "red", padding: "6px"}}>
+                                {formik.errors.email && formik.values.email.trim()
+                                  ? formik.errors.email
+                                  : <span>&nbsp;</span>}
+                            </div>
 
                             <FormControl sx={{m: 1, width: '347px'}} variant="standard">
                                 <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
@@ -100,7 +103,12 @@ export const SignIn = () => {
                                     }
                                 />
                             </FormControl>
-                            {formik.errors.password ? <div style={{color: "red", padding: "6px"}}>{formik.errors.password}</div> : ''}
+
+                            <div style={{color: "red", padding: "6px"}}>
+                                {formik.errors.password && formik.values.password.trim()
+                                  ? formik.errors.password
+                                  : <span>&nbsp;</span>}
+                            </div>
 
                             <div className={s.checkboxField}>
                                 <SuperCheckbox {...formik.getFieldProps('rememberMe')}>Remember me</SuperCheckbox>

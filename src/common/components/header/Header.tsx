@@ -5,6 +5,7 @@ import {Avatar} from "./avatar/Avatar";
 import {SuperButton} from "../SuperButton";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../app/store";
+import {Link} from "react-router-dom";
 
 export const Header = () => {
 
@@ -13,9 +14,13 @@ export const Header = () => {
   return (
     <header id='header' className={s.header}>
       <div className={`container ${s.headerFlex}`}>
-        <Logo/>
-        {isLoggedIn ? <Avatar/> : <SuperButton>Sign in</SuperButton>}
-        {/* Кнопку можно застилизовать как на макете */}
+        <Link to={'/'}>
+          <Logo/>
+        </Link>
+        {isLoggedIn
+          ? <Avatar/>
+          : <Link to={'/login'}><SuperButton>Sign in</SuperButton></Link>
+        }
       </div>
     </header>
   );
