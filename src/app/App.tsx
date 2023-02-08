@@ -11,6 +11,7 @@ import {Header} from "../common/components/header/Header";
 import {CheckEmail} from "../features/Auth/forgot-password/CheckEmail";
 import {AppDispatch} from "./store";
 import {initializeAppTC} from "./appReducer";
+import {ErrorSnackbar} from "../common/components/ErrorSnackbar/ErrorSnackbar";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
+      <ErrorSnackbar/>
       <Routes>
         <Route path="/" element={<Navigate to={'/login'} />} />
         <Route path="/login" element={<SignIn />} />
