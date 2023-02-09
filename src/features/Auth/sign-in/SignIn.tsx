@@ -77,30 +77,37 @@ export const SignIn = () => {
                                 variant="standard"
                                 margin="normal"
                                 {...formik.getFieldProps("email")}
+                                error={!!formik.errors.email && formik.touched.email}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.email}
+                                helperText={formik.touched.email && formik.errors.email ? formik.errors.email : ' '}
                             />
-                            <div style={{color: "red", padding: "6px"}}>
-                                {formik.errors.email && formik.values.email.trim()
-                                  ? formik.errors.email
-                                  : <span>&nbsp;</span>}
-                            </div>
 
                             <FormControl sx={{m: 1, width: '347px'}} variant="standard">
-                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                                <Input
+                                {/*<InputLabel htmlFor="standard-adornment-password">Password</InputLabel>*/}
+                                <TextField
                                     id="show-password"
+                                    label="Password"
+                                    variant="standard"
                                     type={password ? 'password' : 'text'}
                                     {...formik.getFieldProps("password")}
-                                    endAdornment={
+                                    error={!!formik.errors.password && formik.touched.password}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.password}
+                                    helperText={formik.touched.password && formik.errors.password ? formik.errors.password : ' '}
+                                    InputProps = {{
+                                        endAdornment: (
                                         <InputAdornment position="end">
-                                            <IconButton
-                                                id="password"
-                                                aria-label="toggle password visibility"
-                                                onClick={(e) => showPassword(e.currentTarget.id)}
-                                            >
-                                                {password ? <Visibility/> : <VisibilityOff/>}
-                                            </IconButton>
+                                        <IconButton
+                                        id="password"
+                                        aria-label="toggle password visibility"
+                                        onClick={(e) => showPassword(e.currentTarget.id)}
+                                        >
+                                    {password ? <Visibility/> : <VisibilityOff/>}
+                                        </IconButton>
                                         </InputAdornment>
-                                    }
+                                        )
+                                    }}
                                 />
                             </FormControl>
 
