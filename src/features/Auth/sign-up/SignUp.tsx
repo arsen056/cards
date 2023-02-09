@@ -85,9 +85,10 @@ export const SignUp = memo(() => {
                                         label="Email"
                                         margin="normal"
                                         {...formik.getFieldProps("email")}
-                                        error={!!formik.errors.email && !!formik.values.email.trim()}
+                                        error={!!formik.errors.email && formik.touched.email}
+                                        onBlur={formik.handleBlur}
                                         value={formik.values.email}
-                                        helperText={formik.errors.email && formik.values.email.trim() ? formik.errors.email : ' '}
+                                        helperText={formik.touched.email && formik.errors.email ? formik.errors.email : ' '}
                                     />
                                     <FormControl variant="standard" sx={{m: 1, width: '347px'}}>
                                         <TextField
@@ -97,9 +98,10 @@ export const SignUp = memo(() => {
                                             autoComplete="password"
                                             variant="standard"
                                             {...formik.getFieldProps("password")}
-                                            error={!!formik.errors.password && !!formik.values.password.trim()}
+                                            error={!!formik.errors.password && formik.touched.password}
+                                            onBlur={formik.handleBlur}
                                             value={formik.values.password}
-                                            helperText={formik.errors.password && formik.values.password.trim() ? formik.errors.password : ' '}
+                                            helperText={formik.touched.password && formik.errors.password ? formik.errors.password : ' '}
                                             InputProps={{
                                                 endAdornment: (
                                                     <InputAdornment position="end">
@@ -123,9 +125,10 @@ export const SignUp = memo(() => {
                                             autoComplete="current-password"
                                             variant="standard"
                                             {...formik.getFieldProps("confirmPassword")}
-                                            error={!!formik.errors.confirmPassword && !!formik.values.confirmPassword.trim()}
+                                            error={!!formik.errors.confirmPassword && formik.touched.confirmPassword}
+                                            onBlur={formik.handleBlur}
                                             value={formik.values.confirmPassword}
-                                            helperText={formik.errors.confirmPassword && formik.values.confirmPassword.trim() ? formik.errors.confirmPassword : ' '}
+                                            helperText={formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ' '}
                                             InputProps={{
                                                 endAdornment: (
                                                     <InputAdornment position="end">
