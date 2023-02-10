@@ -18,7 +18,10 @@ export const Header = () => {
           <Logo/>
         </Link>
         {isLoggedIn
-          ? <Avatar/>
+          ? <>
+            <Avatar/>
+            {/*<ShowMenu/>*/}
+          </>
           : <Link to={'/login'}><SuperButton>Sign in</SuperButton></Link>
         }
       </div>

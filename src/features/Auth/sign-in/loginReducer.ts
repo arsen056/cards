@@ -43,6 +43,7 @@ export const logoutTC = (): AppThunk => async dispatch => {
   try {
     await SignInAPI.logout()
     dispatch(signInAC(false))
+    dispatch(setLoggedIn(false))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
     if (axios.isAxiosError(err)) {
