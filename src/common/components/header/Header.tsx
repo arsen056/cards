@@ -11,6 +11,7 @@ export const Header = () => {
 
   const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.app.isLoggedIn)
 
+
   return (
     <header id='header' className={s.header}>
       <div className={`container ${s.headerFlex}`}>
@@ -18,10 +19,7 @@ export const Header = () => {
           <Logo/>
         </Link>
         {isLoggedIn
-          ? <>
-            <Avatar/>
-            {/*<ShowMenu/>*/}
-          </>
+          ? <Avatar/>
           : <Link to={'/login'}><SuperButton>Sign in</SuperButton></Link>
         }
       </div>

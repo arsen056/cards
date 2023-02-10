@@ -9,14 +9,16 @@ import MenuItem from "@mui/material/MenuItem";
 import Popper from "@mui/material/Popper";
 import {Button} from "@mui/material";
 import {Link} from "react-router-dom";
-import {AppDispatch} from "../../../../app/store";
+import {AppDispatch, AppRootStateType} from "../../../../app/store";
 import {logoutTC} from "../../../../features/Auth/sign-in/loginReducer";
+import {useSelector} from "react-redux";
 
 export const Avatar = () => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   const dispatch = AppDispatch();
+  const name = useSelector<AppRootStateType, string>(state => state.profile.name)
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -69,7 +71,7 @@ export const Avatar = () => {
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
       >
-        <span className={s.name}>Ivan</span>
+        <span className={s.name}>{name}</span>
         <div id='avatar' className={s.avatar}>
           <img src={avatar} alt="avatar"/>
         </div>
