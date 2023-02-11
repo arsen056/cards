@@ -3,7 +3,7 @@ import {AppThunk} from "../../../app/store";
 import {setError, setLoggedIn, setStatus} from "../../../app/appReducer";
 import axios, {AxiosError} from "axios";
 import {errorUtils} from "../../../common/utils/errorUtils";
-import {setProfile} from "../../Profile/profileReducer";
+import {setProfile} from "../../profile/profileReducer";
 
 const initialState = {
   isLoggedIn: false

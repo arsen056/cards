@@ -1,5 +1,5 @@
 import {instance} from "../../API/instance";
-import {ProfileType} from "../Auth/sign-in/SignInAPI";
+import {ProfileType} from "../auth/signIn/SignInAPI";
 
 export const ProfileAPI = {
   changeProfile (name: string, avatar: string) {

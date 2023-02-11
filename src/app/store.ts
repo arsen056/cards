@@ -1,11 +1,11 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
-import {ProfileActionsType, profileReducer} from "../features/Profile/profileReducer";
+import {ProfileActionsType, profileReducer} from "../features/profile/profileReducer";
 import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppActionsType, appReducer} from "./appReducer";
 import {useDispatch} from "react-redux";
-import {ForgotActionType, forgotReducer} from "../features/Auth/forgot-password/forgotReducer";
-import {SignUpActionsType, signUpReducer} from "../features/Auth/sign-up/signUpReducer";
-import {loginReducer, SignInACType} from "../features/Auth/sign-in/loginReducer";
+import {ForgotActionType, forgotReducer} from "../features/auth/forgotPassword/forgotReducer";
+import {SignUpActionsType, signUpReducer} from "../features/auth/signUp/signUpReducer";
+import {loginReducer, SignInACType} from "../features/auth/signIn/loginReducer";
 
 const rootReducers = combineReducers({
     profile: profileReducer,

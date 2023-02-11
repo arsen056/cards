@@ -9,7 +9,7 @@ import {AppDispatch} from "../../app/store";
 import {Navigate} from "react-router-dom";
 import {SkeletonCustom} from "../../common/components/Sceleton";
 import {Box} from "../../common/components/box/Box";
-import {logoutTC} from "../Auth/sign-in/loginReducer";
+import {logoutTC} from "../auth/signIn/loginReducer";
 import {selectIsLoggedIn, selectStatus, selectUser} from "../../common/selectors";
 
 export const Profile = () => {

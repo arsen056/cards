@@ -10,7 +10,7 @@ import Popper from "@mui/material/Popper";
 import {Button} from "@mui/material";
 import {Link} from "react-router-dom";
 import {AppDispatch} from "../../../../app/store";
-import {logoutTC} from "../../../../features/Auth/sign-in/loginReducer";
+import {logoutTC} from "../../../../features/auth/signIn/loginReducer";
 import {useSelector} from "react-redux";
 import {selectName} from "../../../selectors";
 
