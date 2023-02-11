@@ -2,7 +2,8 @@ import {AppThunk} from "../../../app/store";
 import {setStatus} from "../../../app/appReducer";
 import {AxiosError} from "axios";
 import {errorUtils} from "../../../common/utils/errorUtils";
-import {ForgotAPI} from "./ForgotAPI";
+import {ForgotAPI} from "../authAPI/authAPI";
+
 
 const initState: ForgotStateType = {
   forgotStatus: false

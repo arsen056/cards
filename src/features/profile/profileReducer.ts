@@ -1,9 +1,9 @@
 import {AppThunk} from "../../app/store";
-import {ProfileType, SignInAPI} from "../auth/signIn/SignInAPI";
 import {setStatus} from "../../app/appReducer";
 import {errorUtils} from "../../common/utils/errorUtils";
 import {AxiosError} from "axios";
 import {ProfileAPI} from "./ProfileAPI";
+import {ProfileType, SignInAPI} from "../auth/authAPI/authAPI";
 
 const initState = {name: 'Name', email: 'Email'} as ProfileType
 

@@ -1,16 +1,11 @@
-import {LoginParamsType, SignInAPI} from "./SignInAPI";
 import {AppThunk} from "../../../app/store";
-import {setError, setLoggedIn, setStatus} from "../../../app/appReducer";
+import {AppStateType, initState, setError, setLoggedIn, setStatus} from "../../../app/appReducer";
 import axios, {AxiosError} from "axios";
 import {errorUtils} from "../../../common/utils/errorUtils";
 import {setProfile} from "../../profile/profileReducer";
+import {LoginParamsType, SignInAPI} from "../authAPI/authAPI";
 
-const initialState = {
-  isLoggedIn: false
-}
-type initialStateType = typeof initialState
-
-export const loginReducer = (state: initialStateType = initialState, action: SignInACType): initialStateType => {
+export const loginReducer = (state: AppStateType = initState, action: SignInACType): AppStateType => {
   switch (action.type) {
     case 'login/SET-IS-LOGGED-IN':
       return {...state, isLoggedIn: action.value}
