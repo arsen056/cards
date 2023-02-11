@@ -4,7 +4,7 @@ import {signInAC} from "../features/auth/signIn/loginReducer";
 import {setProfile} from "../features/profile/profileReducer";
 import {AppThunk} from "./store";
 
-const initState: AppStateType = {
+export const initState: AppStateType = {
   status: 'idle',
   isLoggedIn: false,
   isInit: false,
