@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {SignInAPI} from "../features/auth/signIn/SignInAPI";
 import {signInAC} from "../features/auth/signIn/loginReducer";
 import {setProfile} from "../features/profile/profileReducer";
+import {AppThunk} from "./store";
 
 const initState: AppStateType = {
   status: 'idle',
@@ -39,7 +40,7 @@ export const setLoggedIn = (isLogged: boolean) => ({type: 'APP/SET_LOGGED_IN', i
 export const setIsInit = (init: boolean) => ({type: 'APP/SET_IS_INIT', init} as const)
 export const setError = (error: string) => ({type: 'APP/SET_ERROR', error} as const)
 
-export const initializeAppTC = () => async (dispatch: Dispatch) => {
+export const initializeAppTC = (): AppThunk => async dispatch => {
   dispatch(setStatus('loading'))
   try {
     const res = await SignInAPI.me()
