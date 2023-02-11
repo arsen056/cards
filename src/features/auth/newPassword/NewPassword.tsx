@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './NewPassword.module.css'
 import {Box} from "../../../common/components/box/Box";
-import {FormControl, IconButton, Input, InputAdornment, InputLabel} from "@mui/material";
+import {FormControl, IconButton, InputAdornment, TextField} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {SuperButton} from "../../../common/components/SuperButton";
 import {useFormik} from "formik";
@@ -56,26 +56,30 @@ export const NewPassword = () => {
         {appStatus === 'loading' ? <Loader/> :
           <>
             <FormControl fullWidth sx={{ m: 1,}} variant="standard">
-              <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-              <Input
+              <TextField
+                id="standard-adornment-password"
                 name='password'
+                variant="standard"
+                label='Password'
                 value={formik.values.password}
                 onChange={formik.handleChange}
-                id="standard-adornment-password"
                 type={showPassword ? 'text' : 'password'}
                 error={!!formik.errors.password}
-
-                endAdornment={
+                helperText={formik.errors.password}
+                InputProps={{
+                  endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
+                  <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
                   </InputAdornment>
-                }
+                  )
+                }}
+
               />
             </FormControl>
             <p>Create new password and we will send you further instructions to email</p>
