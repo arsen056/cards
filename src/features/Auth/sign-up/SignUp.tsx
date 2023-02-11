@@ -4,12 +4,13 @@ import {useSelector} from "react-redux";
 import {Navigate, NavLink} from "react-router-dom";
 import {FormControl, FormGroup, Grid, InputAdornment, TextField} from "@mui/material";
 import {SuperButton} from "../../../common/components/SuperButton";
-import {AppDispatch, AppRootStateType} from "../../../app/store";
+import {AppDispatch} from "../../../app/store";
 import {IconButton} from '@mui/material';
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import s from './SignUp.module.css'
 import {signUpTC} from "./signUpReducer";
 import {Box} from "../../../common/components/box/Box";
+import {selectIsLoggedIn, selectSignUp} from "../../../common/selectors";
 
 type FormikErrorType = {
     email?: string
@@ -19,13 +20,12 @@ type FormikErrorType = {
 
 export const SignUp = memo(() => {
     const dispatch = AppDispatch()
-    const signUp = useSelector<AppRootStateType>(state => state.signUp.signUp)
-    const isLoggedIn = useSelector<AppRootStateType>(state => state.app.isLoggedIn)
+    const signUp = useSelector(selectSignUp)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
     const [password, setShowPassword] = useState<boolean>(true)
     const [confirmPassword, setConfirmPassword] = useState<boolean>(true)
 
     const showPassword = (p: string) => {
-        console.log(p)
         p === 'password' ? setShowPassword(!password) : setConfirmPassword(!confirmPassword)
     }
 

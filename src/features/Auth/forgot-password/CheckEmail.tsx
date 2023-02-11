@@ -3,13 +3,13 @@ import {Box} from "../../../common/components/box/Box";
 import {Link, Navigate} from "react-router-dom";
 import s from './ForgotPassword.module.css'
 import checkEmail from '../../../assets/check-email.svg'
-import {AppRootStateType} from "../../../app/store";
 import {useSelector} from "react-redux";
 import {SuperButton} from "../../../common/components/SuperButton";
+import {selectForgotStatus} from "../../../common/selectors";
 
 export const CheckEmail = () => {
 
-  const forgotStatus = useSelector<AppRootStateType, boolean>(state => state.forgot.forgotStatus)
+  const forgotStatus = useSelector(selectForgotStatus)
 
   if (!forgotStatus) {
     return <Navigate to='/forgot-password'/>

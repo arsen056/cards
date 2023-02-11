@@ -9,16 +9,17 @@ import MenuItem from "@mui/material/MenuItem";
 import Popper from "@mui/material/Popper";
 import {Button} from "@mui/material";
 import {Link} from "react-router-dom";
-import {AppDispatch, AppRootStateType} from "../../../../app/store";
+import {AppDispatch} from "../../../../app/store";
 import {logoutTC} from "../../../../features/Auth/sign-in/loginReducer";
 import {useSelector} from "react-redux";
+import {selectName} from "../../../selectors";
 
 export const Avatar = () => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   const dispatch = AppDispatch();
-  const name = useSelector<AppRootStateType, string>(state => state.profile.name)
+  const name = useSelector(selectName)
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);

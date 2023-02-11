@@ -4,13 +4,11 @@ import {Logo} from "./logo/Logo";
 import {Avatar} from "./avatar/Avatar";
 import {SuperButton} from "../SuperButton";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../../app/store";
 import {Link} from "react-router-dom";
+import {selectIsLoggedIn} from "../../selectors";
 
 export const Header = () => {
-
-  const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.app.isLoggedIn)
-
+  const isLoggedIn = useSelector(selectIsLoggedIn)
 
   return (
     <header id='header' className={s.header}>

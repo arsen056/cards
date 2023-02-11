@@ -1,9 +1,9 @@
 import React, {FC, HTMLAttributes} from 'react';
 import s from './Box.module.css'
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../../app/store";
-import {AppStatusType} from "../../../app/appReducer";
 import {Loader} from "../Loader/Loader";
+import {selectStatus} from "../../selectors";
+
 
 type BoxPropsType = {
   title?: string
@@ -11,7 +11,7 @@ type BoxPropsType = {
 
 export const Box: FC<BoxPropsType> = ({children, title}) => {
 
-  const appStatus = useSelector<AppRootStateType, AppStatusType>(state => state.app.status)
+  const appStatus = useSelector(selectStatus)
 
   return (
     <div className={s.box}>

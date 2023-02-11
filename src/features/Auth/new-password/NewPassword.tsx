@@ -5,18 +5,20 @@ import {FormControl, IconButton, Input, InputAdornment, InputLabel} from "@mui/m
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {SuperButton} from "../../../common/components/SuperButton";
 import {useFormik} from "formik";
-import {AppDispatch, AppRootStateType} from "../../../app/store";
+import {AppDispatch} from "../../../app/store";
 import {newPasswordThunk} from "./newPasswordThunk";
 import {Navigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {AppStatusType} from "../../../app/appReducer";
 import {Loader} from "../../../common/components/Loader/Loader";
+import {selectForgotStatus, selectStatus} from "../../../common/selectors";
 
 export const NewPassword = () => {
   const dispatch = AppDispatch();
   const {token} = useParams<{token: string}>();
-  const forgotStatus = useSelector<AppRootStateType, boolean>(state => state.forgot.forgotStatus)
-  const appStatus = useSelector<AppRootStateType, AppStatusType>(state => state.app.status)
+
+  const forgotStatus = useSelector(selectForgotStatus)
+  const appStatus = useSelector(selectStatus)
+
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
