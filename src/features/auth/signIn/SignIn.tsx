@@ -47,7 +47,6 @@ export const SignIn = () => {
     },
     onSubmit: values => {
       dispatch(signInTC(values))
-      formik.resetForm()
     },
     enableReinitialize: true
   })
