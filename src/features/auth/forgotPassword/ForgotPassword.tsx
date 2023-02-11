@@ -5,14 +5,15 @@ import {TextField} from "@mui/material";
 import {SuperButton} from "../../../common/components/SuperButton";
 import {Link, Navigate} from "react-router-dom";
 import {useFormik} from "formik";
-import {AppDispatch, AppRootStateType} from "../../../app/store";
+import {AppDispatch} from "../../../app/store";
 import {forgotPassword} from "./forgotReducer";
 import {useSelector} from "react-redux";
+import {selectForgotStatus} from "../../../common/selectors";
 
 export const ForgotPassword = () => {
 
   const dispatch = AppDispatch();
-  const forgotStatus = useSelector<AppRootStateType, boolean>(state => state.forgot.forgotStatus)
+  const forgotStatus = useSelector(selectForgotStatus)
 
   const formik = useFormik({
     initialValues: {

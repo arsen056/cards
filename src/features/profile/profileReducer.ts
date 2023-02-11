@@ -1,5 +1,5 @@
 import {AppThunk} from "../../app/store";
-import {ProfileType, SignInAPI} from "../Auth/sign-in/SignInAPI";
+import {ProfileType, SignInAPI} from "../auth/signIn/SignInAPI";
 import {setStatus} from "../../app/appReducer";
 import {errorUtils} from "../../common/utils/errorUtils";
 import {AxiosError} from "axios";
