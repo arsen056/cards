@@ -5,7 +5,7 @@ import React, {useState} from 'react'
 import s from './Login.module.css'
 import {useSelector} from 'react-redux'
 import {AppDispatch} from "../../../app/store";
-import {SuperCheckbox} from "../../../common/components/SuperCheckbox/SuperCheckbox";
+import {SuperCheckbox} from "../../../common/components/superCheckbox/SuperCheckbox";
 import {SuperButton} from "../../../common/components/SuperButton";
 import {FormControl, Grid, IconButton, InputAdornment, TextField} from "@mui/material";
 import {signInTC} from "./loginReducer";

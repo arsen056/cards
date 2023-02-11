@@ -9,7 +9,7 @@ import {AppDispatch} from "../../../app/store";
 import {newPasswordThunk} from "./newPasswordThunk";
 import {Navigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {Loader} from "../../../common/components/Loader/Loader";
+import {Loader} from "../../../common/components/loader/Loader";
 import {selectForgotStatus, selectStatus} from "../../../common/selectors";
 
 export const NewPassword = () => {

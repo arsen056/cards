@@ -3,9 +3,9 @@ import '../App.css'
 import {Header} from "../common/components/header/Header";
 import {AppDispatch, AppRootStateType} from "./store";
 import {initializeAppTC} from "./appReducer";
-import {ErrorSnackbar} from "../common/components/ErrorSnackbar/ErrorSnackbar";
+import {ErrorSnackbar} from "../common/components/errorSnackbar/ErrorSnackbar";
 import {useSelector} from "react-redux";
-import {LoaderBackDrop} from "../common/components/Loader/LoaderBackDrop";
+import {LoaderBackDrop} from "../common/components/loader/LoaderBackDrop";
 import {RoutesPage} from "../common/routes/Routes";
 
 

@@ -1,7 +1,7 @@
 import React, {FC, HTMLAttributes} from 'react';
 import s from './Box.module.css'
 import {useSelector} from "react-redux";
-import {Loader} from "../Loader/Loader";
+import {Loader} from "../loader/Loader";
 import {selectStatus} from "../../selectors";
 
 
