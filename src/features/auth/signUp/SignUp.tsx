@@ -46,11 +46,13 @@ export const SignUp = memo(() => {
                 errors.password = 'Password is required!'
             } else if (values.password.length < 8) {
                 errors.password = 'Password need to be more than 7 symbols'
+            } else if (values.password !== values.confirmPassword && values.confirmPassword !== '') {
+                errors.password = 'Please enter the same password for both fields.'
             }
             if (!values.confirmPassword) {
                 errors.confirmPassword = 'Confirm password is required!'
-            } else if (values.confirmPassword !== values.password) {
-                errors.confirmPassword = 'Check your password!'
+            } else if (values.confirmPassword !== values.password && values.password !== '') {
+                errors.confirmPassword = 'Please enter the same password for both fields.'
             }
             return errors
         },
