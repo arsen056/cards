@@ -1,8 +1,7 @@
-import {Dispatch} from "redux";
-import {SignInAPI} from "../features/auth/signIn/SignInAPI";
 import {signInAC} from "../features/auth/signIn/loginReducer";
 import {setProfile} from "../features/profile/profileReducer";
 import {AppThunk} from "./store";
+import {SignInAPI} from "../features/auth/authAPI/authAPI";
 
 export const initState: AppStateType = {
   status: 'idle',
