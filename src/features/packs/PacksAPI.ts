@@ -1,13 +1,14 @@
 import {instance} from "../../API/instance";
 
 export const PacksAPI = {
-  fetchPacks() {
+  fetchPacks(params: any) {
     return instance.get<PacksResponseType>('cards/pack', {
-      params: {
-        page: 2,
-        pageCount: 8
-      }
+      params: params
     })
+  },
+
+  searchPacks(name:string) {
+    return instance.get<PacksResponseType>(`cards/pack?packName=${name}`)
   }
 }
 

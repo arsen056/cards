@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,19 +9,19 @@ import Paper from '@mui/material/Paper';
 import {AppDispatch} from "../../../app/store";
 import {getPacks} from "../packsReducer";
 import {useSelector} from "react-redux";
-import {selectCardPacks} from "../../../common/selectors/selectCardPacks";
 import {PackItem} from "./PackItem";
+import {selectPackName, selectPacksUserID, selectCardPacks} from "../../../common/selectors";
 
 export const PackList = () => {
   const dispatch = AppDispatch()
-
   const packs = useSelector(selectCardPacks)
+  const packName = useSelector(selectPackName)
+  const userID = useSelector(selectPacksUserID)
+
 
   useEffect(() => {
     dispatch(getPacks())
-  }, [])
-
-  console.log(packs)
+  }, [packName, userID])
 
   return (
     <TableContainer component={Paper}>
