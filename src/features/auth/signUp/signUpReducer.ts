@@ -1,8 +1,8 @@
-import {registerAPI, RegisterParamsType} from "./signUp-api";
 import {setStatus} from "../../../app/appReducer";
 import {AppThunk} from "../../../app/store";
 import {errorUtils} from "../../../common/utils/errorUtils";
 import {AxiosError} from "axios";
+import {registerAPI, RegisterParamsType} from "../authAPI/authAPI";
 
 
 const initialState = {
