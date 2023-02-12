@@ -5,6 +5,8 @@ import {AxiosError} from "axios";
 import {ProfileAPI} from "./ProfileAPI";
 import {ProfileType, SignInAPI} from "../auth/authAPI/authAPI";
 
+
+
 const initState = {name: 'Name', email: 'Email'} as ProfileType
 
 export const profileReducer = (state = initState, action: ProfileActionsType) => {

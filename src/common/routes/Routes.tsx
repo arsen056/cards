@@ -10,6 +10,7 @@ import {Error404} from "../components/Error404";
 
 import {PATHS} from "./PATHS";
 import {Packs} from "../../features/packs/Packs";
+import {Cards} from "../../features/cards/Cards";
 
 export const RoutesPage = () => {
   return (
@@ -25,7 +26,7 @@ export const RoutesPage = () => {
       <Route path={PATHS.unknown} element={<Navigate to="/404" />} />
 
       <Route path={PATHS.packs} element={<Packs />} />
-      <Route path={PATHS.pack} element={<h3>Страница колоды</h3>} />
+      <Route path={PATHS.pack} element={<Cards />} />
     </Routes>
   );
 };

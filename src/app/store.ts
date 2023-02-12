@@ -7,6 +7,7 @@ import {ForgotActionType, forgotReducer} from "../features/auth/forgotPassword/f
 import {SignUpActionsType, signUpReducer} from "../features/auth/signUp/signUpReducer";
 import {loginReducer, SignInACType} from "../features/auth/signIn/loginReducer";
 import {PacksActionsType, packsReducer} from "../features/packs/packsReducer";
+import {CardsActionsType, cardsReducer} from "../features/cards/cardsReducer";
 
 const rootReducers = combineReducers({
     profile: profileReducer,
@@ -14,7 +15,8 @@ const rootReducers = combineReducers({
     login: loginReducer,
     signUp: signUpReducer,
     forgot: forgotReducer,
-    packs: packsReducer
+    packs: packsReducer,
+    cards: cardsReducer
 })
 
 export type AppDispatchType = ThunkDispatch<AppRootStateType, any, ActionsRootTypes>
@@ -23,4 +25,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateTy
 export const store = legacy_createStore(rootReducers, applyMiddleware(thunk))
 
 export type AppRootStateType = ReturnType<typeof rootReducers>
-export type ActionsRootTypes = ProfileActionsType | AppActionsType | SignUpActionsType | SignInACType | ForgotActionType | PacksActionsType
+export type ActionsRootTypes = ProfileActionsType | AppActionsType | SignUpActionsType | SignInACType | ForgotActionType | PacksActionsType | CardsActionsType

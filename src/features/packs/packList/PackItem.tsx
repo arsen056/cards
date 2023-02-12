@@ -10,20 +10,20 @@ type PackItemPropsType = {
 
 export const PackItem:FC<PackItemPropsType> = ({pack}) => {
   return (
-    <TableRow
-      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-    >
+      <TableRow
+          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+      >
 
-      <TableCell component="th" scope="row">
-        <Link to={pack._id}>
-          {pack.name}
-        </Link>
-      </TableCell>
-      <TableCell align="right">{pack.cardsCount}</TableCell>
-      <TableCell align="right">{pack.updated}</TableCell>
-      <TableCell align="right">{pack.created}</TableCell>
-      <TableCell align="right">CRUD</TableCell>
+        <TableCell component="th" scope="row">
+          <Link to={pack._id}>
+            {pack.name}
+          </Link>
+        </TableCell>
+        <TableCell align="right">{pack.cardsCount}</TableCell>
+        <TableCell align="right">{pack.updated}</TableCell>
+        <TableCell align="right">{pack.created}</TableCell>
+        <TableCell align="right">CRUD</TableCell>
 
-    </TableRow>
+      </TableRow>
   );
 };
