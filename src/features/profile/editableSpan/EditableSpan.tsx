@@ -1,6 +1,6 @@
 import {ChangeEvent, FC, useState} from "react";
 import s from './EditableSpan.module.css'
-import {IconButton, InputAdornment, TextField} from "@mui/material";
+import {InputAdornment, TextField} from "@mui/material";
 
 
 type EditableSpanPropsType = {
@@ -11,8 +11,17 @@ type EditableSpanPropsType = {
 export const EditableSpan: FC<EditableSpanPropsType> = ({title, changeTitle}) => {
   const [value, setValue] = useState<string>(title)
   const [isEdit, setIsEdit] = useState<boolean>(false)
+  const [helpText, setHelpText] = useState<string>('')
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value)
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const name = e.currentTarget.value
+    if (!name) {
+      setHelpText('Name is required')
+    } else {
+      setHelpText('')
+    }
+    setValue(name)
+  }
 
   const changeEditMode = () => {
     changeTitle(value)
@@ -25,28 +34,22 @@ export const EditableSpan: FC<EditableSpanPropsType> = ({title, changeTitle}) =>
         <span className={s.editIcon} onClick={changeEditMode}></span>
       </div>
       : <TextField
-        fullWidth
-        id="standard-basic"
-        label='Nick name'
-        value={value}
-        onChange={onChange}
-        variant="standard"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                disableRipple
-                aria-label="toggle password visibility"
-                onClick={() => {
-                }}
-                edge="end"
+          fullWidth
+          id="standard-basic"
+          label='Nick name'
+          value={value}
+          onChange={onChange}
+          variant="standard"
+          error={!!helpText}
+          helperText={helpText || ' '}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <button className={s.save} disabled={!!helpText} onClick={changeEditMode}>SAVE</button>
+              </InputAdornment>
+            ),
+          }}
+        />
 
-              >
-                {<button className={s.save} onClick={changeEditMode}>SAVE</button>}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
   );
 };
