@@ -10,7 +10,7 @@ const initState = {
   cardPacksTotalCount: 0 as number,
   min: 0 as number,
   max: 20 as number,
-  packName: null as string | null,
+  packName: '' as string,
   page: 1 as number,
   pageCount: 8 as number,
   sortPacks: null as string | null,
