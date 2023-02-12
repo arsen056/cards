@@ -10,18 +10,20 @@ import {AppDispatch} from "../../../app/store";
 import {getPacks} from "../packsReducer";
 import {useSelector} from "react-redux";
 import {PackItem} from "./PackItem";
-import {selectPackName, selectPacksUserID, selectCardPacks} from "../../../common/selectors";
+import {selectPackName, selectPacksUserID, selectCardPacks, selectMin, selectMax} from "../../../common/selectors";
 
 export const PackList = () => {
   const dispatch = AppDispatch()
   const packs = useSelector(selectCardPacks)
   const packName = useSelector(selectPackName)
   const userID = useSelector(selectPacksUserID)
+  const min = useSelector(selectMin)
+  const max = useSelector(selectMax)
 
 
   useEffect(() => {
     dispatch(getPacks())
-  }, [packName, userID])
+  }, [packName, userID, min, max])
 
   return (
     <TableContainer component={Paper}>

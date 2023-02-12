@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {selectUserID} from "../../../common/selectors";
 import {AppDispatch} from "../../../app/store";
 import {setUserId} from "../packsReducer";
+import {SuperButton} from "../../../common/components/SuperButton";
 
 export const MyOrAll = () => {
   const userID = useSelector(selectUserID)
@@ -14,8 +15,8 @@ export const MyOrAll = () => {
 
   return (
     <div>
-      <button onClick={myPacksHandler}>My</button>
-      <button onClick={allPacksHandler}>All</button>
+      <SuperButton onClick={myPacksHandler}>My</SuperButton>
+      <SuperButton onClick={allPacksHandler}>All</SuperButton>
     </div>
   );
 };

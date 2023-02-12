@@ -19,7 +19,7 @@ const initState = {
 
 export type PacksStateType = typeof initState
 
-export const packsReducer = (state:PacksStateType = initState, action: PacksActionsType):PacksStateType => {
+export const packsReducer = (state: PacksStateType = initState, action: PacksActionsType): PacksStateType => {
   switch (action.type) {
     case "PACKS/SET_PACKS":
       return {...state, cardPacks: action.packs}
@@ -27,23 +27,34 @@ export const packsReducer = (state:PacksStateType = initState, action: PacksActi
       return {...state, packName: action.packName}
     case "PACKS/SET_USER_ID":
       return {...state, user_id: action.userID}
+    case "PACKS/SET_MIN":
+      return {...state, min: action.min}
+    case "PACKS/SET_MAX":
+
+      return {...state, max: action.max}
     default:
       return state
   }
 }
 
-export const setPacks = (packs: PackType[]) => ({type:'PACKS/SET_PACKS', packs} as const)
+export const setPacks = (packs: PackType[]) => ({type: 'PACKS/SET_PACKS', packs} as const)
 export const setPackName = (packName: string) => ({type: 'PACKS/SET_PACK_NAME', packName} as const)
 export const setUserId = (userID: string | null) => ({type: 'PACKS/SET_USER_ID', userID} as const)
-export type PacksActionsType = ReturnType<typeof setPacks> | ReturnType<typeof setPackName> | ReturnType<typeof setUserId>
+export const setMin = (min: number) => ({type: 'PACKS/SET_MIN', min} as const)
+export const setMax = (max: number) => ({type: 'PACKS/SET_MAX', max} as const)
+
+export type PacksActionsType =
+  ReturnType<typeof setPacks>
+  | ReturnType<typeof setPackName>
+  | ReturnType<typeof setUserId>
+  | ReturnType<typeof setMin>
+  | ReturnType<typeof setMax>
 
 export const getPacks = (): AppThunk => async (dispatch, getState) => {
   const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs
-
-
   try {
     setStatus('loading')
-    const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, packName, min, max, user_id})
+    const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, min, max, user_id, packName})
     dispatch(setPacks(res.data.cardPacks))
   } catch (err) {
     errorUtils(err as Error | AxiosError, dispatch)
