@@ -9,6 +9,7 @@ import {NewPassword} from "../../features/auth/newPassword/NewPassword";
 import {Error404} from "../components/Error404";
 
 import {PATHS} from "./PATHS";
+import {Packs} from "../../features/packs/Packs";
 
 export const RoutesPage = () => {
   return (
@@ -22,6 +23,9 @@ export const RoutesPage = () => {
       <Route path={PATHS.newPassword} element={<NewPassword />} />
       <Route path={PATHS.notFound} element={<Error404 />} />
       <Route path={PATHS.unknown} element={<Navigate to="/404" />} />
+
+      <Route path={PATHS.packs} element={<Packs />} />
+      <Route path={PATHS.pack} element={<h3>Страница колоды</h3>} />
     </Routes>
   );
 };
