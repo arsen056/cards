@@ -1,5 +1,6 @@
 import {AddCardsPack, PacksAPI, PackType, UpdatePackType} from "../PacksAPI";
 import {AppThunk} from "../../../app/store";
+import {Dispatch} from "redux";
 
 
 export type InitialStateType = {
@@ -53,24 +54,24 @@ export const packListReducer = (state: InitialStateType = initialState, action: 
 }
 
 export const addPackTC =
-    (data: AddCardsPack): AppThunk =>
-        dispatch => {
+    (data: AddCardsPack) =>
+        (dispatch: Dispatch)  => {
             PacksAPI.addPack(data).then(res => {
                 dispatch(addPackAC(res.data.newCardsPack))
             })
         }
 
 export const updatePackTC =
-    (data: UpdatePackType): AppThunk =>
-        dispatch => {
+    (data: UpdatePackType) =>
+        (dispatch: Dispatch)  => {
             PacksAPI.createPack(data).then(res => {
                 dispatch(updatePackAC(res.data.updatedCardsPack))
             })
         }
 
 export const deletePackTC =
-    (id: string): AppThunk =>
-        dispatch => {
+    (id: string)=>
+        (dispatch: Dispatch)  => {
             PacksAPI.deletePack(id).then(res => {
                 dispatch(deletePackAC(res.data.deletedCardsPack._id))
             })

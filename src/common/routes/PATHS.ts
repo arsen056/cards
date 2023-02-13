@@ -8,5 +8,6 @@ export const PATHS = {
   packs: '/packs',
   pack: '/packs/:packID',
   notFound: '/404',
-  unknown: '/*'
+  unknown: '/*',
+  learn: "/learn/:packId"
 }

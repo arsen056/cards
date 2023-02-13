@@ -5,19 +5,18 @@ import {RangeSlider} from "./RangeSlider";
 import resetIcon from "../../../assets/reset.svg"
 import s from './HeaderPacks.module.css'
 import {SuperButton} from "../../../common/components/SuperButton";
-import {useDispatch} from "react-redux";
-import {addPackTC, updatePackTC} from "../packList/PackListReducer";
-import {UpdatePackType} from "../PacksAPI";
+import {addPackTC} from "../packList/PackListReducer";
+import {AppDispatch} from "../../../app/store";
 
 export const HeaderPacks = () => {
-    const dispatch = useDispatch()
+    const dispatch = AppDispatch()
 
   const resetHandler = () => {
 
   }
 
     const addPack = () => {
-        dispatch(addPackTC({ cardsPack: { name: 'Hello', private: false } }))
+        dispatch(addPackTC({ cardsPack: { name: 'HI', private: false } }))
     }
 
 

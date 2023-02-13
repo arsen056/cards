@@ -4,8 +4,8 @@ import TableRow from "@mui/material/TableRow";
 import {PackType, UpdatePackType} from "../PacksAPI";
 import {Link} from "react-router-dom";
 import {PackListCrud} from "./PackListCRUD";
-import {useDispatch} from "react-redux";
 import {deletePackTC, updatePackTC} from "./PackListReducer";
+import {AppDispatch} from "../../../app/store";
 
 type PackItemPropsType = {
   pack: PackType
@@ -14,7 +14,7 @@ type PackItemPropsType = {
 export const PackItem:FC<PackItemPropsType> = ({pack}) => {
 
 
-  const dispatch = useDispatch()
+  const dispatch = AppDispatch()
 
   const updatePack = (data: UpdatePackType) => {
     dispatch(updatePackTC(data))
