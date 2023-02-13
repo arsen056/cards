@@ -4,19 +4,20 @@ import {setStatus} from "../../app/appReducer";
 import {AxiosError} from "axios";
 import {errorUtils} from "../../common/utils/errorUtils";
 
-
 const initState = {
   cardPacks: [] as PackType[],
   cardPacksTotalCount: 0 as number,
   maxCardsCount: 0 as number,
   minCardsCount: 0 as number,
-  min: 0 as number,
-  max: 20 as number,
-  packName: '' as string,
-  page: 1 as number,
-  pageCount: 8 as number,
-  sortPacks: null as string | null,
-  user_id: null as string | null
+  searchParams: {
+    sortPacks: null as string | null,
+    min: 0 as number,
+    max: 20 as number,
+    packName: '' as string,
+    page: 1 as number,
+    pageCount: 8 as number,
+    user_id: null as string | null
+  }
 }
 
 export type PacksStateType = typeof initState
@@ -31,17 +32,17 @@ export const packsReducer = (state: PacksStateType = initState, action: PacksAct
         cardPacksTotalCount: action.cardPacksTotalCount
       }
     case "PACKS/SET_PACK_NAME":
-      return {...state, packName: action.packName}
+      return {...state, searchParams: {...state.searchParams, packName: action.packName}}
     case "PACKS/SET_USER_ID":
-      return {...state, user_id: action.userID}
+      return {...state, searchParams: {...state.searchParams, user_id: action.userID}}
     case "PACKS/SET_MIN":
-      return {...state, min: action.min}
+      return {...state, searchParams: {...state.searchParams, min: action.min}}
     case "PACKS/SET_MAX":
-      return {...state, max: action.max}
+      return {...state, searchParams: {...state.searchParams, max: action.max}}
     case "PACKS/SET_PAGE":
-      return {...state, page: action.page}
+      return {...state, searchParams: {...state.searchParams, page: action.page}}
     case "PACKS/SET_PAGE_COUNT":
-      return {...state, pageCount: action.pageCount}
+      return {...state, searchParams: {...state.searchParams, pageCount: action.pageCount}}
     default:
       return state
   }
@@ -67,7 +68,7 @@ export type PacksActionsType =
   | ReturnType<typeof setPageCount>
 
 export const getPacks = (): AppThunk => async (dispatch, getState) => {
-  const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs
+  const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs.searchParams
   try {
     setStatus('loading')
     const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, min, max, user_id, packName})

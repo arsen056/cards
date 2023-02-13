@@ -2,7 +2,7 @@ import {AddCardsPack, PacksAPI, PackType, UpdatePackType} from "../PacksAPI";
 import {AppThunk} from "../../../app/store";
 import {setStatus} from "../../../app/appReducer";
 import {errorUtils} from "../../../common/utils/errorUtils";
-import {AxiosError} from "axios/index";
+import {AxiosError} from "axios";
 import {setPacks} from "../packsReducer";
 
 
@@ -57,7 +57,7 @@ export const packListReducer = (state: InitialStateType = initialState, action: 
 }
 
 export const addPackTC = (data: AddCardsPack): AppThunk => async (dispatch, getState) => {
-    const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs
+    const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs.searchParams
     dispatch(setStatus('loading'))
     try {
         await PacksAPI.addPack(data)
@@ -72,7 +72,7 @@ export const addPackTC = (data: AddCardsPack): AppThunk => async (dispatch, getS
 
 export const updatePackTC =
     (data: UpdatePackType): AppThunk => async (dispatch, getState) => {
-        const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs
+        const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs.searchParams
         dispatch(setStatus('loading'))
         try {
             await PacksAPI.createPack(data)
@@ -86,7 +86,7 @@ export const updatePackTC =
     }
 
 export const deletePackTC = (id: string): AppThunk => async (dispatch, getState) => {
-    const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs
+    const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs.searchParams
     dispatch(setStatus('loading'))
     try {
         await PacksAPI.deletePack(id)
