@@ -1,6 +1,9 @@
 import {AddCardsPack, PacksAPI, PackType, UpdatePackType} from "../PacksAPI";
 import {AppThunk} from "../../../app/store";
 import {Dispatch} from "redux";
+import {setStatus} from "../../../app/appReducer";
+import {errorUtils} from "../../../common/utils/errorUtils";
+import {AxiosError} from "axios/index";
 
 
 export type InitialStateType = {
@@ -33,7 +36,7 @@ export const initialState: InitialStateType = {
 export const packListReducer = (state: InitialStateType = initialState, action: PacksActionType): InitialStateType => {
     switch (action.type) {
         case 'PACKS/ADD-PACKS':
-            return { ...state, cardPacks: [...state.cardPacks, action.newCardsPack] }
+            return {...state, cardPacks: [...state.cardPacks, action.newCardsPack]}
         case 'PACKS/UPDATE-PACKS':
             return {
                 ...state,
@@ -47,39 +50,46 @@ export const packListReducer = (state: InitialStateType = initialState, action: 
                 ),
             }
         case 'PACKS/DELETE-PACKS':
-            return { ...state, cardPacks: state.cardPacks.filter(e => e._id !== action.idPack) }
+            return {...state, cardPacks: state.cardPacks.filter(e => e._id !== action.idPack)}
         default:
             return state
     }
 }
 
-export const addPackTC =
-    (data: AddCardsPack) =>
-        (dispatch: Dispatch)  => {
-            PacksAPI.addPack(data).then(res => {
-                dispatch(addPackAC(res.data.newCardsPack))
-            })
-        }
+export const addPackTC = (data: AddCardsPack): AppThunk => async dispatch => {
+    dispatch(setStatus('loading'))
+    try {
+        await PacksAPI.addPack(data)
+        dispatch(setStatus('success'))
+    } catch (err) {
+        errorUtils(err as Error | AxiosError, dispatch)
+    }
+}
 
 export const updatePackTC =
-    (data: UpdatePackType) =>
-        (dispatch: Dispatch)  => {
-            PacksAPI.createPack(data).then(res => {
-                dispatch(updatePackAC(res.data.updatedCardsPack))
-            })
+    (data: UpdatePackType): AppThunk => async dispatch => {
+        dispatch(setStatus('loading'))
+        try {
+            await PacksAPI.createPack(data)
+            dispatch(setStatus('success'))
+        } catch (err) {
+            errorUtils(err as Error | AxiosError, dispatch)
         }
+    }
 
-export const deletePackTC =
-    (id: string)=>
-        (dispatch: Dispatch)  => {
-            PacksAPI.deletePack(id).then(res => {
-                dispatch(deletePackAC(res.data.deletedCardsPack._id))
-            })
-        }
+export const deletePackTC = (id: string): AppThunk => async dispatch => {
+    dispatch(setStatus('loading'))
+    try {
+        await PacksAPI.deletePack(id)
+        dispatch(setStatus('success'))
+    } catch (err) {
+        errorUtils(err as Error | AxiosError, dispatch)
+    }
+}
 
 export const addPackAC = (newCardsPack: PackType) => ({type: 'PACKS/ADD-PACKS', newCardsPack} as const)
-export const updatePackAC = (data: PackType) => ({ type: 'PACKS/UPDATE-PACKS', data } as const)
-export const deletePackAC = (idPack: string) => ({ type: 'PACKS/DELETE-PACKS', idPack } as const)
+export const updatePackAC = (data: PackType) => ({type: 'PACKS/UPDATE-PACKS', data} as const)
+export const deletePackAC = (idPack: string) => ({type: 'PACKS/DELETE-PACKS', idPack} as const)
 
 export type PacksActionType =
     | ReturnType<typeof addPackAC>
