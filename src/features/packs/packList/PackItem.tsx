@@ -1,15 +1,31 @@
 import React, {FC} from 'react';
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import {PackType} from "../PacksAPI";
+import {PackType, UpdatePackType} from "../PacksAPI";
 import {Link} from "react-router-dom";
-import PackListCRUD from "./PackListCRUD";
+import {PackListCrud} from "./PackListCRUD";
+import {useDispatch} from "react-redux";
+import {updatePackTC} from "./PackListReducer";
 
 type PackItemPropsType = {
   pack: PackType
 }
 
 export const PackItem:FC<PackItemPropsType> = ({pack}) => {
+
+
+  const dispatch = useDispatch()
+
+
+  const deletePack = (id: string) => {
+    /*dispatch(deletePackTC(id))*/
+  }
+
+  const updatePack = (data: UpdatePackType) => {
+    dispatch(updatePackTC(data))
+  }
+
+
   return (
       <TableRow
           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -23,7 +39,14 @@ export const PackItem:FC<PackItemPropsType> = ({pack}) => {
         <TableCell align="right">{pack.cardsCount}</TableCell>
         <TableCell align="right">{pack.updated}</TableCell>
         <TableCell align="right">{pack.created}</TableCell>
-        <TableCell align="right"><PackListCRUD/></TableCell>
+        <TableCell align="right">
+          <PackListCrud id={pack._id}
+                        cardsCount={pack.cardsCount}
+                        userId={pack.user_id}
+                        educationsAction={() => {}}
+                        editAction={updatePack}
+                        deleteAction={deletePack}/>
+        </TableCell>
 
       </TableRow>
   );

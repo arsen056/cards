@@ -8,6 +8,7 @@ import {SignUpActionsType, signUpReducer} from "../features/auth/signUp/signUpRe
 import {loginReducer, SignInACType} from "../features/auth/signIn/loginReducer";
 import {PacksActionsType, packsReducer} from "../features/packs/packsReducer";
 import {CardsActionsType, cardsReducer} from "../features/cards/cardsReducer";
+import {packListReducer} from "../features/packs/packList/PackListReducer";
 
 const rootReducers = combineReducers({
     profile: profileReducer,
@@ -16,6 +17,7 @@ const rootReducers = combineReducers({
     signUp: signUpReducer,
     forgot: forgotReducer,
     packs: packsReducer,
+    packList: packListReducer,
     cards: cardsReducer
 })
 
