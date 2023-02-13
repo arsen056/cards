@@ -3,7 +3,7 @@ import {AppThunk} from "../../../app/store";
 import {setStatus} from "../../../app/appReducer";
 import {errorUtils} from "../../../common/utils/errorUtils";
 import {AxiosError} from "axios/index";
-import {setPacks} from "../packsReducer";
+import {getPacks, setPacks} from "../packsReducer";
 
 
 export type InitialStateType = {
@@ -74,16 +74,23 @@ export const updatePackTC =
         dispatch(setStatus('loading'))
         try {
             await PacksAPI.createPack(data)
+            const res = await PacksAPI.fetchPacks(data)
+            const {cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount} = res.data
+            dispatch(setPacks(cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount))
             dispatch(setStatus('success'))
         } catch (err) {
             errorUtils(err as Error | AxiosError, dispatch)
         }
     }
 
-export const deletePackTC = (id: string): AppThunk => async dispatch => {
+export const deletePackTC = (id: string): AppThunk => async (dispatch, getState) => {
+    const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs
     dispatch(setStatus('loading'))
     try {
         await PacksAPI.deletePack(id)
+        const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, min, max, user_id, packName})
+        const {cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount} = res.data
+        dispatch(setPacks(cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount))
         dispatch(setStatus('success'))
     } catch (err) {
         errorUtils(err as Error | AxiosError, dispatch)
