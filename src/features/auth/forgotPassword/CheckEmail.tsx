@@ -5,7 +5,7 @@ import s from './ForgotPassword.module.css'
 import checkEmail from '../../../assets/check-email.svg'
 import {useSelector} from "react-redux";
 import {SuperButton} from "../../../common/components/SuperButton";
-import {selectForgotStatus} from "../../../common/selectors";
+import {selectForgotStatus} from "../selectors";
 
 export const CheckEmail = () => {
 

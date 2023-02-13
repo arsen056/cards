@@ -8,7 +8,7 @@ import {useFormik} from "formik";
 import {AppDispatch} from "../../../app/store";
 import {forgotPassword} from "./forgotReducer";
 import {useSelector} from "react-redux";
-import {selectForgotStatus} from "../../../common/selectors";
+import {selectForgotStatus} from "../selectors";
 
 export const ForgotPassword = () => {
 

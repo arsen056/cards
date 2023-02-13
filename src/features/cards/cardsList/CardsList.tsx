@@ -10,7 +10,7 @@ import {AppDispatch} from "../../../app/store";
 import {useSelector} from "react-redux";
 import {CardItem} from "./CardItem";
 import {getCards} from "../cardsReducer";
-import {selectCards} from "../../../common/selectors/selectCards";
+import {selectCards} from "../../packs/selectors";
 import {useParams} from "react-router-dom";
 
 export const CardsList = () => {

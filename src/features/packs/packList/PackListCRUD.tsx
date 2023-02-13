@@ -4,7 +4,7 @@ import editIcon from '../../../assets/edit.svg'
 import deleteIcon from '../../../assets/delete.svg'
 import {UpdatePackType} from "../PacksAPI";
 import {useSelector} from "react-redux";
-import {selectUserID} from "../../../common/selectors";
+import {selectUserID} from "../selectors";
 import s from './packList.module.css'
 
 

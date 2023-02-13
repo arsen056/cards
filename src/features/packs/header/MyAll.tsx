@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {selectUserID} from "../../../common/selectors";
+import {selectUserID} from "../selectors";
 import {AppDispatch} from "../../../app/store";
 import {setUserId} from "../packsReducer";
 import {SuperButton} from "../../../common/components/SuperButton";

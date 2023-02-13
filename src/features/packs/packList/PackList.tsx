@@ -17,7 +17,7 @@ import {
   selectMin,
   selectMax,
   selectPageCount, selectPage
-} from "../../../common/selectors";
+} from "../selectors";
 
 
 export const PackList = () => {

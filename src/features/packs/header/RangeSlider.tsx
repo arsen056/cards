@@ -4,7 +4,7 @@ import {AppDispatch} from "../../../app/store";
 import {setMax, setMin} from "../packsReducer";
 import s from './HeaderPacks.module.css'
 import {useSelector} from "react-redux";
-import {selectMaxCardsCount, selectMinCardsCount} from "../../../common/selectors/selectMinMax";
+import {selectMaxCardsCount, selectMinCardsCount} from "../selectors";
 
 export const RangeSlider = () => {
   const dispatch = AppDispatch()
