@@ -3,7 +3,13 @@ export {selectCardPacksTotaCount} from './selectCardPacksTotaCount'
 export {selectPage} from './selectPage'
 export {selectPackName} from './selectPackName'
 export {selectPageCount} from './selectPageCount'
-export {selectCards} from './selectCards'
+export {
+		selectCards,
+		selectCardsPage,
+		selectCardsPageCount,
+		selectCardsTotalCount,
+		selectCardsPackName
+} from './selectCards'
 export {selectMin} from './selectMinMax'
 export {selectMax} from './selectMinMax'
 export {selectMinCardsCount} from './selectMinMax'

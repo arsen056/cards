@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,23 +6,22 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {AppDispatch} from "../../../app/store";
-import {useSelector} from "react-redux";
 import {CardItem} from "./CardItem";
-import {getCards} from "../cardsReducer";
-import {selectCards} from "../../packs/selectors";
-import {useParams} from "react-router-dom";
+import {CardType} from "../CardsAPI";
+import {useSelector} from "react-redux";
+import {selectStatus} from "../../../common/selectors";
+import {Loader} from "../../../common/components/loader/Loader";
 
-export const CardsList = () => {
-		const dispatch = AppDispatch()
-		const {packID} = useParams();
-		const cards = useSelector(selectCards)
+type CardsListPropsType = {
+		cards: CardType[]
+}
 
+export const CardsList = ({cards}: CardsListPropsType) => {
+		const appStatus = useSelector(selectStatus)
 
-		useEffect(() => {
-				dispatch(getCards(packID))
-		}, [packID])
-
+		if (appStatus === 'loading') {
+				return <Loader/>
+		}
 		return (
 				<TableContainer component={Paper}>
 						<Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -35,13 +34,11 @@ export const CardsList = () => {
 												<TableCell align="right">Actions</TableCell>
 										</TableRow>
 								</TableHead>
-
 								<TableBody>
 										{cards.map((card) => (
 												<CardItem key={card._id} card={card}/>
 										))}
 								</TableBody>
-
 						</Table>
 				</TableContainer>
 		);

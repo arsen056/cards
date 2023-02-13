@@ -36,7 +36,6 @@ export const Profile = () => {
       <Link to={'/packs'}>
         <button className={s.back}>Back to Packs List</button>
       </Link>
-
       <div className={s.profileWrapper}>
         {appStatus === 'loading' ? <SkeletonCustom/>
           : <Box title={'Personal Information'}>

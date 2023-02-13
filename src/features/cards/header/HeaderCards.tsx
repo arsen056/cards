@@ -4,15 +4,33 @@ import {SearchPacks} from "../../packs/searchPack/SearchPacks";
 import React from "react";
 import {SuperButton} from "../../../common/components/SuperButton";
 import {TitleCards} from "./titleCards/TitleCards";
+import {AppDispatch} from "../../../app/store";
+import {addCardTC} from "../cardsReducer";
 
-export const HeaderCards = () => {
+type HeaderCardsPropsType = {
+		title: string
+		packID: string
+}
+
+export const HeaderCards = ({title, packID}: HeaderCardsPropsType) => {
+		const dispatch = AppDispatch()
+
+		const addCard = () => {
+				dispatch(addCardTC({card: {
+						cardsPack_id: packID,
+						question: "how do you like this task?",
+						answer: "It is wonderful",
+						grade: 2
+				}}))
+		}
 		return (
 				<div>
 						<div className={`${s.wrapper} ${style.headerCards}`}>
 								<div className={style.titleAndButton}>
-										<TitleCards title={'My cards'}/>
+										<TitleCards title={title}/>
 										<SuperButton variant={'contained'}
 																 color={'primary'}
+																 onClick={addCard}
 										>
 												Add new card
 										</SuperButton>
