@@ -22,12 +22,6 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
         editAction && editAction({ cardsPack: { _id: id, name: 'new Card' } })
     }
 
-  /*  const educationCallback = (e: MouseEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        navigate(`/learn/${id}`)
-    }*/
-
 
     return (
         <div>

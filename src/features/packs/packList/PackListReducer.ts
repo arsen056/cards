@@ -3,7 +3,7 @@ import {AppThunk} from "../../../app/store";
 import {setStatus} from "../../../app/appReducer";
 import {errorUtils} from "../../../common/utils/errorUtils";
 import {AxiosError} from "axios/index";
-import {getPacks, setPacks} from "../packsReducer";
+import {setPacks} from "../packsReducer";
 
 
 export type InitialStateType = {
@@ -25,7 +25,7 @@ export const initialState: InitialStateType = {
     pageCount: 4, //ко-во стр
     cardPacksTotalCount: 2, // количество колод
     minCardsCount: 0,
-    maxCardsCount: 4,
+    maxCardsCount: 8,
     isDisabled: false,
     cardsCount: [1, 30],
     userId: '',
@@ -56,11 +56,12 @@ export const packListReducer = (state: InitialStateType = initialState, action: 
     }
 }
 
-export const addPackTC = (data: AddCardsPack): AppThunk => async dispatch => {
+export const addPackTC = (data: AddCardsPack): AppThunk => async (dispatch, getState) => {
+    const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs
     dispatch(setStatus('loading'))
     try {
         await PacksAPI.addPack(data)
-        const res = await PacksAPI.fetchPacks(data)
+        const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, min, max, user_id, packName})
         const {cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount} = res.data
         dispatch(setPacks(cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount))
         dispatch(setStatus('success'))
@@ -70,11 +71,12 @@ export const addPackTC = (data: AddCardsPack): AppThunk => async dispatch => {
 }
 
 export const updatePackTC =
-    (data: UpdatePackType): AppThunk => async dispatch => {
+    (data: UpdatePackType): AppThunk => async (dispatch, getState) => {
+        const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs
         dispatch(setStatus('loading'))
         try {
             await PacksAPI.createPack(data)
-            const res = await PacksAPI.fetchPacks(data)
+            const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, min, max, user_id, packName})
             const {cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount} = res.data
             dispatch(setPacks(cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount))
             dispatch(setStatus('success'))
@@ -88,6 +90,7 @@ export const deletePackTC = (id: string): AppThunk => async (dispatch, getState)
     dispatch(setStatus('loading'))
     try {
         await PacksAPI.deletePack(id)
+
         const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, min, max, user_id, packName})
         const {cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount} = res.data
         dispatch(setPacks(cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount))

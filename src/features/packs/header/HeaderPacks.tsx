@@ -16,7 +16,7 @@ export const HeaderPacks = () => {
   }
 
     const addPack = () => {
-        dispatch(addPackTC({ cardsPack: { name: 'HI', private: false } }))
+        dispatch(addPackTC({ cardsPack: { name: 'TEST PACK', private: false } }))
     }
 
 
