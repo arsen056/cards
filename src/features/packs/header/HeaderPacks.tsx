@@ -1,6 +1,6 @@
 import React from 'react';
 import {SearchPacks} from "../searchPack/SearchPacks";
-import {MyOrAll} from "./MyAll";
+import {MyOrAll} from "./MyAllBtn/MyAll";
 import {RangeSlider} from "./RangeSlider";
 import resetIcon from "../../../assets/reset.svg"
 import s from './HeaderPacks.module.css'

@@ -10,6 +10,7 @@ import {AppDispatch} from "../../../app/store";
 import {getPacks} from "../packsReducer";
 import {useSelector} from "react-redux";
 import {PackItem} from "./PackItem";
+import s from './packList.module.css'
 import {
   selectPackName,
   selectPacksUserID,
@@ -40,10 +41,10 @@ export const PackList = () => {
   }, [packName, userID, min, max, pageCount, page])
 
   return ( appStatus === 'loading' ? <div className='loader-pack'><Loader/></div> :
-    <TableContainer component={Paper}>
+    <TableContainer className={s.tableContainer} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <TableRow className={s.thead}>
             <TableCell>Name</TableCell>
             <TableCell align="right">Cards</TableCell>
             <TableCell align="right">Last Updated</TableCell>

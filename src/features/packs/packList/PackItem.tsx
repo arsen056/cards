@@ -6,48 +6,49 @@ import {Link} from "react-router-dom";
 import {PackListCrud} from "./PackListCRUD";
 import {deletePackTC, updatePackTC} from "./PackListReducer";
 import {AppDispatch} from "../../../app/store";
+import {isoToDate} from "../../../common/utils/time";
 
 type PackItemPropsType = {
-    pack: PackType
+  pack: PackType
 }
 
 export const PackItem: FC<PackItemPropsType> = ({pack}) => {
 
+  const dispatch = AppDispatch()
 
-    const dispatch = AppDispatch()
+  const updatePack = (data: UpdatePackType) => {
+    dispatch(updatePackTC(data))
+  }
 
-    const updatePack = (data: UpdatePackType) => {
-        dispatch(updatePackTC(data))
-    }
+  const deletePack = (id: string) => {
+    dispatch(deletePackTC(id))
+  }
 
-    const deletePack = (id: string) => {
-        dispatch(deletePackTC(id))
-    }
+  const date = isoToDate(pack.updated)
 
+  return (
+    <TableRow
+      sx={{'&:last-child td, &:last-child th': {border: 0}}}
+    >
 
-    return (
-        <TableRow
-            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-        >
+      <TableCell component="th" scope="row">
+        <Link to={pack._id}>
+          {pack.name}
+        </Link>
+      </TableCell>
+      <TableCell align="right">{pack.cardsCount}</TableCell>
+      <TableCell align="right">{date}</TableCell>
+      <TableCell align="right">{pack.user_name}</TableCell>
+      <TableCell align="right">
+        <PackListCrud id={pack._id}
+                      cardsCount={pack.cardsCount}
+                      userId={pack.user_id}
+                      educationsAction={() => {
+                      }}
+                      editAction={updatePack}
+                      deleteAction={deletePack}/>
+      </TableCell>
 
-            <TableCell component="th" scope="row">
-                <Link to={pack._id}>
-                    {pack.name}
-                </Link>
-            </TableCell>
-            <TableCell align="right">{pack.cardsCount}</TableCell>
-            <TableCell align="right">{pack.updated}</TableCell>
-            <TableCell align="right">{pack.created}</TableCell>
-            <TableCell align="right">
-                <PackListCrud id={pack._id}
-                              cardsCount={pack.cardsCount}
-                              userId={pack.user_id}
-                              educationsAction={() => {
-                              }}
-                              editAction={updatePack}
-                              deleteAction={deletePack}/>
-            </TableCell>
-
-        </TableRow>
-    );
+    </TableRow>
+  );
 };

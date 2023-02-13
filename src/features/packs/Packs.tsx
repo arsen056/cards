@@ -23,13 +23,13 @@ export const Packs = () => {
   }
 
   useEffect(() => {
-    const params = Object.fromEntries(searchParams)
-    dispatch(setPage(+params.page || 1))
-    dispatch(setPageCount(+params.pageCount || 8))
+    // const params = Object.fromEntries(searchParams)
+    // dispatch(setPage(+params.page || 1))
+    // dispatch(setPageCount(+params.pageCount || 8))
   }, [])
 
   return (
-    <div className={'container pading-vertical'}>
+    <div className={'container padding-vertical'}>
       <HeaderPacks/>
       <PackList/>
       <SuperPagination page={page} itemsCountForPage={pageCount} totalCount={totalCount} onChange={onChangePagination}/>
