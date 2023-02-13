@@ -5,7 +5,7 @@ import {PackType, UpdatePackType} from "../PacksAPI";
 import {Link} from "react-router-dom";
 import {PackListCrud} from "./PackListCRUD";
 import {useDispatch} from "react-redux";
-import {updatePackTC} from "./PackListReducer";
+import {deletePackTC, updatePackTC} from "./PackListReducer";
 
 type PackItemPropsType = {
   pack: PackType
@@ -16,13 +16,12 @@ export const PackItem:FC<PackItemPropsType> = ({pack}) => {
 
   const dispatch = useDispatch()
 
-
-  const deletePack = (id: string) => {
-    /*dispatch(deletePackTC(id))*/
-  }
-
   const updatePack = (data: UpdatePackType) => {
     dispatch(updatePackTC(data))
+  }
+
+  const deletePack = (id: string) => {
+    dispatch(deletePackTC(id))
   }
 
 

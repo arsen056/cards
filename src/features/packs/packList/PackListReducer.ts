@@ -45,6 +45,8 @@ export const packListReducer = (state: InitialStateType = initialState, action: 
                         : e
                 ),
             }
+        case 'PACKS/DELETE-PACKS':
+            return { ...state, cardPacks: state.cardPacks.filter(e => e._id !== action.idPack) }
         default:
             return state
     }
@@ -66,9 +68,19 @@ export const updatePackTC =
             })
         }
 
+export const deletePackTC =
+    (id: string): AppThunk =>
+        dispatch => {
+            PacksAPI.deletePack(id).then(res => {
+                dispatch(deletePackAC(res.data.deletedCardsPack._id))
+            })
+        }
+
 export const addPackAC = (newCardsPack: PackType) => ({type: 'PACKS/ADD-PACKS', newCardsPack} as const)
 export const updatePackAC = (data: PackType) => ({ type: 'PACKS/UPDATE-PACKS', data } as const)
+export const deletePackAC = (idPack: string) => ({ type: 'PACKS/DELETE-PACKS', idPack } as const)
 
 export type PacksActionType =
     | ReturnType<typeof addPackAC>
     | ReturnType<typeof updatePackAC>
+    | ReturnType<typeof deletePackAC>
