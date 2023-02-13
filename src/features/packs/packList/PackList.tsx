@@ -12,6 +12,7 @@ import {useSelector} from "react-redux";
 import {PackItem} from "./PackItem";
 import {selectPackName, selectPacksUserID, selectCardPacks, selectMin, selectMax} from "../../../common/selectors";
 
+
 export const PackList = () => {
   const dispatch = AppDispatch()
   const packs = useSelector(selectCardPacks)

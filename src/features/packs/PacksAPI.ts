@@ -6,11 +6,68 @@ export const PacksAPI = {
       params: params
     })
   },
-
   searchPacks(name:string) {
     return instance.get<PacksResponseType>(`cards/pack?packName=${name}`)
+  },
+
+
+  addPack(data: AddCardsPack) {
+    return instance.post<ResponseTypeNewCardsPack>(`cards/pack`, data)
+  },
+  deletePack(id: string) {
+    return instance.delete<ResponseDeletedCardsPackType>(`cards/pack?id=${id}`)
+  },
+  createPack(data: UpdatePackType) {
+    return instance.put<ResponseUpdateType>(`cards/pack`, data)
+  },
+}
+
+export type AddCardsPack = {
+  cardsPack: {
+    name?: string // если не отправить будет таким
+    deckCover?: string // не обязателен
+    private?: boolean // если не отправить будет такой
   }
 }
+
+export type ResponseUpdateType = {
+  updatedCardsPack: PackType
+  token: string
+  tokenDeathTime: number
+}
+
+
+export type UpdatePackType = {
+  cardsPack: {
+    _id: string
+    name?: string
+  }
+}
+
+export type ResponseTypeNewCardsPack = {
+  newCardsPack: PackType
+  token: string
+  tokenDeathTime: number
+}
+
+export type ResponseDeletedCardsPackType = {
+  deletedCardsPack: PackType
+  token: string
+  tokenDeathTime: number
+}
+
+
+export type GetPacksPayloadType = {
+  packName?: string
+  min?: number
+  max?: number
+  sortPacks?: string
+  page?: number
+  pageCount?: number
+  user_id?: string // чьи колоды,если не передан то придут все
+  block?: boolean
+}
+
 
 export type PacksResponseType = {
   cardPacks: PackType[];
@@ -41,4 +98,3 @@ export type PackType =  {
   more_id: string;
   __v: number;
 }
-

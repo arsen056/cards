@@ -3,6 +3,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import {PackType} from "../PacksAPI";
 import {Link} from "react-router-dom";
+import PackListCRUD from "./PackListCRUD";
 
 type PackItemPropsType = {
   pack: PackType
@@ -22,7 +23,7 @@ export const PackItem:FC<PackItemPropsType> = ({pack}) => {
         <TableCell align="right">{pack.cardsCount}</TableCell>
         <TableCell align="right">{pack.updated}</TableCell>
         <TableCell align="right">{pack.created}</TableCell>
-        <TableCell align="right">CRUD</TableCell>
+        <TableCell align="right"><PackListCRUD/></TableCell>
 
       </TableRow>
   );

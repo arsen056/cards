@@ -7,7 +7,10 @@ import {ProfileType, SignInAPI} from "../auth/authAPI/authAPI";
 
 
 
-const initState = {name: 'Name', email: 'Email'} as ProfileType
+const initState = {
+  name: 'Name',
+  email: 'Email',
+} as ProfileType
 
 export const profileReducer = (state = initState, action: ProfileActionsType) => {
   switch (action.type) {
