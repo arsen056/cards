@@ -38,6 +38,10 @@ export const packsReducer = (state: PacksStateType = initState, action: PacksAct
       return {...state, min: action.min}
     case "PACKS/SET_MAX":
       return {...state, max: action.max}
+    case "PACKS/SET_PAGE":
+      return {...state, page: action.page}
+    case "PACKS/SET_PAGE_COUNT":
+      return {...state, pageCount: action.pageCount}
     default:
       return state
   }
@@ -50,6 +54,8 @@ export const setPackName = (packName: string) => ({type: 'PACKS/SET_PACK_NAME', 
 export const setUserId = (userID: string | null) => ({type: 'PACKS/SET_USER_ID', userID} as const)
 export const setMin = (min: number) => ({type: 'PACKS/SET_MIN', min} as const)
 export const setMax = (max: number) => ({type: 'PACKS/SET_MAX', max} as const)
+export const setPage = (page: number) => ({type: 'PACKS/SET_PAGE', page} as const)
+export const setPageCount = (pageCount: number) => ({type: 'PACKS/SET_PAGE_COUNT', pageCount} as const)
 
 export type PacksActionsType =
   ReturnType<typeof setPacks>
@@ -57,6 +63,8 @@ export type PacksActionsType =
   | ReturnType<typeof setUserId>
   | ReturnType<typeof setMin>
   | ReturnType<typeof setMax>
+  | ReturnType<typeof setPage>
+  | ReturnType<typeof setPageCount>
 
 export const getPacks = (): AppThunk => async (dispatch, getState) => {
   const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs

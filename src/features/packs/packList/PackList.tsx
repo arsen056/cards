@@ -10,7 +10,14 @@ import {AppDispatch} from "../../../app/store";
 import {getPacks} from "../packsReducer";
 import {useSelector} from "react-redux";
 import {PackItem} from "./PackItem";
-import {selectPackName, selectPacksUserID, selectCardPacks, selectMin, selectMax} from "../../../common/selectors";
+import {
+  selectPackName,
+  selectPacksUserID,
+  selectCardPacks,
+  selectMin,
+  selectMax,
+  selectPageCount, selectPage
+} from "../../../common/selectors";
 
 
 export const PackList = () => {
@@ -20,11 +27,13 @@ export const PackList = () => {
   const userID = useSelector(selectPacksUserID)
   const min = useSelector(selectMin)
   const max = useSelector(selectMax)
+  const pageCount = useSelector(selectPageCount)
+  const page = useSelector(selectPage)
 
 
   useEffect(() => {
     dispatch(getPacks())
-  }, [packName, userID, min, max])
+  }, [packName, userID, min, max, pageCount, page])
 
   return (
     <TableContainer component={Paper}>
