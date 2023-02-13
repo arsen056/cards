@@ -3,9 +3,9 @@ import educationIcon from '../../../assets/learn.svg'
 import editIcon from '../../../assets/edit.svg'
 import deleteIcon from '../../../assets/delete.svg'
 import {UpdatePackType} from "../PacksAPI";
-import {setUserId} from "../packsReducer";
 import {useSelector} from "react-redux";
 import {selectUserID} from "../../../common/selectors";
+import s from './packList.module.css'
 
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
@@ -31,18 +31,18 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
     return (
         <div>
 
-            <button /*onClick={e => educationCallback(e)}*/>
+            <button/*onClick={e => educationCallback(e)}*/ className={s.button}>
                 <img src={educationIcon} alt="education icon"/>
             </button>
 
             {userId === userProfileID && editAction && (
-                <button onClick={editCallback}>
+                <button onClick={editCallback} className={s.button} >
                     <img src={editIcon} alt="edit icon"/>
                 </button>
             )}
 
             {userId === userProfileID && editAction && (
-                <button onClick={deleteCallback}>
+                <button onClick={deleteCallback} className={s.button}>
                     <img src={deleteIcon} alt="delete icon"/>
                 </button>
             )}
