@@ -6,3 +6,10 @@
 .pading-vertical {
   padding: 30px 0;
 }
+
+.loader-pack {
+  display: flex;
+  align-items: center;
+
+  height: 50vh;
+}

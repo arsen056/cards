@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {PackList} from "./packList/PackList";
 import {HeaderPacks} from "./header/HeaderPacks";
 import {SuperPagination} from "../../common/components/superPagination/SuperPagination";
@@ -6,9 +6,11 @@ import {useSelector} from "react-redux";
 import {selectCardPacksTotaCount, selectPage, selectPageCount} from "./selectors";
 import {AppDispatch} from "../../app/store";
 import {setPage, setPageCount} from "./packsReducer";
+import {useSearchParams} from "react-router-dom";
 
 export const Packs = () => {
   const dispatch = AppDispatch();
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const totalCount = useSelector(selectCardPacksTotaCount)
   const page = useSelector(selectPage)
@@ -17,7 +19,14 @@ export const Packs = () => {
   const onChangePagination = (pageNumber: number, pageCount: number) => {
     dispatch(setPage(pageNumber));
     dispatch(setPageCount(pageCount))
+    setSearchParams({page: `${pageNumber}`, pageCount: `${pageCount}`})
   }
+
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams)
+    dispatch(setPage(+params.page || 1))
+    dispatch(setPageCount(+params.pageCount || 8))
+  }, [])
 
   return (
     <div className={'container pading-vertical'}>

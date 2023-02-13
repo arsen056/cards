@@ -18,11 +18,14 @@ import {
   selectMax,
   selectPageCount, selectPage
 } from "../selectors";
+import {selectStatus} from "../../../common/selectors";
+import {Loader} from "../../../common/components/loader/Loader";
 
 
 export const PackList = () => {
   const dispatch = AppDispatch()
   const packs = useSelector(selectCardPacks)
+
   const packName = useSelector(selectPackName)
   const userID = useSelector(selectPacksUserID)
   const min = useSelector(selectMin)
@@ -30,12 +33,13 @@ export const PackList = () => {
   const pageCount = useSelector(selectPageCount)
   const page = useSelector(selectPage)
 
+  const appStatus = useSelector(selectStatus)
 
   useEffect(() => {
     dispatch(getPacks())
   }, [packName, userID, min, max, pageCount, page])
 
-  return (
+  return ( appStatus === 'loading' ? <div className='loader-pack'><Loader/></div> :
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
