@@ -21,12 +21,19 @@ export const HeaderPacks = () => {
 
 
   return (
-    <div className={s.wrapper}>
-        <SuperButton onClick={addPack}>Add new pack</SuperButton>
-      <SearchPacks/>
-      <MyOrAll/>
-      <RangeSlider/>
-      <img className={s.reset} src={resetIcon} alt="reset" onClick={resetHandler}/>
-    </div>
+      <div>
+          <div className={s.headTitleButton}>
+             <h2>Packs List</h2>
+              <SuperButton onClick={addPack}>Add new pack</SuperButton>
+          </div>
+          <div className={s.wrapper}>
+
+              <SearchPacks/>
+              <MyOrAll/>
+              <RangeSlider/>
+              <img className={s.reset} src={resetIcon} alt="reset" onClick={resetHandler}/>
+          </div>
+
+      </div>
   );
 };
