@@ -79,6 +79,7 @@ export const Avatar = () => {
       </Button>
 
       <Popper
+        sx={{zIndex:5}}
         open={open}
         anchorEl={anchorRef.current}
         role={undefined}
