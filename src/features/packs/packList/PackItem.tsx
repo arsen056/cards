@@ -4,8 +4,8 @@ import TableRow from "@mui/material/TableRow";
 import {PackType, UpdatePackType} from "../PacksAPI";
 import {Link} from "react-router-dom";
 import {PackListCrud} from "./PackListCRUD";
-import {deletePackTC, updatePackTC} from "./PackListReducer";
 import {AppDispatch} from "../../../app/store";
+import {deletePackTC, updatePackTC} from "../packsReducer";
 
 type PackItemPropsType = {
     pack: PackType
