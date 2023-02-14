@@ -2,20 +2,16 @@ import React from 'react';
 import educationIcon from '../../../assets/learn.svg'
 import editIcon from '../../../assets/edit.svg'
 import deleteIcon from '../../../assets/delete.svg'
-import {UpdatePackType} from "../PacksAPI";
 import {useSelector} from "react-redux";
 import {selectUserID} from "../selectors";
 import s from './packList.module.css'
+import {UpdatePackType} from "../PacksAPI";
+import {IconButton} from "@mui/material";
 
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
-                                                                       id,
-                                                                       userId,
-                                                                       cardsCount,
-                                                                       educationsAction,
-                                                                       editAction,
-                                                                       deleteAction
-                                                                   }) => {
+ id, userId, cardsCount, educationsAction, editAction, deleteAction
+}) => {
 
     const userProfileID = useSelector(selectUserID)
 
@@ -30,21 +26,22 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
 
     return (
         <div>
-
-            <button/*onClick={e => educationCallback(e)}*/ className={s.button}>
-                <img src={educationIcon} alt="education icon"/>
-            </button>
+            {educationsAction && (
+                <IconButton size="small" disabled={cardsCount === 0}
+                            className={cardsCount === 0 ? s.disabled : s.button}>
+                    <img src={educationIcon} alt="education icon"/>
+                </IconButton>)}
 
             {userId === userProfileID && editAction && (
-                <button onClick={editCallback} className={s.button} >
+                <IconButton onClick={editCallback} size="small">
                     <img src={editIcon} alt="edit icon"/>
-                </button>
+                </IconButton>
             )}
 
             {userId === userProfileID && editAction && (
-                <button onClick={deleteCallback} className={s.button}>
+                <IconButton onClick={deleteCallback} size="small">
                     <img src={deleteIcon} alt="delete icon"/>
-                </button>
+                </IconButton>
             )}
         </div>
     );
