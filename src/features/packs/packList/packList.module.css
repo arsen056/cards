@@ -4,7 +4,6 @@
     padding: 2px;
 }
 
-.disabled{
+.disabled {
     opacity: 0.5;
-    background-color: red;
 }

@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 import {PackListCrud} from "./PackListCRUD";
 import {AppDispatch} from "../../../app/store";
 import {deletePackTC, updatePackTC} from "../packsReducer";
+import {useSelector} from "react-redux";
+import {selectIsDisabled} from "../selectors/selectIsDisabled";
 
 type PackItemPropsType = {
     pack: PackType
@@ -23,7 +25,6 @@ export const PackItem: FC<PackItemPropsType> = ({pack}) => {
     const deletePack = (id: string) => {
         dispatch(deletePackTC(id))
     }
-
 
     return (
         <TableRow
@@ -46,7 +47,7 @@ export const PackItem: FC<PackItemPropsType> = ({pack}) => {
                               }}
                               editAction={updatePack}
                               deleteAction={deletePack}
-                              />
+                />
             </TableCell>
 
         </TableRow>
