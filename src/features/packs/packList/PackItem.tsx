@@ -6,8 +6,6 @@ import {Link} from "react-router-dom";
 import {PackListCrud} from "./PackListCRUD";
 import {AppDispatch} from "../../../app/store";
 import {deletePackTC, updatePackTC} from "../packsReducer";
-import {useSelector} from "react-redux";
-import {selectIsDisabled} from "../selectors/selectIsDisabled";
 
 type PackItemPropsType = {
     pack: PackType
