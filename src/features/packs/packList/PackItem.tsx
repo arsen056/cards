@@ -45,7 +45,8 @@ export const PackItem: FC<PackItemPropsType> = ({pack}) => {
                               educationsAction={() => {
                               }}
                               editAction={updatePack}
-                              deleteAction={deletePack}/>
+                              deleteAction={deletePack}
+                              />
             </TableCell>
 
         </TableRow>

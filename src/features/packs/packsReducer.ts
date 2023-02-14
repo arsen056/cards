@@ -9,6 +9,7 @@ const initState = {
     cardPacksTotalCount: 0 as number,
     maxCardsCount: 0 as number,
     minCardsCount: 0 as number,
+    isDisabled: false,
     searchParams: {
         sortPacks: null as string | null,
         min: 0 as number,
@@ -98,6 +99,7 @@ export const getPacks = (): AppThunk => async (dispatch, getState) => {
         const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, min, max, user_id, packName})
         const {cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount} = res.data
         dispatch(setPacks(cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount))
+
     } catch (err) {
         errorUtils(err as Error | AxiosError, dispatch)
     } finally {

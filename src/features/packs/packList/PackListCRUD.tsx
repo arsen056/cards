@@ -9,15 +9,12 @@ import {UpdatePackType} from "../PacksAPI";
 
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
-                                                                       id,
-                                                                       userId,
-                                                                       cardsCount,
-                                                                       educationsAction,
-                                                                       editAction,
-                                                                       deleteAction
+                                                                       id, userId, cardsCount,
+                                                                       educationsAction, editAction, deleteAction
                                                                    }) => {
 
     const userProfileID = useSelector(selectUserID)
+
 
     const deleteCallback = () => {
         deleteAction && deleteAction(id)
@@ -30,10 +27,10 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
 
     return (
         <div>
-
-            <button/*onClick={e => educationCallback(e)}*/ className={s.button}>
+            {educationsAction && (
+            <button className={s.button}>
                 <img src={educationIcon} alt="education icon"/>
-            </button>
+            </button>)}
 
             {userId === userProfileID && editAction && (
                 <button onClick={editCallback} className={s.button}>
