@@ -1,13 +1,18 @@
 import {instance} from "../../API/instance";
 
 export const cardsAPI = {
-		fetchCards(packId: string) {
-				return instance.get<CardsResponseType>(`cards/card?cardsPack_id=${packId}`)
+		fetchCards(params: any, packId: string) {
+				return instance.get<CardsResponseType>(
+						`cards/card?cardsPack_id=${packId}`,
+						{params: params})
 		},
 		addPack(data: AddCardType) {
-				return instance.post(`cards/card
-`, data)
+				return instance.post(`cards/card`, data)
 		},
+		deleteCard(id: string) {
+				return instance.delete(`cards/card?id=${id}`)
+		}
+
 }
 
 export type CardsResponseType = {

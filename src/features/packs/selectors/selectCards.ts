@@ -6,3 +6,4 @@ export const selectCardsTotalCount = (state: AppRootStateType): number => state.
 export const selectCardsPage = (state: AppRootStateType): number => state.cards.page
 export const selectCardsPageCount = (state: AppRootStateType): number => state.cards.pageCount
 export const selectCardsPackName = (state: AppRootStateType): string => state.cards.packName
+export const selectPackUserId = (state: AppRootStateType): string => state.cards.packUserId

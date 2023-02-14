@@ -8,20 +8,20 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {CardItem} from "./CardItem";
 import {CardType} from "../CardsAPI";
-import {useSelector} from "react-redux";
-import {selectStatus} from "../../../common/selectors";
-import {Loader} from "../../../common/components/loader/Loader";
 
 type CardsListPropsType = {
 		cards: CardType[]
+		userId: string
+		packUserId: string
+		packID: string
 }
 
-export const CardsList = ({cards}: CardsListPropsType) => {
-		const appStatus = useSelector(selectStatus)
+export const CardsList = ({cards, userId, packUserId, packID}: CardsListPropsType) => {
+		// const appStatus = useSelector(selectStatus)
 
-		if (appStatus === 'loading') {
-				return <Loader/>
-		}
+		// if (appStatus === 'loading') {
+		// 		return <Loader/>
+		// }
 		return (
 				<TableContainer component={Paper}>
 						<Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -31,12 +31,13 @@ export const CardsList = ({cards}: CardsListPropsType) => {
 												<TableCell align="right">Answer</TableCell>
 												<TableCell align="right">Last Updated</TableCell>
 												<TableCell align="right">Grade</TableCell>
-												<TableCell align="right">Actions</TableCell>
+												{userId === packUserId &&
+												<TableCell align="right"></TableCell>}
 										</TableRow>
 								</TableHead>
 								<TableBody>
 										{cards.map((card) => (
-												<CardItem key={card._id} card={card}/>
+												<CardItem key={card._id} card={card} packID={packID} userId={userId} packUserId={packUserId}/>
 										))}
 								</TableBody>
 						</Table>

@@ -4,25 +4,16 @@ import {SearchPacks} from "../../packs/searchPack/SearchPacks";
 import React from "react";
 import {SuperButton} from "../../../common/components/SuperButton";
 import {TitleCards} from "./titleCards/TitleCards";
-import {AppDispatch} from "../../../app/store";
-import {addCardTC} from "../cardsReducer";
 
 type HeaderCardsPropsType = {
 		title: string
-		packID: string
+		addCard: () => void
+		packUserId: string
+		userId: string
 }
 
-export const HeaderCards = ({title, packID}: HeaderCardsPropsType) => {
-		const dispatch = AppDispatch()
+export const HeaderCards = ({title, addCard, userId, packUserId}: HeaderCardsPropsType) => {
 
-		const addCard = () => {
-				dispatch(addCardTC({card: {
-						cardsPack_id: packID,
-						question: "how do you like this task?",
-						answer: "It is wonderful",
-						grade: 2
-				}}))
-		}
 		return (
 				<div>
 						<div className={`${s.wrapper} ${style.headerCards}`}>
@@ -30,9 +21,9 @@ export const HeaderCards = ({title, packID}: HeaderCardsPropsType) => {
 										<TitleCards title={title}/>
 										<SuperButton variant={'contained'}
 																 color={'primary'}
-																 onClick={addCard}
+																 onClick={userId === packUserId ? addCard : () => alert('Learning to start')}
 										>
-												Add new card
+												{userId === packUserId ? 'Add new card' : 'Learn to pack'}
 										</SuperButton>
 								</div>
 								<SearchPacks/>

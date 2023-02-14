@@ -6,10 +6,12 @@ import {AddCardType, cardsAPI, CardType} from "./CardsAPI";
 
 const initState = {
 		cards: [] as CardType[],
+		packUserId: '' as string,
 		cardsTotalCount: 0 as number,
 		page: 1 as number,
 		pageCount: 4 as number,
-		packName: '' as string
+		packName: '' as string,
+		sortPacks: null as string | null,
 }
 
 export type CardsStateType = typeof initState
@@ -21,7 +23,8 @@ export const cardsReducer = (state: CardsStateType = initState, action: CardsAct
 								...state,
 								cards: action.cards,
 								cardsTotalCount: action.cardsTotalCount,
-								packName: action.packName
+								packName: action.packName,
+								packUserId: action.packUserId
 						}
 				case "CARDS/SET_PAGE":
 						return {
@@ -33,35 +36,32 @@ export const cardsReducer = (state: CardsStateType = initState, action: CardsAct
 								...state,
 								pageCount: action.cardsPageCount
 						}
-				// case "CARDS/ADD_CARD":
-				// 		return {
-				// 				...state,
-				// 				cards: [...state.cards, action.newCard]
-				// 		}
 				default:
 						return state
 		}
 }
 
 //actions
-export const setCards = (cards: CardType[], cardsTotalCount: number, packName: string) => ({
+export const setCards = (cards: CardType[], cardsTotalCount: number, packName: string, packUserId: string) => ({
 		type: 'CARDS/SET_CARDS',
 		cards,
 		cardsTotalCount,
-		packName
+		packName,
+		packUserId
 } as const)
 export const setCardsPage = (pageCardsNumber: number) => ({type: "CARDS/SET_PAGE", pageCardsNumber} as const)
 export const setCardsPageCount = (cardsPageCount: number) => ({type: "CARDS/SET_PAGE_COUNT", cardsPageCount} as const)
 export const addCard = (newCard: CardType) => ({type: "CARDS/ADD_CARD", newCard} as const)
 
 //thunks
-export const getCards = (packId: string | undefined): AppThunk => async (dispatch) => {
+export const getCards = (packId: string | undefined): AppThunk => async (dispatch, getState) => {
+		const {page, pageCount, sortPacks} = getState().cards
 		dispatch(setStatus('loading'))
 		if (packId) {
 				try {
-						const res = await cardsAPI.fetchCards(packId)
-						const {cards, cardsTotalCount, packName} = res.data
-						dispatch(setCards(cards, cardsTotalCount, packName))
+						const res = await cardsAPI.fetchCards({page, pageCount, sortPacks}, packId)
+						const {cards, cardsTotalCount, packName, packUserId} = res.data
+						dispatch(setCards(cards, cardsTotalCount, packName, packUserId))
 				} catch (e) {
 						const err = e as Error | AxiosError<{ error: string }>
 						errorUtils(err, dispatch)
@@ -70,13 +70,29 @@ export const getCards = (packId: string | undefined): AppThunk => async (dispatc
 				}
 		}
 }
-export const addCardTC = (newCard: AddCardType): AppThunk => async dispatch => {
+export const addCardTC = (newCard: AddCardType): AppThunk => async (dispatch, getState) => {
+		const {page, pageCount, sortPacks} = getState().cards
 		dispatch(setStatus('loading'))
 		try {
 				await cardsAPI.addPack(newCard)
-				const res = await cardsAPI.fetchCards(newCard.card.cardsPack_id)
-				const {cards, cardsTotalCount, packName} = res.data
-				dispatch(setCards(cards, cardsTotalCount, packName))
+				const res = await cardsAPI.fetchCards({page, pageCount, sortPacks}, newCard.card.cardsPack_id)
+				const {cards, cardsTotalCount, packName, packUserId} = res.data
+				dispatch(setCards(cards, cardsTotalCount, packName, packUserId))
+		} catch (e) {
+				const err = e as Error | AxiosError<{ error: string }>
+				errorUtils(err, dispatch)
+		} finally {
+				dispatch(setStatus('success'))
+		}
+}
+export const deleteCardTC = (cardId: string, packId: string): AppThunk => async (dispatch, getState) => {
+		const {page, pageCount, sortPacks} = getState().cards
+		dispatch(setStatus('loading'))
+		try {
+				await cardsAPI.deleteCard(cardId)
+				const res = await cardsAPI.fetchCards({page, pageCount, sortPacks}, packId)
+				const {cards, cardsTotalCount, packName, packUserId} = res.data
+				dispatch(setCards(cards, cardsTotalCount, packName, packUserId))
 		} catch (e) {
 				const err = e as Error | AxiosError<{ error: string }>
 				errorUtils(err, dispatch)
