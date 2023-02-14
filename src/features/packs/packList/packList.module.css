@@ -1,9 +1,13 @@
 .button {
     padding: 2px;
-
     background-color: white;
     border: 0px;
 }
+
+.disabled {
+    opacity: 0.5;
+}
+
 
 .thead {
     background-color: #EFEFEF;
