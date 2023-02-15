@@ -20,7 +20,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
     }
 
     const editCallback = () => {
-        editAction && editAction({cardsPack: {_id: id, name: 'new Card'}})
+        editAction && editAction({cardsPack: {_id: id, name: 'new Pack'}})
     }
 
 

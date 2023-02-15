@@ -20,6 +20,11 @@ export const SearchPacks = () => {
     dispatch(setPackName(value))
   }, [debouncedValue])
 
+  useEffect(() => {
+
+  }, [value])
+
+
   return (
     <Paper
       component="form"

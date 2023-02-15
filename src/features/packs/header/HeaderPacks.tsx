@@ -6,7 +6,7 @@ import resetIcon from "../../../assets/reset.svg"
 import s from './HeaderPacks.module.css'
 import {SuperButton} from "../../../common/components/SuperButton";
 import {AppDispatch} from "../../../app/store";
-import {addPackTC} from "../packsReducer";
+import {addPackTC, resetFilters} from "../packsReducer";
 
 
 // type HeaderPacksPropsType = {
@@ -15,31 +15,30 @@ import {addPackTC} from "../packsReducer";
 // }
 
 export const HeaderPacks = () => {
-  const dispatch = AppDispatch()
+    const dispatch = AppDispatch()
 
-  const resetHandler = () => {
+    const resetHandler = () => {
+        dispatch(resetFilters())
+    }
 
-  }
+    const addPack = () => {
+        dispatch(addPackTC({cardsPack: {name: 'TEST PACK', private: false}}))
+    }
 
-  const addPack = () => {
-    dispatch(addPackTC({cardsPack: {name: 'TEST PACK', private: false}}))
-  }
+    return (
+        <div>
+            <div className={s.headTitleButton}>
+                <h2>Packs List</h2>
+                <SuperButton onClick={addPack}>Add new pack</SuperButton>
+            </div>
+            <div className={s.wrapper}>
 
+                <SearchPacks/>
+                <MyOrAll/>
+                <RangeSlider/>
+                <img className={s.reset} src={resetIcon} alt="reset" onClick={resetHandler}/>
+            </div>
 
-  return (
-    <div>
-      <div className={s.headTitleButton}>
-        <h2>Packs List</h2>
-        <SuperButton onClick={addPack}>Add new pack</SuperButton>
-      </div>
-      <div className={s.wrapper}>
-
-        <SearchPacks/>
-        <MyOrAll/>
-        <RangeSlider/>
-        <img className={s.reset} src={resetIcon} alt="reset" onClick={resetHandler}/>
-      </div>
-
-    </div>
-  );
+        </div>
+    );
 };
