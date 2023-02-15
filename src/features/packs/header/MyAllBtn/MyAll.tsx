@@ -28,7 +28,7 @@ export const MyOrAll = () => {
 
     useEffect(() => {
 
-    }, [my, all])
+    }, [filter])
 
 
     return (
