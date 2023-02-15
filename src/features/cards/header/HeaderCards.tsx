@@ -1,6 +1,6 @@
 import s from "../../packs/header/HeaderPacks.module.css";
 import style from './HeaderCards.module.css'
-import {SearchPacks} from "../../packs/searchPack/SearchPacks";
+import {SearchPacks} from "../../packs/header/searchPack/SearchPacks";
 import React from "react";
 import {SuperButton} from "../../../common/components/SuperButton";
 import {TitleCards} from "./titleCards/TitleCards";

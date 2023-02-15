@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Slider} from "@mui/material";
-import {AppDispatch} from "../../../app/store";
-import {setMax, setMin} from "../packsReducer";
-import s from './HeaderPacks.module.css'
+import {AppDispatch} from "../../../../app/store";
+import {setMax, setMin} from "../../packsReducer";
+import s from '../HeaderPacks.module.css'
 import {useSelector} from "react-redux";
-import {selectMax, selectMaxCardsCount, selectMin, selectMinCardsCount} from "../selectors";
+import {selectMax, selectMaxCardsCount, selectMin, selectMinCardsCount} from "../../selectors";
 
 export const RangeSlider = () => {
     const dispatch = AppDispatch()

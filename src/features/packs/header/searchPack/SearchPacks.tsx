@@ -2,11 +2,11 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import {useDebounce} from "../../../common/hooks/useDebounce";
-import {setPackName} from "../packsReducer";
-import {AppDispatch} from "../../../app/store";
+import {useDebounce} from "../../../../common/hooks/useDebounce";
+import {setPackName} from "../../packsReducer";
+import {AppDispatch} from "../../../../app/store";
 import {useSelector} from "react-redux";
-import {searchParamsSelector} from "../selectors/selectMyPacks";
+import {searchParamsSelector} from "../../selectors/selectMyPacks";
 
 
 export const SearchPacks = () => {
