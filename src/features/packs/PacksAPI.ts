@@ -6,11 +6,6 @@ export const PacksAPI = {
       params: params
     })
   },
-  searchPacks(name:string) {
-    return instance.get<PacksResponseType>(`cards/pack?packName=${name}`)
-  },
-
-
   addPack(data: AddCardsPack) {
     return instance.post<ResponseTypeNewCardsPack>(`cards/pack`, data)
   },

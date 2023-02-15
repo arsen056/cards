@@ -6,7 +6,6 @@ import {errorUtils} from "../../common/utils/errorUtils";
 
 const initState = {
     cardPacks: [] as PackType[],
-    isMyPacks: false,
     cardPacksTotalCount: 0 as number,
     maxCardsCount: 0 as number,
     minCardsCount: 0 as number,
@@ -19,7 +18,8 @@ const initState = {
         packName: '' as string,
         page: 1 as number,
         pageCount: 8 as number,
-        user_id: null as string | null
+        user_id: null as string | null,
+        isMyPacks: false as boolean
     }
 }
 
@@ -64,7 +64,9 @@ export const packsReducer = (state: PacksStateType = initState, action: PacksAct
         case 'PACKS/DELETE-PACKS':
             return {...state, cardPacks: state.cardPacks.filter(e => e._id !== action.idPack)}
         case "PACK/IS_MY_PACK":
-            return {...state, isMyPacks: action.isMyPacks}
+            return {...state, searchParams: {...state.searchParams, isMyPacks: action.isMyPacks}}
+        case "PACK/SET_RESET_FILTERS":
+            return {...state, searchParams: {...state.searchParams, ...action.filters}}
         default:
             return state
     }
@@ -84,6 +86,14 @@ export const updatePackAC = (data: PackType) => ({type: 'PACKS/UPDATE-PACKS', da
 export const deletePackAC = (idPack: string) => ({type: 'PACKS/DELETE-PACKS', idPack} as const)
 export const getCardsPackAC = (data: PacksResponseType) => ({ type: "PACK/GET_CARDS_PACK", data } as const);
 export const setIsMyPacks = (isMyPacks: boolean) => ({ type: "PACK/IS_MY_PACK", isMyPacks} as const);
+export const setResetFilters = () => ({ type: "PACK/SET_RESET_FILTERS", filters: {
+        packName:'',
+        user_id: '',
+        min: 0,
+        max: 20,
+        page: 1,
+        isMyPacks: false
+    }} as const);
 
 export type PacksActionsType =
     ReturnType<typeof setPacks>
@@ -98,23 +108,7 @@ export type PacksActionsType =
     | ReturnType<typeof deletePackAC>
     | ReturnType<typeof getCardsPackAC>
     | ReturnType<typeof setIsMyPacks>
-
-
-export const resetFilters = (): AppThunk => async dispatch => {
-
-    try {
-        dispatch(setStatus('loading'))
-        dispatch(setPackName(''))
-        dispatch(setUserId(null))
-        dispatch(setMin(0))
-        dispatch(setMax(20))
-        dispatch(setPage(1))
-        dispatch(setIsMyPacks(false))
-    } finally {
-        dispatch(setStatus('success'))
-    }
-}
-
+    | ReturnType<typeof setResetFilters>
 
 export const getPacks = (): AppThunk => async (dispatch, getState) => {
     const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs.searchParams

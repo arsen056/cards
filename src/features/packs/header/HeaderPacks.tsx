@@ -6,19 +6,15 @@ import resetIcon from "../../../assets/reset.svg"
 import s from './HeaderPacks.module.css'
 import {SuperButton} from "../../../common/components/SuperButton";
 import {AppDispatch} from "../../../app/store";
-import {addPackTC, resetFilters} from "../packsReducer";
+import {addPackTC, setResetFilters} from "../packsReducer";
 
-
-// type HeaderPacksPropsType = {
-//   searchParams: URLSearchParams
-//   setSearchParams: (value: URLSearchParams) => void
-// }
 
 export const HeaderPacks = () => {
     const dispatch = AppDispatch()
 
     const resetHandler = () => {
-        dispatch(resetFilters())
+        // dispatch(resetFilters())
+        dispatch(setResetFilters())
     }
 
     const addPack = () => {
