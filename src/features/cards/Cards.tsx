@@ -12,7 +12,7 @@ import {
 		selectCardsPage,
 		selectCardsPackName,
 		selectCardsTotalCount,
-		selectCardsPageCount, selectUserID
+		selectCardsPageCount, selectUserID,
 } from "../packs/selectors";
 import {EmptyPack} from "./header/emptyPack/EmptyPack";
 import {Loader} from "../../common/components/loader/Loader";
@@ -31,10 +31,9 @@ export const Cards = () => {
 		const userId = useSelector(selectUserID)
 		const packUserId = useSelector(selectPackUserId)
 
-
 		useEffect(() => {
 				dispatch(getCards(packID))
-		}, [packID, cardsPage, cardsPageCount])
+		}, [packID, cardsPage, cardsPageCount, cardsPackName])
 
 		const onChangePagination = (pageCardsNumber: number, pageCardsCount: number) => {
 				dispatch(setCardsPage(pageCardsNumber));
@@ -64,7 +63,7 @@ export const Cards = () => {
 		return (
 				<div className={'container pading-vertical'}>
 						<BackToPacksList/>
-						<HeaderCards title={cardsPackName} addCard={addCard} userId={userId} packUserId={packUserId}/>
+						<HeaderCards title={cardsPackName} addCard={addCard} userId={userId} packUserId={packUserId} packID={packID ? packID : ''}/>
 						<CardsList cards={cards} userId={userId} packUserId={packUserId} packID={packID ? packID : ''}/>
 						<SuperPagination
 								page={cardsPage}

@@ -6,11 +6,12 @@ import {SuperButton} from "../../common/components/SuperButton";
 import {changeProfile} from "./profileReducer";
 import {useSelector} from "react-redux";
 import {AppDispatch} from "../../app/store";
-import {Link, Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {SkeletonCustom} from "../../common/components/Sceleton";
 import {Box} from "../../common/components/box/Box";
 import {logoutTC} from "../auth/signIn/loginReducer";
 import {selectIsLoggedIn, selectStatus, selectUser} from "../../common/selectors";
+import {BackToPacksList} from "../../common/components/backToPacksList/BackToPacksList";
 
 export const Profile = () => {
   const user = useSelector(selectUser)
@@ -33,9 +34,7 @@ export const Profile = () => {
 
   return (
     <div className='container'>
-      <Link to={'/packs'}>
-        <button className={s.back}>Back to Packs List</button>
-      </Link>
+      <BackToPacksList/>
       <div className={s.profileWrapper}>
         {appStatus === 'loading' ? <SkeletonCustom/>
           : <Box title={'Personal Information'}>
