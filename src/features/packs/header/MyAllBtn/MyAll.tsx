@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useSelector} from "react-redux";
 import {selectUserID} from "../../selectors";
 import {AppDispatch} from "../../../../app/store";
@@ -24,12 +24,6 @@ export const MyOrAll = () => {
 
     const my = filter === 'my' ? s.pressed : ''
     const all = filter === 'all' ? s.pressed : ''
-
-
-    useEffect(() => {
-
-    }, [filter])
-
 
     return (
         <div>

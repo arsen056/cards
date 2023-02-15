@@ -1,4 +1,4 @@
 import {AppRootStateType} from "../../../app/store";
 
-export const selectIsDisabled = (state: AppRootStateType):boolean => state.packs.isDisabled
+export const selectIsMyPacks = (state: AppRootStateType):boolean => state.packs.isMyPacks
 export const searchParamsSelector = (state: AppRootStateType) => state.packs.searchParams.packName

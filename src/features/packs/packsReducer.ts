@@ -1,12 +1,12 @@
-import {AddCardsPack, GetPacksPayloadType, PacksAPI, PacksResponseType, PackType, UpdatePackType} from "./PacksAPI";
-import {AppRootStateType, AppThunk} from "../../app/store";
+import {AddCardsPack, PacksAPI, PacksResponseType, PackType, UpdatePackType} from "./PacksAPI";
+import {AppThunk} from "../../app/store";
 import {setStatus} from "../../app/appReducer";
 import {AxiosError} from "axios";
 import {errorUtils} from "../../common/utils/errorUtils";
-import {useDebounce} from "../../common/hooks/useDebounce";
 
 const initState = {
     cardPacks: [] as PackType[],
+    isMyPacks: false,
     cardPacksTotalCount: 0 as number,
     maxCardsCount: 0 as number,
     minCardsCount: 0 as number,
@@ -63,7 +63,8 @@ export const packsReducer = (state: PacksStateType = initState, action: PacksAct
             }
         case 'PACKS/DELETE-PACKS':
             return {...state, cardPacks: state.cardPacks.filter(e => e._id !== action.idPack)}
-        case "PACK/GET_CARDS_PACK":
+        case "PACK/IS_MY_PACK":
+            return {...state, isMyPacks: state.isMyPacks}
         default:
             return state
     }
@@ -82,6 +83,7 @@ export const addPackAC = (newCardsPack: PackType) => ({type: 'PACKS/ADD-PACKS', 
 export const updatePackAC = (data: PackType) => ({type: 'PACKS/UPDATE-PACKS', data} as const)
 export const deletePackAC = (idPack: string) => ({type: 'PACKS/DELETE-PACKS', idPack} as const)
 export const getCardsPackAC = (data: PacksResponseType) => ({ type: "PACK/GET_CARDS_PACK", data } as const);
+export const setIsMyPacks = (isMyPacks: boolean) => ({ type: "PACK/IS_MY_PACK", isMyPacks} as const);
 
 export type PacksActionsType =
     ReturnType<typeof setPacks>
@@ -95,19 +97,19 @@ export type PacksActionsType =
     | ReturnType<typeof updatePackAC>
     | ReturnType<typeof deletePackAC>
     | ReturnType<typeof getCardsPackAC>
+    | ReturnType<typeof setIsMyPacks>
 
 
 export const resetFilters = (): AppThunk => async dispatch => {
 
     try {
-        console.log('reset')
         dispatch(setStatus('loading'))
         dispatch(setPackName(''))
         dispatch(setUserId(null))
         dispatch(setMin(0))
         dispatch(setMax(20))
-        dispatch(setUserId(''))
         dispatch(setPage(1))
+        dispatch(setIsMyPacks(false))
     } finally {
         dispatch(setStatus('success'))
     }
@@ -121,7 +123,6 @@ export const getPacks = (): AppThunk => async (dispatch, getState) => {
         const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, min, max, user_id, packName})
         const {cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount} = res.data
         dispatch(setPacks(cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount))
-
     } catch (err) {
         errorUtils(err as Error | AxiosError, dispatch)
     } finally {

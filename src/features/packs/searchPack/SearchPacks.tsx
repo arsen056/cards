@@ -6,7 +6,6 @@ import {useDebounce} from "../../../common/hooks/useDebounce";
 import {setPackName} from "../packsReducer";
 import {AppDispatch} from "../../../app/store";
 import {useSelector} from "react-redux";
-import {selectUserID} from "../selectors";
 import {searchParamsSelector} from "../selectors/selectIsDisabled";
 
 
