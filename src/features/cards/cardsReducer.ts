@@ -2,7 +2,7 @@ import {AppThunk} from "../../app/store";
 import {setStatus} from "../../app/appReducer";
 import {AxiosError} from "axios";
 import {errorUtils} from "../../common/utils/errorUtils";
-import {AddCardType, cardsAPI, CardType} from "./CardsAPI";
+import {AddCardType, cardsAPI, CardType, UpdateCardType} from "./CardsAPI";
 
 const initState = {
 		cards: [] as CardType[],
@@ -90,6 +90,22 @@ export const deleteCardTC = (cardId: string, packId: string): AppThunk => async 
 		dispatch(setStatus('loading'))
 		try {
 				await cardsAPI.deleteCard(cardId)
+				const res = await cardsAPI.fetchCards({page, pageCount, sortPacks}, packId)
+				const {cards, cardsTotalCount, packName, packUserId} = res.data
+				dispatch(setCards(cards, cardsTotalCount, packName, packUserId))
+		} catch (e) {
+				const err = e as Error | AxiosError<{ error: string }>
+				errorUtils(err, dispatch)
+		} finally {
+				dispatch(setStatus('success'))
+		}
+}
+
+export const updateCardTC = (date: UpdateCardType, packId: string): AppThunk => async (dispatch, getState) => {
+		const {page, pageCount, sortPacks} = getState().cards
+		dispatch(setStatus('loading'))
+		try {
+				await cardsAPI.updateCard(date)
 				const res = await cardsAPI.fetchCards({page, pageCount, sortPacks}, packId)
 				const {cards, cardsTotalCount, packName, packUserId} = res.data
 				dispatch(setCards(cards, cardsTotalCount, packName, packUserId))

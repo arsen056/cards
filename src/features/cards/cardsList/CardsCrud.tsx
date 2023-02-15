@@ -2,7 +2,7 @@ import {IconButton} from "@mui/material";
 import React from "react";
 import deleteIcon from "../../../assets/delete.svg";
 import editIcon from "../../../assets/edit.svg";
-import {deleteCardTC} from "../cardsReducer";
+import {deleteCardTC, updateCardTC} from "../cardsReducer";
 import {AppDispatch} from "../../../app/store";
 
 type CardsCrudType = {
@@ -15,9 +15,13 @@ export const CardsCrud = ({cardId, packID}: CardsCrudType) => {
 		const deleteCard = () => {
 				dispatch(deleteCardTC(cardId, packID))
 		}
+
+		const updateCard = () => {
+				dispatch(updateCardTC({card: {_id: cardId, question: 'new question', answer: 'correct answer'}}, packID))
+		}
 		return (
 				<div>
-						<IconButton onClick={() => {alert('edit')}} size="small">
+						<IconButton onClick={updateCard} size="small">
 								<img src={editIcon} alt="edit icon"/>
 						</IconButton>
 						<IconButton onClick={deleteCard} size="small">

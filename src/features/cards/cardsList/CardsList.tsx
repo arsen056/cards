@@ -8,6 +8,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {CardItem} from "./CardItem";
 import {CardType} from "../CardsAPI";
+import {useSelector} from "react-redux";
+import {selectStatus} from "../../../common/selectors";
+import {Loader} from "../../../common/components/loader/Loader";
 
 type CardsListPropsType = {
 		cards: CardType[]
@@ -17,11 +20,11 @@ type CardsListPropsType = {
 }
 
 export const CardsList = ({cards, userId, packUserId, packID}: CardsListPropsType) => {
-		// const appStatus = useSelector(selectStatus)
+		const appStatus = useSelector(selectStatus)
 
-		// if (appStatus === 'loading') {
-		// 		return <Loader/>
-		// }
+		if (appStatus === 'loading') {
+				return <Loader/>
+		}
 		return (
 				<TableContainer component={Paper} sx={{marginBottom: '20px'}}>
 						<Table sx={{ minWidth: 650 }} aria-label="simple table">
