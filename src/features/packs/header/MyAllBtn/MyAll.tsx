@@ -1,29 +1,30 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useSelector} from "react-redux";
 import {selectUserID} from "../../selectors";
 import {AppDispatch} from "../../../../app/store";
-import {setUserId} from "../../packsReducer";
+import {setIsMyPacks, setUserId} from "../../packsReducer";
 import s from './MyAllBtn.module.css'
+import {selectIsMyPacks} from "../../selectors/selectMyPacks";
 
 export const MyOrAll = () => {
-    const [filter, setFilter] = useState<'my' | 'all'>('all')
-
     const userID = useSelector(selectUserID)
+    const IsMyPacks = useSelector(selectIsMyPacks)
 
     const dispatch = AppDispatch()
 
     const myPacksHandler = () => {
+
         dispatch(setUserId(userID))
-        setFilter('my')
+        dispatch(setIsMyPacks(true))
     }
 
     const allPacksHandler = () => {
         dispatch(setUserId(null))
-        setFilter('all')
+        dispatch(setIsMyPacks(false))
     }
 
-    const my = filter === 'my' ? s.pressed : ''
-    const all = filter === 'all' ? s.pressed : ''
+    const my = IsMyPacks ? s.pressed : ''
+    const all = !IsMyPacks ? s.pressed : ''
 
     return (
         <div>
@@ -32,3 +33,4 @@ export const MyOrAll = () => {
         </div>
     );
 };
+

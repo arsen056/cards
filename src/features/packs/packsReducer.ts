@@ -64,7 +64,7 @@ export const packsReducer = (state: PacksStateType = initState, action: PacksAct
         case 'PACKS/DELETE-PACKS':
             return {...state, cardPacks: state.cardPacks.filter(e => e._id !== action.idPack)}
         case "PACK/IS_MY_PACK":
-            return {...state, isMyPacks: state.isMyPacks}
+            return {...state, isMyPacks: action.isMyPacks}
         default:
             return state
     }

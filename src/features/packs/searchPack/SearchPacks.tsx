@@ -6,7 +6,7 @@ import {useDebounce} from "../../../common/hooks/useDebounce";
 import {setPackName} from "../packsReducer";
 import {AppDispatch} from "../../../app/store";
 import {useSelector} from "react-redux";
-import {searchParamsSelector} from "../selectors/selectIsDisabled";
+import {searchParamsSelector} from "../selectors/selectMyPacks";
 
 
 export const SearchPacks = () => {
