@@ -6,7 +6,8 @@ import {useSelector} from "react-redux";
 import {selectCardPacksTotaCount, selectPage, selectPageCount} from "./selectors";
 import {AppDispatch} from "../../app/store";
 import {setPage, setPageCount} from "./packsReducer";
-import {useSearchParams} from "react-router-dom";
+import {Navigate, useSearchParams} from "react-router-dom";
+import {selectIsLoggedIn} from "../../common/selectors";
 
 export const Packs = () => {
   const dispatch = AppDispatch();
@@ -20,6 +21,11 @@ export const Packs = () => {
     dispatch(setPage(pageNumber));
     dispatch(setPageCount(pageCount))
     setSearchParams({page: `${pageNumber}`, pageCount: `${pageCount}`})
+  }
+
+  const isLoggedIn = useSelector(selectIsLoggedIn)
+  if (!isLoggedIn) {
+    return <Navigate to={'/login'}/>
   }
 
   useEffect(() => {

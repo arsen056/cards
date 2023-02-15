@@ -23,7 +23,7 @@ export const HeaderCards = ({title, addCard, userId, packUserId}: HeaderCardsPro
 																 color={'primary'}
 																 onClick={userId === packUserId ? addCard : () => alert('Learning to start')}
 										>
-												{userId === packUserId ? 'Add new card' : 'Learn to pack'}
+												{userId === packUserId ? 'Add new card' : 'learn to pack'}
 										</SuperButton>
 								</div>
 								<SearchPacks/>

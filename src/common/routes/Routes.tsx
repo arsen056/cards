@@ -11,7 +11,7 @@ import {Error404} from "../components/Error404";
 import {PATHS} from "./PATHS";
 import {Packs} from "../../features/packs/Packs";
 import {Cards} from "../../features/cards/Cards";
-import Learn from "../../features/Learn/Learn";
+import {Learn} from "../../features/learn/Learn";
 
 export const RoutesPage = () => {
     return (

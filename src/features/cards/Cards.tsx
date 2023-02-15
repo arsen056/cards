@@ -5,7 +5,7 @@ import {BackToPacksList} from "../../common/components/backToPacksList/BackToPac
 import {SuperPagination} from "../../common/components/superPagination/SuperPagination";
 import {useSelector} from "react-redux";
 import {AppDispatch} from "../../app/store";
-import {useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import {addCardTC, getCards, setCardsPage, setCardsPageCount} from "./cardsReducer";
 import {
 		selectCards,
@@ -16,7 +16,7 @@ import {
 } from "../packs/selectors";
 import {EmptyPack} from "./header/emptyPack/EmptyPack";
 import {Loader} from "../../common/components/loader/Loader";
-import {selectStatus} from "../../common/selectors";
+import {selectIsLoggedIn, selectStatus} from "../../common/selectors";
 import {selectPackUserId} from "../packs/selectors/selectCards";
 
 export const Cards = () => {
@@ -48,6 +48,11 @@ export const Cards = () => {
 								answer: "It is wonderful",
 								grade: 0
 						}}))
+		}
+
+		const isLoggedIn = useSelector(selectIsLoggedIn)
+		if (!isLoggedIn) {
+			return <Navigate to={'/login'}/>
 		}
 
 		if (appStatus === 'loading') {
