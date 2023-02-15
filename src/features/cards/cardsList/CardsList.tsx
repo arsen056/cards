@@ -23,7 +23,7 @@ export const CardsList = ({cards, userId, packUserId, packID}: CardsListPropsTyp
 		// 		return <Loader/>
 		// }
 		return (
-				<TableContainer component={Paper}>
+				<TableContainer component={Paper} sx={{marginBottom: '20px'}}>
 						<Table sx={{ minWidth: 650 }} aria-label="simple table">
 								<TableHead>
 										<TableRow>
@@ -32,7 +32,7 @@ export const CardsList = ({cards, userId, packUserId, packID}: CardsListPropsTyp
 												<TableCell align="right">Last Updated</TableCell>
 												<TableCell align="right">Grade</TableCell>
 												{userId === packUserId &&
-												<TableCell align="right"></TableCell>}
+												<TableCell align="right">Actions</TableCell>}
 										</TableRow>
 								</TableHead>
 								<TableBody>
