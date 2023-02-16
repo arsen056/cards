@@ -3,6 +3,7 @@ import {setStatus} from "../../app/appReducer";
 import {AxiosError} from "axios";
 import {errorUtils} from "../../common/utils/errorUtils";
 import {AddCardType, cardsAPI, CardType, UpdateCardType} from "./CardsAPI";
+import {PacksAPI} from "../packs/PacksAPI";
 
 const initState = {
 		cards: [] as CardType[],
@@ -12,6 +13,7 @@ const initState = {
 		pageCount: 4 as number,
 		packName: '' as string,
 		sortPacks: null as string | null,
+		isDeleted: false as boolean,
 }
 
 export type CardsStateType = typeof initState
@@ -36,7 +38,12 @@ export const cardsReducer = (state: CardsStateType = initState, action: CardsAct
 								...state,
 								pageCount: action.cardsPageCount
 						}
-				default:
+			case "CARDS/UPDATE_PACK_NAME":
+				return {...state, packName: action.name}
+			case "CARDS/SET_IS_DELETED":
+				debugger
+				return {...state, isDeleted: action.deleted}
+			default:
 						return state
 		}
 }
@@ -52,10 +59,13 @@ export const setCards = (cards: CardType[], cardsTotalCount: number, packName: s
 export const setCardsPage = (pageCardsNumber: number) => ({type: "CARDS/SET_PAGE", pageCardsNumber} as const)
 export const setCardsPageCount = (cardsPageCount: number) => ({type: "CARDS/SET_PAGE_COUNT", cardsPageCount} as const)
 export const addCard = (newCard: CardType) => ({type: "CARDS/ADD_CARD", newCard} as const)
+export const updatePackName = (name: string) => ({type: "CARDS/UPDATE_PACK_NAME", name} as const)
+export const setIsDeleted = (deleted: boolean) => ({type: "CARDS/SET_IS_DELETED", deleted} as const)
 
 //thunks
 export const getCards = (packId: string | undefined): AppThunk => async (dispatch, getState) => {
 		const {page, pageCount, sortPacks} = getState().cards
+
 		dispatch(setStatus('loading'))
 		if (packId) {
 				try {
@@ -117,6 +127,38 @@ export const updateCardTC = (date: UpdateCardType, packId: string): AppThunk => 
 		}
 }
 
+export const updatePackNameTC = (name: string, id: string): AppThunk => async (dispatch) => {
+		dispatch(setStatus('loading'))
+
+		const data = {
+				cardsPack: {
+					_id: id,
+					name: name
+				}
+			}
+	try {
+			await PacksAPI.editPack(data)
+			dispatch(updatePackName(name))
+	} catch (e) {
+		const err = e as Error | AxiosError<{ error: string }>
+		errorUtils(err, dispatch)
+	} finally {
+		dispatch(setStatus('success'))
+	}
+}
+
+export const deletePackInCards = (id: string): AppThunk => async dispatch => {
+	dispatch(setStatus('loading'))
+	try {
+		await PacksAPI.deletePack(id)
+		dispatch(setIsDeleted(true))
+	} catch (e) {
+		const err = e as Error | AxiosError<{ error: string }>
+		errorUtils(err, dispatch)
+	} finally {
+		dispatch(setStatus('success'))
+	}
+}
 
 //types
 export type CardsActionsType =
@@ -124,6 +166,8 @@ export type CardsActionsType =
 		| ReturnType<typeof setCardsPage>
 		| ReturnType<typeof setCardsPageCount>
 		| ReturnType<typeof addCard>
+		| ReturnType<typeof updatePackName>
+		| ReturnType<typeof setIsDeleted>
 
 
 

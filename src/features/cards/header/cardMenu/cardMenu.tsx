@@ -12,11 +12,10 @@ import {AppDispatch} from "../../../../app/store";
 import edit from "../../../../assets/edit.svg";
 import deleteIcon from "../../../../assets/delete.svg";
 import learn from "../../../../assets/learn.svg";
-import {deletePackTC, updatePackTC} from "../../../packs/packsReducer";
 import style from "./CardMenu.module.css"
-import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectCardPacks} from "../../../packs/selectors";
+import {deletePackInCards, updatePackNameTC} from "../../cardsReducer";
 
 type CardMenuPropsType = {
 		packID: string
@@ -63,16 +62,11 @@ export const CardMenu = ({packID}: CardMenuPropsType) => {
 		}, [open]);
 
 		const editPack = () => {
-				dispatch(updatePackTC({cardsPack: {_id: packID, name: 'new Pack'}}))
+				dispatch(updatePackNameTC('Edited pack', packID))
 		}
 		const deletePack = () => {
-				dispatch(deletePackTC(packID))
+				dispatch(deletePackInCards(packID))
 		}
-
-		if (!packs.some(el => el._id === packID)) {
-				return <Navigate to={'/packs'}/>
-		}
-
 
 		return (
 				<div className={style.menu}>
@@ -117,11 +111,20 @@ export const CardMenu = ({packID}: CardMenuPropsType) => {
 																		onKeyDown={handleListKeyDown}
 																		className={style.imgStyle}
 																>
-																		<MenuItem onClick={editPack}><img src={edit} alt="edit icon"/>Edit</MenuItem>
-																		<MenuItem onClick={deletePack}><img src={deleteIcon}
-																																				alt="delete icon"/>Delete</MenuItem>
-																		<MenuItem onClick={deletePack}><img src={learn}
-																																				alt="learn icon"/>Learn</MenuItem>
+																		<MenuItem onClick={editPack}>
+                                      <img src={edit} alt="edit icon"/>
+                                      Edit
+                                    </MenuItem>
+
+																		<MenuItem onClick={deletePack}>
+                                      <img src={deleteIcon} alt="delete icon"/>
+                                      Delete
+                                    </MenuItem>
+
+																		<MenuItem onClick={() => {}}>
+																			<img src={learn} alt="learn icon"/>
+																			Learn
+																		</MenuItem>
 																</MenuList>
 														</ClickAwayListener>
 												</Paper>

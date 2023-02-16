@@ -20,7 +20,6 @@ export const RangeSlider = () => {
         setValue([min, max])
     }, [min, max])
 
-    console.log('min', min)
     const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
     };

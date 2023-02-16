@@ -12,7 +12,7 @@ export const PacksAPI = {
   deletePack(id: string) {
     return instance.delete<ResponseDeletedCardsPackType>(`cards/pack?id=${id}`)
   },
-  createPack(data: UpdatePackType) {
+  editPack(data: UpdatePackType) {
     return instance.put<ResponseUpdateType>(`cards/pack`, data)
   },
 }

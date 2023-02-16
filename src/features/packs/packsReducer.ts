@@ -143,7 +143,7 @@ export const updatePackTC =
         const {sortPacks, pageCount, page, packName, min, max, user_id} = getState().packs.searchParams
         dispatch(setStatus('loading'))
         try {
-            await PacksAPI.createPack(data)
+            await PacksAPI.editPack(data)
             const res = await PacksAPI.fetchPacks({sortPacks, pageCount, page, min, max, user_id, packName})
             const {cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount} = res.data
             dispatch(setPacks(cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount))

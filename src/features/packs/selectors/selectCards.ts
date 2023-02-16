@@ -7,3 +7,4 @@ export const selectCardsPage = (state: AppRootStateType): number => state.cards.
 export const selectCardsPageCount = (state: AppRootStateType): number => state.cards.pageCount
 export const selectCardsPackName = (state: AppRootStateType): string => state.cards.packName
 export const selectPackUserId = (state: AppRootStateType): string => state.cards.packUserId
+export const selectIsDeleted = (state: AppRootStateType): boolean => state.cards.isDeleted
