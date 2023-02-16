@@ -1,12 +1,11 @@
 import s from "../../packs/header/HeaderPacks.module.css";
 import style from './HeaderCards.module.css'
-import {SearchPacks} from "../../packs/header/searchPack/SearchPacks";
 import React from "react";
 import {SuperButton} from "../../../common/components/SuperButton";
-import {TitleCards} from "./titleCards/TitleCards";
 import {CardMenu} from "./cardMenu/cardMenu";
 import {useSelector} from "react-redux";
 import {selectCards} from "../../packs/selectors";
+import {SearchCards} from "./searchCards/SeachCards";
 
 type HeaderCardsPropsType = {
 		title: string
@@ -16,7 +15,7 @@ type HeaderCardsPropsType = {
 		packID: string
 }
 
-export const HeaderCards = ({title, addCard, userId, packUserId, packID}: HeaderCardsPropsType) => {
+export const HeaderCards = ({addCard, userId, packUserId, packID}: HeaderCardsPropsType) => {
 
 		const cards = useSelector(selectCards)
 		const isEdited = userId === packUserId
@@ -26,7 +25,7 @@ export const HeaderCards = ({title, addCard, userId, packUserId, packID}: Header
 						<div className={`${s.wrapper} ${style.headerCards}`}>
 								<div className={style.titleAndButton}>
 										<div className={style.menu}>
-												<TitleCards title={title}/>
+												{/*<TitleCards title={title}/>*/}
 												{isEdited && <CardMenu packID={packID}/>}
 										</div>
 										<SuperButton variant={'contained'}
@@ -37,7 +36,7 @@ export const HeaderCards = ({title, addCard, userId, packUserId, packID}: Header
 										</SuperButton>
 								</div>
 
-							{cards.length ? <SearchPacks/> : undefined}
+							{cards.length ? <SearchCards packID={packID}/> : undefined}
 						</div>
 				</div>
 		)

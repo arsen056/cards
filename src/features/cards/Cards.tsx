@@ -62,10 +62,10 @@ export const Cards = memo(() => {
     return <Navigate to={'/packs'}/>
   }
 
-
   if (appStatus === 'loading') {
     return <div className='loader-pack'><Loader/></div>
   }
+
 
   return (
     <div className={'container pading-vertical'}>

@@ -13,8 +13,6 @@ import edit from "../../../../assets/edit.svg";
 import deleteIcon from "../../../../assets/delete.svg";
 import learn from "../../../../assets/learn.svg";
 import style from "./CardMenu.module.css"
-import {useSelector} from "react-redux";
-import {selectCardPacks} from "../../../packs/selectors";
 import {deletePackInCards, updatePackNameTC} from "../../cardsReducer";
 
 type CardMenuPropsType = {
@@ -22,7 +20,6 @@ type CardMenuPropsType = {
 }
 
 export const CardMenu = ({packID}: CardMenuPropsType) => {
-		const packs = useSelector(selectCardPacks)
 		const [open, setOpen] = React.useState(false);
 		const anchorRef = React.useRef<HTMLButtonElement>(null);
 
