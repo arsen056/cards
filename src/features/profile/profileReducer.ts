@@ -3,9 +3,7 @@ import {setStatus} from "../../app/appReducer";
 import {errorUtils} from "../../common/utils/errorUtils";
 import {AxiosError} from "axios";
 import {ProfileAPI} from "./ProfileAPI";
-import {ProfileType, SignInAPI} from "../auth/authAPI/authAPI";
-
-
+import {ProfileType} from "../auth/authAPI/authAPI";
 
 const initState = {
   name: 'Name',
@@ -25,19 +23,6 @@ export const profileReducer = (state = initState, action: ProfileActionsType) =>
 
 export const setProfile = (profile: ProfileType) => ({type: 'PROFILE/SET_PROFILE', profile} as const)
 export const editName = (name: string) => ({type: 'PROFILE/EDIT_NAME', name} as const)
-
-export const fetchProfile = (): AppThunk => async dispatch => {
-  try {
-    setStatus('loading')
-    const res = await SignInAPI.me()
-    dispatch(setProfile(res.data))
-  } catch (e) {
-    const err = e as Error | AxiosError<{ error: string }>
-    errorUtils(err, dispatch)
-  } finally {
-    setStatus('success')
-  }
-}
 
 export const changeProfile = (name: string, avatar: string): AppThunk => async dispatch => {
   setStatus('loading')
