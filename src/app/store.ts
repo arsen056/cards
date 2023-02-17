@@ -8,6 +8,7 @@ import {SignUpActionsType, signUpReducer} from "../features/auth/signUp/signUpRe
 import {loginReducer, SignInACType} from "../features/auth/signIn/loginReducer";
 import {PacksActionsType, packsReducer} from "../features/packs/packsReducer";
 import {CardsActionsType, cardsReducer} from "../features/cards/cardsReducer";
+import {loadState, saveState} from "../common/utils/localStorage";
 
 const rootReducers = combineReducers({
     profile: profileReducer,
@@ -22,7 +23,13 @@ const rootReducers = combineReducers({
 export type AppDispatchType = ThunkDispatch<AppRootStateType, any, ActionsRootTypes>
 export const AppDispatch = () => useDispatch<AppDispatchType>()
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, ActionsRootTypes>
-export const store = legacy_createStore(rootReducers, applyMiddleware(thunk))
+
+const persistedState = loadState();
+export const store = legacy_createStore(rootReducers, persistedState, applyMiddleware(thunk))
 
 export type AppRootStateType = ReturnType<typeof rootReducers>
 export type ActionsRootTypes = ProfileActionsType | AppActionsType | SignUpActionsType | SignInACType | ForgotActionType | PacksActionsType | CardsActionsType
+
+store.subscribe(() => {
+    saveState(store.getState());
+});

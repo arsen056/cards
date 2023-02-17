@@ -18,6 +18,7 @@ import {EmptyPack} from "./header/emptyPack/EmptyPack";
 import {selectIsLoggedIn, selectStatus} from "../../common/selectors";
 import {selectCardQuestion, selectIsDeleted, selectPackUserId} from "../packs/selectors/selectCards";
 import {Loader} from "../../common/components/loader/Loader";
+import {PATHS} from "../../common/routes/PATHS";
 
 export const Cards = memo(() => {
 
@@ -32,6 +33,7 @@ export const Cards = memo(() => {
   const userId = useSelector(selectUserID)
   const packUserId = useSelector(selectPackUserId)
   const cardQuestion = useSelector(selectCardQuestion)
+  const isLoggedIn = useSelector(selectIsLoggedIn)
 
 
   useEffect(() => {
@@ -54,14 +56,13 @@ export const Cards = memo(() => {
     }))
   }
 
-  const isLoggedIn = useSelector(selectIsLoggedIn)
-  if (!isLoggedIn) {
-    return <Navigate to={'/login'}/>
-  }
-
   const isDeleted = useSelector(selectIsDeleted)
   if (isDeleted) {
-    return <Navigate to={'/packs'}/>
+    return <Navigate to={PATHS.packs}/>
+  }
+
+  if (!isLoggedIn) {
+    return <Navigate to={PATHS.login}/>
   }
 
   return (

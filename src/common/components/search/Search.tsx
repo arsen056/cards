@@ -13,7 +13,7 @@ type SearchPropsType = {
 }
 
 export const Search:FC<SearchPropsType> = ({setNameAC, searchParams}) => {
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>(searchParams || '')
   const debouncedValue = useDebounce<string>(value, 1000)
   const dispatch = AppDispatch()
 

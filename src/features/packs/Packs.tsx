@@ -17,16 +17,12 @@ export const Packs = memo(() => {
   const totalCount = useSelector(selectCardPacksTotaCount)
   const page = useSelector(selectPage)
   const pageCount = useSelector(selectPageCount)
+  const isLoggedIn = useSelector(selectIsLoggedIn)
 
   const onChangePagination = (pageNumber: number, pageCount: number) => {
     dispatch(setPage(pageNumber));
     dispatch(setPageCount(pageCount))
     setSearchParams({page: `${pageNumber}`, pageCount: `${pageCount}`})
-  }
-
-  const isLoggedIn = useSelector(selectIsLoggedIn)
-  if (!isLoggedIn) {
-    return <Navigate to={'/login'}/>
   }
 
   useEffect(() => {
@@ -35,6 +31,11 @@ export const Packs = memo(() => {
     // dispatch(setPageCount(+params.pageCount || 8))
     dispatch(setIsDeleted(false))
   }, [])
+
+
+  if (!isLoggedIn) {
+    return <Navigate to={'/login'}/>
+  }
 
   return (
     <div className={'container padding-vertical'}>
