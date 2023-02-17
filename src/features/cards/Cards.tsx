@@ -15,9 +15,9 @@ import {
   selectCardsPageCount, selectUserID,
 } from "../packs/selectors";
 import {EmptyPack} from "./header/emptyPack/EmptyPack";
-import {Loader} from "../../common/components/loader/Loader";
 import {selectIsLoggedIn, selectStatus} from "../../common/selectors";
-import {selectIsDeleted, selectPackUserId} from "../packs/selectors/selectCards";
+import {selectCardQuestion, selectIsDeleted, selectPackUserId} from "../packs/selectors/selectCards";
+import {Loader} from "../../common/components/loader/Loader";
 
 export const Cards = memo(() => {
 
@@ -31,10 +31,12 @@ export const Cards = memo(() => {
   const appStatus = useSelector(selectStatus)
   const userId = useSelector(selectUserID)
   const packUserId = useSelector(selectPackUserId)
+  const cardQuestion = useSelector(selectCardQuestion)
+
 
   useEffect(() => {
     dispatch(getCards(packID))
-  }, [cardsPage, cardsPageCount])
+  }, [cardsPage, cardsPageCount, cardQuestion])
 
   const onChangePagination = (pageCardsNumber: number, pageCardsCount: number) => {
     dispatch(setCardsPage(pageCardsNumber));
@@ -62,28 +64,25 @@ export const Cards = memo(() => {
     return <Navigate to={'/packs'}/>
   }
 
-  if (appStatus === 'loading') {
-    return <div className='loader-pack'><Loader/></div>
-  }
-
-
   return (
-    <div className={'container pading-vertical'}>
+    <div className={'container padding-vertical'}>
       <BackToPacksList/>
       <HeaderCards title={cardsPackName} addCard={addCard} userId={userId} packUserId={packUserId}
                    packID={packID ? packID : ''}/>
-      {cards.length
-        ? <>
-            <CardsList cards={cards} userId={userId} packUserId={packUserId} packID={packID ? packID : ''}/>
-            <SuperPagination
-              page={cardsPage}
-              itemsCountForPage={cardsPageCount}
-              totalCount={cardsTotalCountCards}
-              onChange={onChangePagination}
-            />
-          </>
-        : <EmptyPack addCard={addCard} userId={userId} packUserId={packUserId}/>
-      }
+
+      {appStatus === 'loading' ? <Loader/>
+        : cards.length
+            ? <>
+              <CardsList cards={cards} userId={userId} packUserId={packUserId} packID={packID ? packID : ''}/>
+              <SuperPagination
+                page={cardsPage}
+                itemsCountForPage={cardsPageCount}
+                totalCount={cardsTotalCountCards}
+                onChange={onChangePagination}
+              />
+            </>
+            : <EmptyPack addCard={addCard} userId={userId} packUserId={packUserId}/>
+        }
 
     </div>
   )

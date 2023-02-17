@@ -1,23 +1,24 @@
 import React from 'react';
-import {SearchPacks} from "./searchPack/SearchPacks";
 import {MyOrAll} from "./myAllBtn/MyAll";
 import {RangeSlider} from "./rangeSlider/RangeSlider";
 import resetIcon from "../../../assets/reset.svg"
 import s from './HeaderPacks.module.css'
 import {SuperButton} from "../../../common/components/SuperButton";
 import {AppDispatch} from "../../../app/store";
-import {addPackTC, setResetFilters} from "../packsReducer";
+import {addPackTC, setPackName, setResetFilters} from "../packsReducer";
 import {useSelector} from "react-redux";
 import {selectStatus} from "../../../common/selectors";
+import {Search} from "../../../common/components/search/Search";
+import {searchParamsSelector} from "../selectors/selectMyPacks";
 
 
 export const HeaderPacks = () => {
     const dispatch = AppDispatch()
 
     const isLoading = useSelector(selectStatus)
+    const searchParams = useSelector(searchParamsSelector)
 
     const resetHandler = () => {
-        // dispatch(resetFilters())
         dispatch(setResetFilters())
     }
 
@@ -34,7 +35,7 @@ export const HeaderPacks = () => {
             </div>
             <div className={s.wrapper}>
 
-                <SearchPacks/>
+                <Search searchParams={searchParams} setNameAC={setPackName}/>
                 <MyOrAll/>
                 <RangeSlider/>
                 <img className={s.reset} src={resetIcon} alt="reset" onClick={resetHandler}/>
