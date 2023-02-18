@@ -3,7 +3,7 @@ import {setStatus} from "../../app/appReducer";
 import {errorUtils} from "../../common/utils/errorUtils";
 import {AxiosError} from "axios";
 import {ProfileAPI} from "./ProfileAPI";
-import {ProfileType} from "../auth/authAPI/authAPI";
+import {ProfileType} from "../auth/authAPI";
 
 const initState = {
   name: 'Name',

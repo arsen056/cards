@@ -3,7 +3,7 @@ import {setStatus} from "../../../app/appReducer";
 import {AxiosError} from "axios";
 import {errorUtils} from "../../../common/utils/errorUtils";
 import {setForgotStatus} from "../forgotPassword/forgotReducer";
-import {NewPasswordAPI} from "../authAPI/authAPI";
+import {NewPasswordAPI} from "../authAPI";
 
 
 export const newPasswordThunk = (password: string, resetPasswordToken: string): AppThunk => async dispatch => {

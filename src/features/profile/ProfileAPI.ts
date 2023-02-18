@@ -1,5 +1,5 @@
 import {instance} from "../../API/instance";
-import {ProfileType} from "../auth/authAPI/authAPI";
+import {ProfileType} from "../auth/authAPI";
 
 
 export const ProfileAPI = {

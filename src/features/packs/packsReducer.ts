@@ -13,8 +13,8 @@ const initState = {
     cardsCount: [1, 30] as Array<number>,
     searchParams: {
         sortPacks: null as string | null,
-        min: 0 as number,
-        max: 20 as number,
+        min: undefined as number | undefined,
+        max: undefined as number | undefined,
         packName: '' as string,
         page: 1 as number,
         pageCount: 8 as number,
@@ -86,11 +86,11 @@ export const updatePackAC = (data: PackType) => ({type: 'PACKS/UPDATE-PACKS', da
 export const deletePackAC = (idPack: string) => ({type: 'PACKS/DELETE-PACKS', idPack} as const)
 export const getCardsPackAC = (data: PacksResponseType) => ({ type: "PACK/GET_CARDS_PACK", data } as const);
 export const setIsMyPacks = (isMyPacks: boolean) => ({ type: "PACK/IS_MY_PACK", isMyPacks} as const);
-export const setResetFilters = () => ({ type: "PACK/SET_RESET_FILTERS", filters: {
+export const setResetFilters = (max: number) => ({ type: "PACK/SET_RESET_FILTERS", filters: {
         packName:'',
         user_id: '',
         min: 0,
-        max: 20,
+        max,
         page: 1,
         isMyPacks: false
     }} as const);

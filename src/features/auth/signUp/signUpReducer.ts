@@ -2,7 +2,7 @@ import {setStatus} from "../../../app/appReducer";
 import {AppThunk} from "../../../app/store";
 import {errorUtils} from "../../../common/utils/errorUtils";
 import {AxiosError} from "axios";
-import {registerAPI, RegisterParamsType} from "../authAPI/authAPI";
+import {registerAPI, RegisterParamsType} from "../authAPI";
 
 
 const initialState = {

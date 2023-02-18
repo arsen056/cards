@@ -1,29 +1,30 @@
 import React, {memo, useEffect} from 'react';
 import {PackList} from "./packList/PackList";
 import {HeaderPacks} from "./header/HeaderPacks";
-import {SuperPagination} from "../../common/components/superPagination/SuperPagination";
 import {useSelector} from "react-redux";
-import {selectCardPacksTotaCount, selectPage, selectPageCount} from "./selectors";
+import {
+  selectMax,
+  selectMin,
+  selectPackName,
+  selectPacksUserID,
+  selectPage,
+  selectPageCount
+} from "./selectors";
 import {AppDispatch} from "../../app/store";
-import {setPage, setPageCount} from "./packsReducer";
-import {Navigate, useSearchParams} from "react-router-dom";
+import {getPacks} from "./packsReducer";
+import {Navigate} from "react-router-dom";
 import {selectIsLoggedIn} from "../../common/selectors";
 import {setIsDeleted} from "../cards/cardsReducer";
 
 export const Packs = memo(() => {
   const dispatch = AppDispatch();
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  const totalCount = useSelector(selectCardPacksTotaCount)
+  const isLoggedIn = useSelector(selectIsLoggedIn)
+  const userID = useSelector(selectPacksUserID)
+  const min = useSelector(selectMin)
+  const max = useSelector(selectMax)
+  const packName = useSelector(selectPackName)
   const page = useSelector(selectPage)
   const pageCount = useSelector(selectPageCount)
-  const isLoggedIn = useSelector(selectIsLoggedIn)
-
-  const onChangePagination = (pageNumber: number, pageCount: number) => {
-    dispatch(setPage(pageNumber));
-    dispatch(setPageCount(pageCount))
-    setSearchParams({page: `${pageNumber}`, pageCount: `${pageCount}`})
-  }
 
   useEffect(() => {
     // const params = Object.fromEntries(searchParams)
@@ -32,6 +33,9 @@ export const Packs = memo(() => {
     dispatch(setIsDeleted(false))
   }, [])
 
+  useEffect(() => {
+    dispatch(getPacks())
+  }, [packName, userID, min, max, pageCount, page])
 
   if (!isLoggedIn) {
     return <Navigate to={'/login'}/>
@@ -41,7 +45,6 @@ export const Packs = memo(() => {
     <div className={'container padding-vertical'}>
       <HeaderPacks/>
       <PackList/>
-      <SuperPagination page={page} itemsCountForPage={pageCount} totalCount={totalCount} onChange={onChangePagination}/>
     </div>
   );
 });

@@ -3,7 +3,7 @@ import {AppStateType, initState, setError, setLoggedIn, setStatus} from "../../.
 import axios, {AxiosError} from "axios";
 import {errorUtils} from "../../../common/utils/errorUtils";
 import {setProfile} from "../../profile/profileReducer";
-import {LoginParamsType, SignInAPI} from "../authAPI/authAPI";
+import {LoginParamsType, SignInAPI} from "../authAPI";
 
 export const loginReducer = (state: AppStateType = initState, action: SignInACType): AppStateType => {
   switch (action.type) {

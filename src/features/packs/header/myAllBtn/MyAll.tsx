@@ -1,10 +1,9 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {selectUserID} from "../../selectors";
+import {selectIsMyPacks, selectUserID} from "../../selectors";
 import {AppDispatch} from "../../../../app/store";
 import {setIsMyPacks, setUserId} from "../../packsReducer";
 import s from './MyAllBtn.module.css'
-import {selectIsMyPacks} from "../../selectors/selectMyPacks";
 
 export const MyOrAll = () => {
     const userID = useSelector(selectUserID)

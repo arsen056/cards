@@ -7,18 +7,22 @@ import {useSelector} from "react-redux";
 import {AppDispatch} from "../../app/store";
 import {Navigate, useParams} from "react-router-dom";
 import {addCardTC, getCards, setCardsPage, setCardsPageCount} from "./cardsReducer";
-import {
-  selectCards,
-  selectCardsPage,
-  selectCardsPackName,
-  selectCardsTotalCount,
-  selectCardsPageCount, selectUserID,
-} from "../packs/selectors";
+
 import {EmptyPack} from "./header/emptyPack/EmptyPack";
 import {selectIsLoggedIn, selectStatus} from "../../common/selectors";
-import {selectCardQuestion, selectIsDeleted, selectPackUserId} from "../packs/selectors/selectCards";
+
 import {Loader} from "../../common/components/loader/Loader";
 import {PATHS} from "../../common/routes/PATHS";
+import {
+  selectCardQuestion,
+  selectCards,
+  selectCardsPackName,
+  selectCardsPage, selectCardsPageCount,
+  selectCardsTotalCount,
+  selectIsDeleted,
+  selectPackUserId
+} from "./selectors";
+import {selectUserID} from "../packs/selectors";
 
 export const Cards = memo(() => {
 

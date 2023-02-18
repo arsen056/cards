@@ -1,5 +1,5 @@
 import {AppRootStateType} from "../../../app/store";
-import {CardType} from "../../cards/CardsAPI";
+import {CardType} from "../CardsAPI";
 
 export const selectCards = (state: AppRootStateType): CardType[] => state.cards.cards
 export const selectCardsTotalCount = (state: AppRootStateType): number => state.cards.cardsTotalCount

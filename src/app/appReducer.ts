@@ -1,7 +1,7 @@
 import {signInAC} from "../features/auth/signIn/loginReducer";
 import {setProfile} from "../features/profile/profileReducer";
 import {AppThunk} from "./store";
-import {SignInAPI} from "../features/auth/authAPI/authAPI";
+import {SignInAPI} from "../features/auth/authAPI";
 
 export const initState: AppStateType = {
   status: 'idle',
