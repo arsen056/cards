@@ -64,17 +64,17 @@ const secondary = `
     border: 2px solid #0066CC;
     color: #0066CC;
     box-shadow: 0 0 20px rgb(0 0 0 / 10%);
-    transition: .5s;
+    // transition: .5s;
     
     &:hover {
       color: #0066CC;
       background-color: #E5F0FA;
       box-shadow: 0px 15px 20px rgb(46 229 157 / 40%);
-      transform: translateY(-4px);
+      // transform: translateY(-4px);
     }
     
     &:active {
-      top: 2px;
+      // top: 2px;
       background-color: #006DDB;
     }
 `

@@ -1,16 +1,16 @@
 import React from 'react';
 import educationIcon from '../../../assets/learn.svg'
-import editIcon from '../../../assets/edit.svg'
 import deleteIcon from '../../../assets/delete.svg'
 import {useSelector} from "react-redux";
 import {selectUserID} from "../selectors";
 import s from './packList.module.css'
 import {UpdatePackType} from "../PacksAPI";
 import {IconButton} from "@mui/material";
+import {PackModal} from "../../modal/packModal/PackModal";
 
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
- id, userId, cardsCount, educationsAction, editAction, deleteAction
+ id, userId, cardsCount, educationsAction, editAction, deleteAction, packName
 }) => {
 
     const userProfileID = useSelector(selectUserID)
@@ -19,8 +19,8 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
         deleteAction && deleteAction(id)
     }
 
-    const editCallback = () => {
-        editAction && editAction({cardsPack: {_id: id, name: 'new Pack'}})
+    const editCallback = (packName: string, statusPrivate: boolean) => {
+        editAction && editAction({cardsPack: {_id: id, name: packName, private: statusPrivate}})
     }
 
 
@@ -33,9 +33,9 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
                 </IconButton>)}
 
             {userId === userProfileID && editAction && (
-                <IconButton onClick={editCallback} size="small">
-                    <img src={editIcon} alt="edit icon"/>
-                </IconButton>
+              <div style={{display: "inline-block"}}>
+                  <PackModal packModalFunctional={editCallback} typeButton={'editIcon'} nameValue={packName}/>
+              </div>
             )}
 
             {userId === userProfileID && editAction && (
@@ -54,4 +54,5 @@ export type ActionButtonsContainerType = {
     editAction?: (data: UpdatePackType) => void
     deleteAction?: (id: string) => void
     cardsCount: number
+    packName: string
 }
