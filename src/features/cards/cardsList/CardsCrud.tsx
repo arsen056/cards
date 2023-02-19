@@ -1,41 +1,44 @@
 import React from 'react'
 
-import { IconButton } from '@mui/material'
-
+import { CardModal } from '../../modal/cardModal/CardModal'
 import { deleteCardTC, updateCardTC } from '../cardsReducer'
 
 import { AppDispatch } from 'app/store'
-import deleteIcon from 'assets/delete.svg'
-import editIcon from 'assets/edit.svg'
 
 type CardsCrudType = {
   cardId: string
   packID: string
+  cardAnswer: string
+  cardQuestion: string
 }
 
-export const CardsCrud = ({ cardId, packID }: CardsCrudType) => {
+export const CardsCrud = ({ cardId, packID, cardQuestion, cardAnswer }: CardsCrudType) => {
   const dispatch = AppDispatch()
   const deleteCard = () => {
     dispatch(deleteCardTC(cardId, packID))
   }
 
-  const updateCard = () => {
-    dispatch(
-      updateCardTC(
-        { card: { _id: cardId, question: 'new question', answer: 'correct answer' } },
-        packID
-      )
-    )
+  const updateCard = (question: string, answer: string) => {
+    dispatch(updateCardTC({ card: { _id: cardId, question, answer } }, packID))
   }
 
   return (
     <div>
-      <IconButton onClick={updateCard} size="small">
-        <img src={editIcon} alt="edit icon" />
-      </IconButton>
-      <IconButton onClick={deleteCard} size="small">
-        <img src={deleteIcon} alt="delete icon" />
-      </IconButton>
+      <div style={{ display: 'inline-block' }}>
+        <CardModal
+          typeButton={'editIcon'}
+          cardModalFunctional={updateCard}
+          answer={cardAnswer}
+          question={cardQuestion}
+        />
+      </div>
+      <div style={{ display: 'inline-block' }}>
+        <CardModal
+          typeButton={'deleteIcon'}
+          cardModalFunctional={deleteCard}
+          question={cardQuestion}
+        />
+      </div>
     </div>
   )
 }

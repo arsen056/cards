@@ -8,7 +8,6 @@ import { selectUserID } from '../selectors'
 
 import s from './packList.module.css'
 
-import deleteIcon from 'assets/delete.svg'
 import educationIcon from 'assets/learn.svg'
 import { PackModal } from 'features/modal/packModal/PackModal'
 
@@ -54,9 +53,13 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
       )}
 
       {userId === userProfileID && editAction && (
-        <IconButton onClick={deleteCallback} size="small">
-          <img src={deleteIcon} alt="delete icon" />
-        </IconButton>
+        <div style={{ display: 'inline-block' }}>
+          <PackModal
+            packModalFunctional={deleteCallback}
+            typeButton={'deleteIcon'}
+            nameValue={packName}
+          />
+        </div>
       )}
     </div>
   )

@@ -32,7 +32,12 @@ export const CardItem = ({ card, packID, userId, packUserId }: CardItemPropsType
       </TableCell>
       {userId === packUserId && (
         <TableCell align="right">
-          <CardsCrud cardId={card._id} packID={packID} />
+          <CardsCrud
+            cardId={card._id}
+            packID={packID}
+            cardAnswer={card.answer}
+            cardQuestion={card.question}
+          />
         </TableCell>
       )}
     </TableRow>

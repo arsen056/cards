@@ -12,77 +12,99 @@ import close from 'assets/close.svg'
 import { SuperButton } from 'common/components/SuperButton'
 import { SuperCheckbox } from 'common/components/superCheckbox/SuperCheckbox'
 
-export type TypeButton = 'editIcon' | 'superButton'
+export type TypeButton = 'editIcon' | 'superButton' | 'deleteIcon'
 
 type Props = {
-  packModalFunctional: (namePack: string, statusPrivate: boolean) => void
-  typeButton: TypeButton
-  titleButton?: string
-  nameValue?: string
+	packModalFunctional: (namePack: string, statusPrivate: boolean) => void
+	typeButton: TypeButton
+	titleButton?: string
+	nameValue?: string
 }
 
-export const PackModal = ({ packModalFunctional, typeButton, titleButton, nameValue }: Props) => {
-  const [open, setOpen] = React.useState(false)
-  const [privatePackStatus, setPrivatePackStatus] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
-  const [value, setValue] = useState<string>('')
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value)
-  }
-  const changePackStatus = () => {
-    setPrivatePackStatus(!privatePackStatus)
-  }
+export const PackModal = ({packModalFunctional, typeButton, titleButton, nameValue}: Props) => {
+	const [open, setOpen] = useState<boolean>(false);
+	const [privatePackStatus, setPrivatePackStatus] = useState<boolean>(false)
+	const [value, setValue] = useState<string>('')
+	const [error, setError] = useState<boolean>(false)
+	const handleOpen = () => {
+		setOpen(true);
+		setValue(nameValue || '')
+	}
+	const handleClose = () => {
+		setOpen(false);
+		setError(false)
+	}
 
-  const onClickHandler = () => {
-    packModalFunctional(value, privatePackStatus)
-    setOpen(false)
-  }
 
-  return (
-    <div>
-      <BasicModal
-        titleButton={titleButton}
-        open={open}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        typeButton={typeButton}
-      >
-        <div>
-          <div className={s.titleAndCloseBlock}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Add new pack
-            </Typography>
-            <IconButton onClick={handleClose} size="small">
-              <img src={close} alt="edit icon" />
-            </IconButton>
-          </div>
-          <Box
-            component="form"
-            sx={{
-              '& > :not(style)': { m: 1, width: '40ch' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <TextField
-              id="standard-basic"
-              label="Name pack"
-              variant="standard"
-              onChange={onChangeHandler}
-              style={{ marginBottom: 30 }}
-              value={value ? value : nameValue}
-            />
-          </Box>
-          <SuperCheckbox onChange={changePackStatus}>Private pack</SuperCheckbox>
-          <div className={s.buttonsBlock}>
-            <SuperButton style={{ width: '40%' }} xType="secondary" onClick={handleClose}>
-              Cancel
-            </SuperButton>
-            <SuperButton onClick={onClickHandler}>Save</SuperButton>
-          </div>
-        </div>
-      </BasicModal>
-    </div>
-  )
+	const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+		setError(false)
+		setValue(event.target.value)
+	}
+	const changePackStatus = () => {
+		setPrivatePackStatus(!privatePackStatus)
+	}
+
+	const onClickHandler = () => {
+		if (value === '') {
+			setError(true)
+		} else {
+			packModalFunctional(value, privatePackStatus)
+			setError(false)
+			setOpen(false)
+		}
+	}
+
+	return (
+		<div>
+			<BasicModal titleButton={titleButton} open={open} handleOpen={handleOpen} handleClose={handleClose}
+									typeButton={typeButton}>
+				<div>
+					<div className={s.titleAndCloseBlock}>
+						<Typography id="modal-modal-title" variant="h6" component="h2">
+							{typeButton === 'superButton'
+								? 'Add new pack'
+								: typeButton === 'deleteIcon'
+									? 'Delete pack' : 'Edit pack'}
+						</Typography>
+						<IconButton onClick={handleClose} size="small">
+							<img src={close} alt="edit icon"/>
+						</IconButton>
+					</div>
+					<Box
+						component="form"
+						sx={{
+							'& > :not(style)': {m: 0, width: '40ch'},
+						}}
+						noValidate
+						autoComplete="off"
+					>
+						{typeButton === 'deleteIcon'
+							? <Typography id="modal-modal-description">
+								Do you really want to remove <b>{nameValue}</b>?
+									<React.Fragment><br/></React.Fragment>
+									All cards will be deleted.
+							</Typography>
+							: <TextField
+								id="standard-basic"
+								label="Name pack"
+								variant="standard"
+								onChange={onChangeHandler}
+								style={{marginBottom: 10}}
+								value={value}
+								error={error}
+								helperText={error ? 'Please enter the name of the pack' : ' '}
+							/>
+						}
+					</Box>
+					{typeButton === 'deleteIcon' ? '' : <SuperCheckbox onChange={changePackStatus}>Private pack</SuperCheckbox>}
+					<div className={s.buttonsBlock}>
+						<SuperButton style={{width: '40%'}} xType='secondary' onClick={handleClose}>Cancel</SuperButton>
+						{typeButton === 'deleteIcon'
+							? <SuperButton style={{backgroundColor: '#FF3636'}} onClick={onClickHandler}>Delete</SuperButton>
+							: <SuperButton onClick={onClickHandler}>Save</SuperButton>}
+					</div>
+				</div>
+			</BasicModal>
+		</div>
+	)
 }

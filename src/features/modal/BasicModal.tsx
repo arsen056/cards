@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { ReactNode } from 'react'
+import * as React from 'react';
+import { ReactNode } from "react";
 
 import { IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
@@ -7,6 +7,7 @@ import Modal from '@mui/material/Modal'
 
 import { TypeButton } from './packModal/PackModal'
 
+import deleteIcon from "assets/delete.svg";
 import editIcon from 'assets/edit.svg'
 import { SuperButton } from 'common/components/SuperButton'
 
@@ -42,14 +43,12 @@ export const BasicModal = ({
   handleClose,
   typeButton,
 }: Props) => {
-  const button =
-    typeButton === 'editIcon' ? (
-      <IconButton onClick={handleOpen} size="small">
-        <img src={editIcon} alt="edit icon" />
-      </IconButton>
-    ) : (
-      <SuperButton onClick={handleOpen}>{titleButton}</SuperButton>
-    )
+	const button = typeButton === 'editIcon'
+		? <IconButton onClick={handleOpen} size="small"><img src={editIcon} alt="edit icon"/></IconButton>
+		: typeButton === 'deleteIcon'
+			? <IconButton onClick={handleOpen} size="small"><img src={deleteIcon} alt="delete icon"/></IconButton>
+			: <SuperButton onClick={handleOpen}>{titleButton}</SuperButton>
+// export const BasicModal = ({children, titleButton, open, handleOpen, handleClose, typeButton}: Props) => {
 
   return (
     <div>
