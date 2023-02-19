@@ -61,7 +61,6 @@ export const CardModal = ({
   }
 
   let titleModal
-
   if (typeButton === 'deleteIcon') titleModal = 'Delete card'
   else if (typeButton === 'superButton') titleModal = 'Add new card'
   else titleModal = 'Edit card'
