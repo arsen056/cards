@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Slider} from "@mui/material";
-import {AppDispatch} from "../../../../app/store";
+import {AppDispatch} from "app/store";
 import {setMax, setMin} from "../../packsReducer";
 import s from '../HeaderPacks.module.css'
 import {useSelector} from "react-redux";

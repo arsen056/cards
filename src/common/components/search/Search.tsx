@@ -2,10 +2,10 @@ import React, {ChangeEvent, FC, useEffect, useState} from "react";
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import {useDebounce} from "../../hooks/useDebounce";
-import {AppDispatch} from "../../../app/store";
-import {setPackName} from "../../../features/packs/packsReducer";
-import {setCardQuestion} from "../../../features/cards/cardsReducer";
+import {useDebounce} from "common/hooks/useDebounce";
+import {AppDispatch} from "app/store";
+import {setPackName} from "features/packs/packsReducer";
+import {setCardQuestion} from "features/cards/cardsReducer";
 
 type SearchPropsType = {
   setNameAC: (value: string) => ReturnType<typeof setPackName> | ReturnType<typeof setCardQuestion>

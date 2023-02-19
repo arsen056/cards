@@ -2,10 +2,10 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import {ChangeEvent, useState} from "react";
 import {Box, IconButton, TextField} from "@mui/material";
-import {SuperButton} from "../../../common/components/SuperButton";
-import {SuperCheckbox} from "../../../common/components/superCheckbox/SuperCheckbox";
+import {SuperButton} from "common/components/SuperButton";
+import {SuperCheckbox} from "common/components/superCheckbox/SuperCheckbox";
 import {BasicModal} from "../BasicModal";
-import close from "../../../assets/close.svg";
+import close from "assets/close.svg";
 import s from "./PackModal.module.css"
 
 export type TypeButton = 'editIcon' | 'superButton'

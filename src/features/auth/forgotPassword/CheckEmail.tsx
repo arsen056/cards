@@ -1,10 +1,10 @@
 import React from 'react';
-import {Box} from "../../../common/components/box/Box";
+import {Box} from "common/components/box/Box";
 import {Link, Navigate} from "react-router-dom";
 import s from './ForgotPassword.module.css'
-import checkEmail from '../../../assets/check-email.svg'
+import checkEmail from 'assets/check-email.svg'
 import {useSelector} from "react-redux";
-import {SuperButton} from "../../../common/components/SuperButton";
+import {SuperButton} from "common/components/SuperButton";
 import {selectForgotStatus} from "../selectors";
 
 export const CheckEmail = () => {

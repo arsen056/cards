@@ -3,14 +3,12 @@ import {MyOrAll} from "./myAllBtn/MyAll";
 import {RangeSlider} from "./rangeSlider/RangeSlider";
 import resetIcon from "assets/reset.svg"
 import s from './HeaderPacks.module.css'
-import {SuperButton} from "common/components/SuperButton";
 import {AppDispatch} from "app/store";
 import {addPackTC, setPackName, setResetFilters} from "../packsReducer";
 import {useSelector} from "react-redux";
-
 import {Search} from "common/components/search/Search";
 import {searchParamsSelector, selectMaxCardsCount} from "../selectors";
-import {PackModal} from "../../modal/packModal/PackModal";
+import {PackModal} from "features/modal/packModal/PackModal";
 
 export const HeaderPacks = () => {
     const dispatch = AppDispatch()

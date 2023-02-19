@@ -1,14 +1,14 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
-import {ProfileActionsType, profileReducer} from "../features/profile/profileReducer";
+import {ProfileActionsType, profileReducer} from "features/profile/profileReducer";
 import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppActionsType, appReducer} from "./appReducer";
 import {useDispatch} from "react-redux";
-import {ForgotActionType, forgotReducer} from "../features/auth/forgotPassword/forgotReducer";
-import {SignUpActionsType, signUpReducer} from "../features/auth/signUp/signUpReducer";
-import {loginReducer, SignInACType} from "../features/auth/signIn/loginReducer";
-import {PacksActionsType, packsReducer} from "../features/packs/packsReducer";
-import {CardsActionsType, cardsReducer} from "../features/cards/cardsReducer";
-import {loadState, saveState} from "../common/utils/localStorage";
+import {ForgotActionType, forgotReducer} from "features/auth/forgotPassword/forgotReducer";
+import {SignUpActionsType, signUpReducer} from "features/auth/signUp/signUpReducer";
+import {loginReducer, SignInACType} from "features/auth/signIn/loginReducer";
+import {PacksActionsType, packsReducer} from "features/packs/packsReducer";
+import {CardsActionsType, cardsReducer} from "features/cards/cardsReducer";
+import {loadState, saveState} from "common/utils/localStorage";
 
 const rootReducers = combineReducers({
     profile: profileReducer,

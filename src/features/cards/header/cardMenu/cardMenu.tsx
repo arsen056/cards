@@ -1,6 +1,6 @@
 import {Button} from "@mui/material";
-import s from "../../../../common/components/header/avatar/Avatar.module.css";
-import cardMenu from "../../../../assets/cardMenu.svg";
+import s from "common/components/header/avatar/Avatar.module.css";
+import cardMenu from "assets/cardMenu.svg";
 import Popper from "@mui/material/Popper";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
@@ -8,10 +8,10 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
-import {AppDispatch} from "../../../../app/store";
-import edit from "../../../../assets/edit.svg";
-import deleteIcon from "../../../../assets/delete.svg";
-import learn from "../../../../assets/learn.svg";
+import {AppDispatch} from "app/store";
+import edit from "assets/edit.svg";
+import deleteIcon from "assets/delete.svg";
+import learn from "assets/learn.svg";
 import style from "./CardMenu.module.css"
 import {deletePackInCards, updatePackNameTC} from "../../cardsReducer";
 

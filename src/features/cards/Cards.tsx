@@ -1,18 +1,18 @@
 import {CardsList} from "./cardsList/CardsList";
 import {HeaderCards} from "./header/HeaderCards";
 import React, {memo, useEffect} from "react";
-import {BackToPacksList} from "../../common/components/backToPacksList/BackToPacksList";
-import {SuperPagination} from "../../common/components/superPagination/SuperPagination";
+import {BackToPacksList} from "common/components/backToPacksList/BackToPacksList";
+import {SuperPagination} from "common/components/superPagination/SuperPagination";
 import {useSelector} from "react-redux";
-import {AppDispatch} from "../../app/store";
+import {AppDispatch} from "app/store";
 import {Navigate, useParams} from "react-router-dom";
 import {addCardTC, getCards, setCardsPage, setCardsPageCount} from "./cardsReducer";
 
 import {EmptyPack} from "./header/emptyPack/EmptyPack";
 import {selectIsLoggedIn, selectStatus} from "../../common/selectors";
 
-import {Loader} from "../../common/components/loader/Loader";
-import {PATHS} from "../../common/routes/PATHS";
+import {Loader} from "common/components/loader/Loader";
+import {PATHS} from "common/routes/PATHS";
 import {
   selectCardQuestion,
   selectCards,

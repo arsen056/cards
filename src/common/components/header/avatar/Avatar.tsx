@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Avatar.module.css'
-import avatar from '../../../../assets/avatar.png'
+import avatar from 'assets/avatar.png'
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -9,10 +9,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Popper from "@mui/material/Popper";
 import {Button} from "@mui/material";
 import {Link} from "react-router-dom";
-import {AppDispatch} from "../../../../app/store";
-import {logoutTC} from "../../../../features/auth/signIn/loginReducer";
+import {AppDispatch} from "app/store";
+import {logoutTC} from "features/auth/signIn/loginReducer";
 import {useSelector} from "react-redux";
-import {selectName} from "../../../selectors";
+import {selectName} from "common/selectors";
 
 export const Avatar = () => {
   const [open, setOpen] = React.useState(false);

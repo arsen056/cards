@@ -2,16 +2,16 @@ import React from 'react';
 import s from './Profile.module.css'
 import {EditableSpan} from "./editableSpan/EditableSpan";
 import {Avatar} from "./avatar/Avatar";
-import {SuperButton} from "../../common/components/SuperButton";
+import {SuperButton} from "common/components/SuperButton";
 import {changeProfile} from "./profileReducer";
 import {useSelector} from "react-redux";
-import {AppDispatch} from "../../app/store";
+import {AppDispatch} from "app/store";
 import {Navigate} from "react-router-dom";
-import {SkeletonCustom} from "../../common/components/Sceleton";
-import {Box} from "../../common/components/box/Box";
+import {SkeletonCustom} from "common/components/Sceleton";
+import {Box} from "common/components/box/Box";
 import {logoutTC} from "../auth/signIn/loginReducer";
-import {selectIsLoggedIn, selectStatus, selectUser} from "../../common/selectors";
-import {BackToPacksList} from "../../common/components/backToPacksList/BackToPacksList";
+import {selectIsLoggedIn, selectStatus, selectUser} from "common/selectors";
+import {BackToPacksList} from "common/components/backToPacksList/BackToPacksList";
 
 export const Profile = () => {
   const user = useSelector(selectUser)

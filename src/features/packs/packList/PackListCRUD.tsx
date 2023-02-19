@@ -1,12 +1,12 @@
 import React from 'react';
-import educationIcon from '../../../assets/learn.svg'
-import deleteIcon from '../../../assets/delete.svg'
+import educationIcon from 'assets/learn.svg'
+import deleteIcon from 'assets/delete.svg'
 import {useSelector} from "react-redux";
 import {selectUserID} from "../selectors";
 import s from './packList.module.css'
 import {UpdatePackType} from "../PacksAPI";
 import {IconButton} from "@mui/material";
-import {PackModal} from "../../modal/packModal/PackModal";
+import {PackModal} from "features/modal/packModal/PackModal";
 
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({

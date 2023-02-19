@@ -1,9 +1,9 @@
 import {IconButton} from "@mui/material";
 import React from "react";
-import deleteIcon from "../../../assets/delete.svg";
-import editIcon from "../../../assets/edit.svg";
+import deleteIcon from "assets/delete.svg";
+import editIcon from "assets/edit.svg";
 import {deleteCardTC, updateCardTC} from "../cardsReducer";
-import {AppDispatch} from "../../../app/store";
+import {AppDispatch} from "app/store";
 
 type CardsCrudType = {
 		cardId: string

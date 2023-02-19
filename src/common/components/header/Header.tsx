@@ -5,7 +5,7 @@ import {Avatar} from "./avatar/Avatar";
 import {SuperButton} from "../SuperButton";
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {selectIsLoggedIn} from "../../selectors";
+import {selectIsLoggedIn} from "common/selectors";
 
 export const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn)

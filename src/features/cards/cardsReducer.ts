@@ -1,9 +1,9 @@
-import {AppThunk} from "../../app/store";
-import {setStatus} from "../../app/appReducer";
+import {AppThunk} from "app/store";
+import {setStatus} from "app/appReducer";
 import {AxiosError} from "axios";
-import {errorUtils} from "../../common/utils/errorUtils";
+import {errorUtils} from "common/utils/errorUtils";
 import {AddCardType, cardsAPI, CardType, UpdateCardType} from "./CardsAPI";
-import {PacksAPI} from "../packs/PacksAPI";
+import {PacksAPI} from "features/packs/PacksAPI";
 
 const initState = {
 		cards: [] as CardType[],

@@ -1,11 +1,11 @@
 import React from 'react'
-import {Box} from "../../../common/components/box/Box";
+import {Box} from "common/components/box/Box";
 import s from './ForgotPassword.module.css'
 import {TextField} from "@mui/material";
-import {SuperButton} from "../../../common/components/SuperButton";
+import {SuperButton} from "common/components/SuperButton";
 import {Link, Navigate} from "react-router-dom";
 import {useFormik} from "formik";
-import {AppDispatch} from "../../../app/store";
+import {AppDispatch} from "app/store";
 import {forgotPassword} from "./forgotReducer";
 import {useSelector} from "react-redux";
 import {selectForgotStatus} from "../selectors";

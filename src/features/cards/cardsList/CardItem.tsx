@@ -3,7 +3,7 @@ import TableRow from "@mui/material/TableRow";
 import React from "react";
 import {CardType} from "../CardsAPI";
 import {CardsCrud} from "./CardsCrud";
-import {isoToDate} from "../../../common/utils/time";
+import {isoToDate} from "common/utils/time";
 import {Rating} from "@mui/material";
 
 type CardItemPropsType = {

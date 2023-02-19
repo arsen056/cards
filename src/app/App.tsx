@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react'
-import '../App.css'
-import {Header} from "../common/components/header/Header";
+import '../index.css'
+import {Header} from "common/components/header/Header";
 import {AppDispatch, AppRootStateType} from "./store";
 import {initializeAppTC} from "./appReducer";
-import {ErrorSnackbar} from "../common/components/errorSnackbar/ErrorSnackbar";
+import {ErrorSnackbar} from "common/components/errorSnackbar/ErrorSnackbar";
 import {useSelector} from "react-redux";
-import {LoaderBackDrop} from "../common/components/loader/LoaderBackDrop";
-import {RoutesPage} from "../common/routes/Routes";
-import {selectStatus} from "../common/selectors";
+import {LoaderBackDrop} from "common/components/loader/LoaderBackDrop";
+import {RoutesPage} from "common/routes/Routes";
+import {selectStatus} from "common/selectors";
 
 
 function App() {

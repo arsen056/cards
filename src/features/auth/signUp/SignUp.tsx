@@ -3,14 +3,14 @@ import {useFormik} from "formik";
 import {useSelector} from "react-redux";
 import {Navigate, NavLink} from "react-router-dom";
 import {FormControl, FormGroup, Grid, InputAdornment, TextField} from "@mui/material";
-import {SuperButton} from "../../../common/components/SuperButton";
-import {AppDispatch} from "../../../app/store";
+import {SuperButton} from "common/components/SuperButton";
+import {AppDispatch} from "app/store";
 import {IconButton} from '@mui/material';
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import s from './SignUp.module.css'
 import {signUpTC} from "./signUpReducer";
-import {Box} from "../../../common/components/box/Box";
-import {selectIsLoggedIn, selectSignUp} from "../../../common/selectors";
+import {Box} from "common/components/box/Box";
+import {selectIsLoggedIn, selectSignUp} from "common/selectors";
 
 type FormikErrorType = {
     email?: string

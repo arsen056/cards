@@ -10,7 +10,7 @@ import {CardItem} from "./CardItem";
 import {CardType} from "../CardsAPI";
 import {useSelector} from "react-redux";
 import {selectStatus} from "../../../common/selectors";
-import {Loader} from "../../../common/components/loader/Loader";
+import {Loader} from "common/components/loader/Loader";
 
 type CardsListPropsType = {
 		cards: CardType[]

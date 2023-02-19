@@ -1,9 +1,9 @@
-import s from "../../packs/header/HeaderPacks.module.css";
+import s from "features/packs/header/HeaderPacks.module.css";
 import style from './HeaderCards.module.css'
 import React, {FC} from "react";
-import {SuperButton} from "../../../common/components/SuperButton";
+import {SuperButton} from "common/components/SuperButton";
 import {CardMenu} from "./cardMenu/cardMenu";
-import {Search} from "../../../common/components/search/Search";
+import {Search} from "common/components/search/Search";
 import {setCardQuestion} from "../cardsReducer";
 
 type HeaderCardsPropsType = {

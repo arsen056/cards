@@ -1,17 +1,17 @@
 import React from 'react';
 import s from './NewPassword.module.css'
-import {Box} from "../../../common/components/box/Box";
+import {Box} from "common/components/box/Box";
 import {FormControl, IconButton, InputAdornment, TextField} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {SuperButton} from "../../../common/components/SuperButton";
+import {SuperButton} from "common/components/SuperButton";
 import {useFormik} from "formik";
-import {AppDispatch} from "../../../app/store";
+import {AppDispatch} from "app/store";
 import {newPasswordThunk} from "./newPasswordThunk";
 import {Navigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {Loader} from "../../../common/components/loader/Loader";
+import {Loader} from "common/components/loader/Loader";
 import {selectForgotStatus} from "../selectors";
-import {selectStatus} from "../../../common/selectors";
+import {selectStatus} from "common/selectors";
 
 export const NewPassword = () => {
   const dispatch = AppDispatch();

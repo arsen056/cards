@@ -1,8 +1,8 @@
 import {AddCardsPack, PacksAPI, PacksResponseType, PackType, UpdatePackType} from "./PacksAPI";
-import {AppThunk} from "../../app/store";
-import {setStatus} from "../../app/appReducer";
+import {AppThunk} from "app/store";
+import {setStatus} from "app/appReducer";
 import {AxiosError} from "axios";
-import {errorUtils} from "../../common/utils/errorUtils";
+import {errorUtils} from "common/utils/errorUtils";
 
 const initState = {
     cardPacks: [] as PackType[],

@@ -1,9 +1,9 @@
-import {AppThunk} from "../../app/store";
-import {setStatus} from "../../app/appReducer";
-import {errorUtils} from "../../common/utils/errorUtils";
+import {AppThunk} from "app/store";
+import {setStatus} from "app/appReducer";
+import {errorUtils} from "common/utils/errorUtils";
 import {AxiosError} from "axios";
 import {ProfileAPI} from "./ProfileAPI";
-import {ProfileType} from "../auth/authAPI";
+import {ProfileType} from "features/auth/authAPI";
 
 const initState = {
   name: 'Name',

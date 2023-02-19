@@ -10,10 +10,10 @@ import {
   selectPage,
   selectPageCount
 } from "./selectors";
-import {AppDispatch} from "../../app/store";
+import {AppDispatch} from "app/store";
 import {getPacks} from "./packsReducer";
 import {Navigate} from "react-router-dom";
-import {selectIsLoggedIn} from "../../common/selectors";
+import {selectIsLoggedIn} from "common/selectors";
 import {setIsDeleted} from "../cards/cardsReducer";
 
 export const Packs = memo(() => {

@@ -1,4 +1,4 @@
-import {SuperButton} from "../../../../common/components/SuperButton";
+import {SuperButton} from "common/components/SuperButton";
 import React from "react";
 import s from './EmptyPack.module.css'
 

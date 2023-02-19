@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import {SuperButton} from "../../common/components/SuperButton";
+import {SuperButton} from "common/components/SuperButton";
 import {ReactNode} from "react";
 import {TypeButton} from "./packModal/PackModal";
 import {IconButton} from "@mui/material";
-import editIcon from "../../assets/edit.svg";
+import editIcon from "assets/edit.svg";
 
 
 const style = {
