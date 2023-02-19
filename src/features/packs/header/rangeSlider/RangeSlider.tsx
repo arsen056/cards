@@ -4,21 +4,28 @@ import {AppDispatch} from "app/store";
 import {setMax, setMin} from "../../packsReducer";
 import s from '../HeaderPacks.module.css'
 import {useSelector} from "react-redux";
-import {selectMaxCardsCount, selectMinCardsCount} from "../../selectors";
+import {selectMax, selectMaxCardsCount, selectMin, selectMinCardsCount} from "../../selectors";
 
 export const RangeSlider = () => {
     const dispatch = AppDispatch()
 
     const maxValue = useSelector(selectMaxCardsCount)
     const minValue = useSelector(selectMinCardsCount)
+    const min = useSelector(selectMin)
+    const max = useSelector(selectMax)
 
     const [value, setValue] = useState<number[]>([minValue, maxValue])
 
-    const isDisabled = !value[0] && !value[1]
+    const isDisabled = !maxValue
 
     useEffect(() => {
-        setValue([minValue, maxValue])
-    }, [minValue, maxValue])
+        if (!min && !max) {
+            console.log('setValue')
+            setValue([minValue, maxValue])
+            return
+        }
+        setValue([min, max])
+    }, [min, max, maxValue])
 
     const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);

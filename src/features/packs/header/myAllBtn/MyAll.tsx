@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from "react-redux";
 import {selectIsMyPacks, selectUserID} from "../../selectors";
 import {AppDispatch} from "../../../../app/store";
-import {setIsMyPacks, setUserId} from "../../packsReducer";
+import {setIsMyPacks, setMin, setUserId} from "../../packsReducer";
 import s from './MyAllBtn.module.css'
 
 export const MyOrAll = () => {
@@ -12,7 +12,7 @@ export const MyOrAll = () => {
     const dispatch = AppDispatch()
 
     const myPacksHandler = () => {
-
+        dispatch(setMin(0))
         dispatch(setUserId(userID))
         dispatch(setIsMyPacks(true))
     }

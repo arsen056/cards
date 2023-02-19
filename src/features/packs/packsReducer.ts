@@ -13,8 +13,8 @@ const initState = {
     cardsCount: [1, 30] as Array<number>,
     searchParams: {
         sortPacks: null as string | null,
-        min: undefined as number | undefined,
-        max: undefined as number | undefined,
+        min: 0 as number,
+        max: 0 as number,
         packName: '' as string,
         page: 1 as number,
         pageCount: 8 as number,
