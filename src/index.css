@@ -27,5 +27,5 @@ html {
 }
 
 body {
-  overflow: auto;
+  padding: 0 !important;  /*To avoid adding padding 17px when opening a modal*/
 }
