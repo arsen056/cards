@@ -10,9 +10,10 @@ import {useSelector} from "react-redux";
 
 import {Search} from "common/components/search/Search";
 import {searchParamsSelector, selectMaxCardsCount} from "../selectors";
+import {PackModal} from "../../modal/packModal/PackModal";
 
 export const HeaderPacks = () => {
-  const dispatch = AppDispatch()
+    const dispatch = AppDispatch()
 
   const searchParams = useSelector(searchParamsSelector)
   const maxValue = useSelector(selectMaxCardsCount)
@@ -21,17 +22,17 @@ export const HeaderPacks = () => {
     dispatch(setResetFilters(maxValue))
   }
 
-  const addPack = () => {
-    dispatch(addPackTC({cardsPack: {name: 'TEST PACK', private: false}}))
-  }
+	const addPack = (namePack: string, statusPrivate: boolean) => {
+		dispatch(addPackTC({cardsPack: {name: namePack, private: statusPrivate}}))
+	}
 
-  return (
-    <div className={s.headerPacks}>
-      <div className={s.headTitleButton}>
-        <h2>Packs List</h2>
-        <SuperButton onClick={addPack}>Add new pack</SuperButton>
-      </div>
-      <div className={s.wrapper}>
+	return (
+		<div className={s.headerPacks}>
+			<div className={s.headTitleButton}>
+				<h2>Packs List</h2>
+					<PackModal typeButton={'superButton'} packModalFunctional={addPack} titleButton={'Add new pack'}/>
+			</div>
+			<div className={s.wrapper}>
 
         <Search searchParams={searchParams} setNameAC={setPackName}/>
         <MyOrAll/>

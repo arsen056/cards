@@ -1,0 +1,10 @@
+.titleAndCloseBlock {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonsBlock {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}

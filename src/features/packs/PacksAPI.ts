@@ -36,6 +36,7 @@ export type UpdatePackType = {
   cardsPack: {
     _id: string
     name?: string
+    private?: boolean
   }
 }
 
