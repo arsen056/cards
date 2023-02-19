@@ -1,25 +1,26 @@
 .headerCards {
-    flex-direction: column;
-    align-items: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .titleAndButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu img {
-    height: 25px;
-    margin-top: 5px;
-    margin-left: 1px;
+  height: 25px;
+  margin-top: 5px;
+  margin-left: 1px;
 }

@@ -4,7 +4,7 @@
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 
-  overflow:hidden;
+  overflow: hidden;
 
   width: 11em;
   height: 11em;
@@ -14,11 +14,11 @@
   text-indent: -9999em;
 
   background: #65abf8;
-  background: -moz-linear-gradient(left, #65abf8 10%, rgba(101,171,248, 0) 42%);
-  background: -webkit-linear-gradient(left, #65abf8 10%, rgba(101,171,248, 0) 42%);
-  background: -o-linear-gradient(left, #65abf8 10%, rgba(101,171,248, 0) 42%);
-  background: -ms-linear-gradient(left, #65abf8 10%, rgba(101,171,248, 0) 42%);
-  background: linear-gradient(to right, #65abf8 10%, rgba(101,171,248, 0) 42%);
+  background: -moz-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: -webkit-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: -o-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: -ms-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: linear-gradient(to right, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
   border-radius: 50%;
 
   -webkit-animation: load3 1.4s infinite linear;

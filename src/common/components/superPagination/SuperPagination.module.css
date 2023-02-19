@@ -1,13 +1,11 @@
 .pagination {
-    display: flex;
-    column-gap: 20px;
-    align-items: center;
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
 }
 
 .text1 {
-
 }
 
 .text2 {
-
 }

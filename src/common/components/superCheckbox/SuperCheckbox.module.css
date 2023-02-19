@@ -1,38 +1,38 @@
 .label {
-    cursor: pointer;
+  cursor: pointer;
 
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .checkbox {
-    cursor: pointer;
+  cursor: pointer;
 
-    width: 18px;
-    height: 18px;
-    margin-right: 8px;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
 
-    vertical-align: middle;
+  vertical-align: middle;
 
-    background-repeat: no-repeat;
-    background-position: center center;
-    border: 2px solid #06c;
-    border-radius: 3px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 2px solid #06c;
+  border-radius: 3px;
 
-    appearance: none;
+  appearance: none;
 }
 
 .checkbox:checked {
-    background-image: url('../../../assets/icons/checked.svg');
+  background-image: url('../../../assets/icons/checked.svg');
 
-    appearance: none;
+  appearance: none;
 }
 
 .checkbox:focus {
-    border-color: #0059b3;
+  border-color: #0059b3;
 }
 
 .spanClassName {
-    font-family: 'Montserrat', sans-serif;
-    color: #06c;
+  font-family: 'Montserrat', sans-serif;
+  color: #06c;
 }

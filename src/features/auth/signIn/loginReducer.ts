@@ -1,37 +1,46 @@
-import {AppThunk} from "app/store";
-import {AppStateType, initState, setError, setLoggedIn, setStatus} from "app/appReducer";
-import axios, {AxiosError} from "axios";
-import {errorUtils} from "common/utils/errorUtils";
-import {setProfile} from "features/profile/profileReducer";
-import {LoginParamsType, SignInAPI} from "../authAPI";
+import axios, { AxiosError } from 'axios'
 
-export const loginReducer = (state: AppStateType = initState, action: SignInACType): AppStateType => {
+import { LoginParamsType, SignInAPI } from '../authAPI'
+
+import { AppStateType, initState, setError, setLoggedIn, setStatus } from 'app/appReducer'
+import { AppThunk } from 'app/store'
+import { errorUtils } from 'common/utils/errorUtils'
+import { setProfile } from 'features/profile/profileReducer'
+
+export const loginReducer = (
+  state: AppStateType = initState,
+  action: SignInACType
+): AppStateType => {
   switch (action.type) {
     case 'login/SET-IS-LOGGED-IN':
-      return {...state, isLoggedIn: action.value}
+      return { ...state, isLoggedIn: action.value }
     default:
       return state
   }
 }
 
 // actions
-export const signInAC = (value: boolean) => ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+export const signInAC = (value: boolean) => ({ type: 'login/SET-IS-LOGGED-IN', value } as const)
 
 // thunks
-export const signInTC = (data: LoginParamsType): AppThunk => async dispatch => {
-  dispatch(setStatus('loading'))
-  try {
-    const res = await SignInAPI.login(data)
-    dispatch(signInAC(true))
-    dispatch(setLoggedIn(true))
-    dispatch(setProfile(res.data))
-  } catch (e) {
-    const err = e as Error | AxiosError<{ error: string }>
-    errorUtils(err, dispatch)
-  } finally {
-    dispatch(setStatus('success'))
+export const signInTC =
+  (data: LoginParamsType): AppThunk =>
+  async dispatch => {
+    dispatch(setStatus('loading'))
+    try {
+      const res = await SignInAPI.login(data)
+
+      dispatch(signInAC(true))
+      dispatch(setLoggedIn(true))
+      dispatch(setProfile(res.data))
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
+
+      errorUtils(err, dispatch)
+    } finally {
+      dispatch(setStatus('success'))
+    }
   }
-}
 
 export const logoutTC = (): AppThunk => async dispatch => {
   dispatch(setStatus('loading'))
@@ -41,8 +50,10 @@ export const logoutTC = (): AppThunk => async dispatch => {
     dispatch(setLoggedIn(false))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
+
     if (axios.isAxiosError(err)) {
       const error = err.response?.data ? err.response.data.error : err.message
+
       dispatch(setError(error))
     } else {
       dispatch(setError(`Native error ${err.message}`))

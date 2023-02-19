@@ -14,15 +14,13 @@
 }
 
 .inputWrapper {
-
 }
 
 .superInput {
-
 }
 
 .errorInput {
-  background-color: #EFB4B4;
+  background-color: #efb4b4;
 }
 
 .errorInput:focus {

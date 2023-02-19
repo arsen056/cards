@@ -8,32 +8,32 @@
 }*/
 
 .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .signInBlock {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .signInLink {
-    font-weight: bolder;
-    color: #0066cb;
+  font-weight: bolder;
+  color: #0066cb;
 }
 
 a:hover {
-    color: black;
+  color: black;
 }
 
 .wrapper {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    padding: 5rem 0;
+  padding: 5rem 0;
 }

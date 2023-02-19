@@ -1,28 +1,31 @@
-import React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import {useSelector} from "react-redux";
-import {PackItem} from "./PackItem";
-import s from './packList.module.css'
+import React from 'react'
+
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import { useSelector } from 'react-redux'
+
+import { AppDispatch } from '../../../app/store'
+import { EmptyArray } from '../../../common/components/emptyArray/EmptyArray'
+import { SuperPagination } from '../../../common/components/superPagination/SuperPagination'
+import { setPage, setPageCount } from '../packsReducer'
 import {
   selectCardPacks,
-  selectCardPacksTotaCount, selectPackName,
+  selectCardPacksTotaCount,
+  selectPackName,
   selectPage,
-  selectPageCount
-} from "../selectors";
-import {EmptyArray} from "../../../common/components/emptyArray/EmptyArray";
-import {setPage, setPageCount} from "../packsReducer";
-import {AppDispatch} from "../../../app/store";
+  selectPageCount,
+} from '../selectors'
 
-import {SuperPagination} from "../../../common/components/superPagination/SuperPagination";
+import { PackItem } from './PackItem'
+import s from './packList.module.css'
 
 export const PackList = () => {
-  const dispatch = AppDispatch();
+  const dispatch = AppDispatch()
 
   const packs = useSelector(selectCardPacks)
   const totalCount = useSelector(selectCardPacksTotaCount)
@@ -31,22 +34,22 @@ export const PackList = () => {
   const packName = useSelector(selectPackName)
 
   const onChangePagination = (pageNumber: number, pageCount: number) => {
-    dispatch(setPage(pageNumber));
+    dispatch(setPage(pageNumber))
     dispatch(setPageCount(pageCount))
   }
 
   if (!packName && !packs.length) {
-    return <EmptyArray message={'Pack list empty'}/>
+    return <EmptyArray message={'Pack list empty'} />
   }
 
   if (packName && !packs.length) {
-    return <EmptyArray message={'Check your query'}/>
+    return <EmptyArray message={'Check your query'} />
   }
 
   return (
     <>
       <TableContainer className={s.tableContainer} component={Paper}>
-        <Table sx={{minWidth: 650}} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow className={s.thead}>
               <TableCell>Name</TableCell>
@@ -58,15 +61,19 @@ export const PackList = () => {
           </TableHead>
 
           <TableBody>
-            {packs.map((pack) => (
-              <PackItem key={pack._id} pack={pack}/>
+            {packs.map(pack => (
+              <PackItem key={pack._id} pack={pack} />
             ))}
           </TableBody>
-
         </Table>
       </TableContainer>
 
-      <SuperPagination page={page} itemsCountForPage={pageCount} totalCount={totalCount} onChange={onChangePagination}/>
+      <SuperPagination
+        page={page}
+        itemsCountForPage={pageCount}
+        totalCount={totalCount}
+        onChange={onChangePagination}
+      />
     </>
-  );
+  )
 }

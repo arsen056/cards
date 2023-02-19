@@ -6,7 +6,7 @@
 
   background-image: url(../../../assets/icons/edit.svg);
   background-repeat: no-repeat;
-  background-position:center ;
+  background-position: center;
 }
 
 .title {
@@ -27,9 +27,9 @@
 
   padding: 5px 20px;
 
-  color: #FFFFFF;
+  color: #ffffff;
 
-  background-color: #366EFF;
+  background-color: #366eff;
   border: none;
   border-radius: 2px;
 }
@@ -39,5 +39,3 @@
 
   opacity: 0.5;
 }
-
-

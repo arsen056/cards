@@ -1,22 +1,22 @@
 .button {
-    padding: 2px;
-    background-color: white;
-    border: 0px;
+  padding: 2px;
+
+  background-color: white;
+  border: 0;
 }
 
 .disabled {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
-
 .thead {
-    background-color: #EFEFEF;
+  background-color: #efefef;
 }
 
 .thead th {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .tableContainer {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }

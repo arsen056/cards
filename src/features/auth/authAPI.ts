@@ -1,5 +1,4 @@
-import {instance} from "common/instance/instance";
-
+import { instance } from 'common/instance/instance'
 
 export type LoginParamsType = {
   email: string
@@ -13,10 +12,10 @@ export type RegisterParamsType = {
 }
 
 type ForgotResponseType = {
-  info: string;
-  success: boolean;
-  answer: boolean;
-  html: boolean;
+  info: string
+  success: boolean
+  answer: boolean
+  html: boolean
 }
 
 export const SignInAPI = {
@@ -30,20 +29,19 @@ export const SignInAPI = {
 
   logout() {
     return instance.delete(`auth/me`, {})
-  }
+  },
 }
 
 export const registerAPI = {
   registration(data: RegisterParamsType) {
-    return instance.post('auth/register', data)
-      .then(res => res.data)
+    return instance.post('auth/register', data).then(res => res.data)
   },
 }
 
 export const NewPasswordAPI = {
   newPass(password: string, resetPasswordToken: string) {
-    return instance.post('/auth/set-new-password', {password, resetPasswordToken})
-  }
+    return instance.post('/auth/set-new-password', { password, resetPasswordToken })
+  },
 }
 
 export const ForgotAPI = {
@@ -51,28 +49,30 @@ export const ForgotAPI = {
     const forgot = {
       email: email,
       from: 'test-front-admin <@>',
-      message: '<div style="background-color: lime; padding: 15px">\n' +
+      message:
+        '<div style="background-color: lime; padding: 15px">\n' +
         'password recovery link: \n' +
-        '<a href=\'https://arsen056.github.io/cards/#/set-newPassword/$token$\'>\n' +
+        "<a href='https://arsen056.github.io/cards/#/set-newPassword/$token$'>\n" +
         'link</a>\n' +
-        '</div>'
+        '</div>',
     }
+
     return instance.post<ForgotResponseType>('/auth/forgot', forgot)
-  }
+  },
 }
 
 export type ProfileType = {
-  _id: string;
-  email: string;
-  rememberMe: boolean;
-  isAdmin: boolean;
-  name: string;
-  verified: boolean;
-  publicCardPacksCount: number;
-  created: string;
-  updated: string;
-  __v: number;
-  token: string;
-  tokenDeathTime: number;
-  avatar?: string;
+  _id: string
+  email: string
+  rememberMe: boolean
+  isAdmin: boolean
+  name: string
+  verified: boolean
+  publicCardPacksCount: number
+  created: string
+  updated: string
+  __v: number
+  token: string
+  tokenDeathTime: number
+  avatar?: string
 }

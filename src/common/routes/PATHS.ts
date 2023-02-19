@@ -9,5 +9,5 @@ export const PATHS = {
   pack: '/packs/:packID',
   notFound: '/404',
   unknown: '/*',
-  learn: "/learn/:packId"
+  learn: '/learn/:packId',
 }

@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react'
 
 import styled from 'styled-components'
+
 import logoutIcon from '../../assets/icons/logout.svg'
 
 // тип пропсов обычной кнопки, children в котором храниться название кнопки там уже описан
@@ -28,15 +29,15 @@ const Btn = styled.button<SuperBtnStyledPropsType>`
   border-radius: 30px;
   border: none;
   letter-spacing: 1.5px;
-  
-  ${props => props.fullWidth 
-    ? `width: 100%` : ``}
-  
+
+  ${props => (props.fullWidth ? `width: 100%` : ``)}
 
   ${props =>
+    // eslint-disable-next-line no-nested-ternary
     props.disabled
       ? disabled
-      : props.xType === 'logOut'
+      : // eslint-disable-next-line no-nested-ternary
+      props.xType === 'logOut'
       ? logOut
       : props.xType === 'secondary'
       ? secondary

@@ -1,23 +1,27 @@
-import React, {memo, useEffect} from 'react';
-import {PackList} from "./packList/PackList";
-import {HeaderPacks} from "./header/HeaderPacks";
-import {useSelector} from "react-redux";
+import React, { memo, useEffect } from 'react'
+
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+
+import { setIsDeleted } from '../cards/cardsReducer'
+
+import { HeaderPacks } from './header/HeaderPacks'
+import { PackList } from './packList/PackList'
+import { getPacks } from './packsReducer'
 import {
   selectMax,
   selectMin,
   selectPackName,
   selectPacksUserID,
   selectPage,
-  selectPageCount
-} from "./selectors";
-import {AppDispatch} from "app/store";
-import {getPacks} from "./packsReducer";
-import {Navigate} from "react-router-dom";
-import {selectIsLoggedIn} from "common/selectors";
-import {setIsDeleted} from "../cards/cardsReducer";
+  selectPageCount,
+} from './selectors'
+
+import { AppDispatch } from 'app/store'
+import { selectIsLoggedIn } from 'common/selectors'
 
 export const Packs = memo(() => {
-  const dispatch = AppDispatch();
+  const dispatch = AppDispatch()
   const isLoggedIn = useSelector(selectIsLoggedIn)
   const userID = useSelector(selectPacksUserID)
   const min = useSelector(selectMin)
@@ -38,13 +42,13 @@ export const Packs = memo(() => {
   }, [packName, userID, min, max, pageCount, page])
 
   if (!isLoggedIn) {
-    return <Navigate to={'/login'}/>
+    return <Navigate to={'/login'} />
   }
 
   return (
     <div className={'container padding-vertical'}>
-      <HeaderPacks/>
-      <PackList/>
+      <HeaderPacks />
+      <PackList />
     </div>
-  );
-});
+  )
+})
