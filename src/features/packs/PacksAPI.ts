@@ -1,4 +1,4 @@
-import {instance} from "../../API/instance";
+import {instance} from "../../common/instance/instance";
 
 export const PacksAPI = {
   fetchPacks(params: any) {
