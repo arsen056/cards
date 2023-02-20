@@ -203,7 +203,6 @@ export const deletePackInCards =
                 dispatch(setIsDeleted(true))
             } catch (e) {
                 const err = e as Error | AxiosError<{ error: string }>
-
                 errorUtils(err, dispatch)
             } finally {
                 dispatch(setStatus('success'))
@@ -214,13 +213,15 @@ export const gradeCardUpdateTC = (data: LearnCardType): AppThunk => async dispat
     dispatch(setStatus('loading'))
     try {
         await cardsAPI.gradeUpdate(data)
-            dispatch(gradeCardUpdateAC(data.grade, data.card_id))
-    }finally {
+        dispatch(gradeCardUpdateAC(data.grade, data.card_id))
+       /* dispatch(getCards(data.card_id))*/
+    } catch (e) {
+            const err = e as Error | AxiosError<{ error: string }>
+            errorUtils(err, dispatch)
+        } finally {
         dispatch(setStatus('success'))
     }
 }
-
-
 
 //types
 export type CardsActionsType =

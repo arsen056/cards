@@ -10,7 +10,6 @@ import {selectCards} from "../cards/selectors";
 import {selectIsLoggedIn} from "../../common/selectors";
 import {AppDispatch} from "../../app/store";
 import {gradeCardUpdateTC} from "../cards/cardsReducer";
-import {Box} from "../../common/components/box/Box";
 import {Grid} from "@mui/material";
 
 const grades = ['Did not know', 'forgot', 'A lot of thought', 'Confused', 'Knew the answer']
@@ -57,6 +56,10 @@ export const Learn = () => {
         updated: '',
     })
 
+    if (cards?.length < 0) {
+        return <div>cards not defined</div>
+    }
+
     const onNext = () => {
         setIsChecked(false)
 
@@ -86,8 +89,8 @@ export const Learn = () => {
                         <Grid item justifyContent={'center'} marginTop={5}>
 
                             <div className={s.text}>
-                                    <b>Question: {card.question}</b>
-                                    <h5 style={{color: 'gray'}}>Количество попыток ответов на вопрос:{card.shots}</h5>
+                                <b>Question: {card.question}</b>
+                                <h5 style={{color: 'gray'}}>Количество попыток ответов на вопрос:{card.shots}</h5>
                                 <div className={s.button}>
                                     <SuperButton onClick={() => setIsChecked(true)}>Show answer</SuperButton>
                                 </div>

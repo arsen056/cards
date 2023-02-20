@@ -18,6 +18,8 @@ import deleteIcon from 'assets/delete.svg'
 import edit from 'assets/edit.svg'
 import learn from 'assets/learn.svg'
 import s from 'common/components/header/avatar/Avatar.module.css'
+import {useNavigate} from "react-router-dom";
+import {PATHS} from "../../../../common/routes/PATHS";
 
 type CardMenuPropsType = {
   packID: string
@@ -65,6 +67,12 @@ export const CardMenu = ({ packID }: CardMenuPropsType) => {
   }
   const deletePack = () => {
     dispatch(deletePackInCards(packID))
+  }
+
+  const navigate = useNavigate()
+
+  const learnPack = () => {
+    navigate(`${PATHS.learn}`)
   }
 
   return (
@@ -119,7 +127,7 @@ export const CardMenu = ({ packID }: CardMenuPropsType) => {
                     Delete
                   </MenuItem>
 
-                  <MenuItem onClick={() => {}}>
+                  <MenuItem onClick={learnPack}>
                     <img src={learn} alt="learn icon" />
                     Learn
                   </MenuItem>
