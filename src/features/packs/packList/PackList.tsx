@@ -9,20 +9,23 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { useSelector } from 'react-redux'
 
-import { AppDispatch } from '../../../app/store'
-import { EmptyArray } from '../../../common/components/emptyArray/EmptyArray'
-import { SuperPagination } from '../../../common/components/superPagination/SuperPagination'
-import { setPage, setPageCount } from '../packsReducer'
+import { setPage, setPageCount, setSortPacks } from '../packsReducer'
 import {
   selectCardPacks,
   selectCardPacksTotaCount,
   selectPackName,
   selectPage,
   selectPageCount,
+  selectSortPacks,
 } from '../selectors'
 
 import { PackItem } from './PackItem'
 import s from './packList.module.css'
+
+import { AppDispatch } from 'app/store'
+import sortArrow from 'assets/sort-arrow.svg'
+import { EmptyArray } from 'common/components/emptyArray/EmptyArray'
+import { SuperPagination } from 'common/components/superPagination/SuperPagination'
 
 export const PackList = () => {
   const dispatch = AppDispatch()
@@ -32,10 +35,19 @@ export const PackList = () => {
   const page = useSelector(selectPage)
   const pageCount = useSelector(selectPageCount)
   const packName = useSelector(selectPackName)
+  const sortPacks = useSelector(selectSortPacks)
 
   const onChangePagination = (pageNumber: number, pageCount: number) => {
     dispatch(setPage(pageNumber))
     dispatch(setPageCount(pageCount))
+  }
+
+  const setSortUpdated = () => {
+    if (sortPacks === '0updated') {
+      dispatch(setSortPacks('1updated'))
+    } else {
+      dispatch(setSortPacks('0updated'))
+    }
   }
 
   if (!packName && !packs.length) {
@@ -46,6 +58,8 @@ export const PackList = () => {
     return <EmptyArray message={'Check your query'} />
   }
 
+  const sortClassName = sortPacks === '1updated' ? s.sortArrowDown : ''
+
   return (
     <>
       <TableContainer className={s.tableContainer} component={Paper}>
@@ -54,7 +68,10 @@ export const PackList = () => {
             <TableRow className={s.thead}>
               <TableCell>Name</TableCell>
               <TableCell align="right">Cards</TableCell>
-              <TableCell align="right">Last Updated</TableCell>
+              <TableCell sx={{ cursor: 'pointer' }} align="right" onClick={setSortUpdated}>
+                Last Updated
+                <img className={`${s.sortArrow} ${sortClassName}`} src={sortArrow} alt="sort" />
+              </TableCell>
               <TableCell align="right">Created by</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
