@@ -1,26 +1,40 @@
-import React from 'react'
-
-import { CardType } from '../cards/CardsAPI'
-
-const grades = ['Did not know', 'forgot', 'A lot of thought', 'Confused', 'Knew the answer']
-
-const getCard = (cards: CardType[]) => {
-  const sum = cards.reduce((acc, card) => acc + (6 - card.grade!) * (6 - card.grade!), 0)
-  const rand = Math.random() * sum
-  const res = cards.reduce(
-    (acc: { sum: number; id: number }, card, i) => {
-      const newSum = acc.sum + (6 - card.grade!) * (6 - card.grade!)
-
-      return { sum: newSum, id: newSum < rand ? i : acc.id }
-    },
-    { sum: 0, id: -1 }
-  )
-
-  console.log('test: ', sum, rand, res)
-
-  return cards[res.id + 1]
-}
+import React, {useState} from 'react'
+import {BackToPacksList} from "../../common/components/backToPacksList/BackToPacksList";
+import {CardType} from "../cards/CardsAPI";
+import {useSelector} from "react-redux";
+import {selectCardPacks} from "../packs/selectors";
 
 export const Learn = () => {
-  return <div>Hello</div>
+    const pack = useSelector(selectCardPacks)
+    const [card, setCard] = useState<CardType>({
+        _id: 'fake',
+        cardsPack_id: '',
+        user_id: '',
+        questionImg: '',
+        answerImg: '',
+        answer: 'answer fake',
+        question: 'question fake',
+        grade: 0,
+        shots: 0,
+
+        comments: '',
+        type: '',
+        rating: 0,
+        more_id: '',
+
+        created: '',
+        updated: '',
+    })
+
+
+return (
+    <>
+        <BackToPacksList/>
+        <div>
+            <h2>{pack[0].name}</h2>
+            <b>Question: {card.question}</b>
+        </div>
+
+    </>
+  )
 }
