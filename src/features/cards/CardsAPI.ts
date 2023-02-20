@@ -30,12 +30,19 @@ export type CardType = {
   answer: string
   question: string
   cardsPack_id: string
+  questionImg?: string
+  answerImg?: string
   grade: number
   shots: number
   user_id: string
   created: string
   updated: string
   _id: string
+
+  comments?: string
+  type?: string
+  rating?: number
+  more_id?: string
 }
 
 export type AddCardType = {
@@ -58,4 +65,28 @@ export type UpdateCardType = {
     question: string // не обязательно
     answer: string
   }
+}
+
+export type LearnCardType = {
+  grade: number
+  card_id: string
+}
+
+export interface UpdatedGrade {
+  card_id: string
+  user_id: string
+  cardsPack_id: string
+  grade: number
+  shots: number
+  more_id: string
+  _id: string
+  created: string
+  updated: string
+  __v: number
+}
+
+export interface ResponseGradeUpdateCardType {
+  updatedGrade: UpdatedGrade
+  token: string
+  tokenDeathTime: number
 }

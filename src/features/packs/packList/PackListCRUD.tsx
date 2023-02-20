@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 
 import { IconButton } from '@mui/material'
 import { useSelector } from 'react-redux'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 import { UpdatePackType } from '../PacksAPI'
 import { selectUserID } from '../selectors'
@@ -9,6 +10,7 @@ import { selectUserID } from '../selectors'
 import s from './packList.module.css'
 
 import educationIcon from 'assets/learn.svg'
+import { PATHS } from 'common/routes/PATHS'
 import { PackModal } from 'features/modal/packModal/PackModal'
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
@@ -30,6 +32,12 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
     editAction && editAction({ cardsPack: { _id: id, name: packName, private: statusPrivate } })
   }
 
+  const navigate = useNavigate()
+
+  const learnPack = () => {
+    navigate(`${PATHS.learn}`)
+  }
+
   return (
     <div>
       {educationsAction && (
@@ -37,6 +45,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
           size="small"
           disabled={cardsCount === 0}
           className={cardsCount === 0 ? s.disabled : s.button}
+          onClick={learnPack}
         >
           <img src={educationIcon} alt="education icon" />
         </IconButton>
