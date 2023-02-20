@@ -1,11 +1,11 @@
 import React from 'react'
 
+import { CardModal } from '../../../modal/cardModal/CardModal'
+
 import s from './EmptyPack.module.css'
 
-import { SuperButton } from 'common/components/SuperButton'
-
 type EmptyPackPropsType = {
-  addCard: () => void
+  addCard: (question: string, answer: string) => void
   userId: string
   packUserId: string
 }
@@ -15,9 +15,11 @@ export const EmptyPack = ({ addCard, userId, packUserId }: EmptyPackPropsType) =
     <div className={s.emptyPackBlock}>
       <p>This pack is empty.</p>
       {userId === packUserId && (
-        <SuperButton variant={'contained'} color={'primary'} onClick={addCard}>
-          Add new card
-        </SuperButton>
+        <CardModal
+          typeButton={'superButton'}
+          titleButton={'Add new card'}
+          cardModalFunctional={addCard}
+        />
       )}
     </div>
   )

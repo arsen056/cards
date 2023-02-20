@@ -3,7 +3,7 @@ import React, { memo, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 
-import { selectIsLoggedIn, selectStatus } from '../../common/selectors'
+import { selectIsLoggedIn } from '../../common/selectors'
 import { selectUserID } from '../packs/selectors'
 
 import { CardsList } from './cardsList/CardsList'
@@ -48,13 +48,13 @@ export const Cards = memo(() => {
     dispatch(setCardsPageCount(pageCardsCount))
   }
 
-  const addCard = () => {
+  const addCard = (question: string, answer: string) => {
     dispatch(
       addCardTC({
         card: {
           cardsPack_id: packID as string,
-          question: 'how do you like this task?',
-          answer: 'It is wonderful',
+          question,
+          answer,
           grade: 0,
         },
       })
@@ -76,7 +76,7 @@ export const Cards = memo(() => {
       <BackToPacksList />
       <HeaderCards
         title={cardsPackName}
-        addCard={addCard}
+        cardModalFunctional={addCard}
         userId={userId}
         packUserId={packUserId}
         packID={packID ? packID : ''}

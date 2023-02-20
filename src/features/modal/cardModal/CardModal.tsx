@@ -3,7 +3,9 @@ import { ChangeEvent, useState } from 'react'
 
 import { Box, IconButton, TextField } from '@mui/material'
 import Typography from '@mui/material/Typography'
+import { Navigate } from 'react-router-dom'
 
+import { PATHS } from '../../../common/routes/PATHS'
 import { BasicModal } from '../BasicModal'
 import { TypeButton } from '../packModal/PackModal'
 import s from '../packModal/PackModal.module.css'
@@ -31,9 +33,12 @@ export const CardModal = ({
   const [answerCard, setAnswerCard] = useState<string>('')
   const [error, setError] = useState<boolean>(false)
   const handleOpen = () => {
-    setOpen(true)
-    setQuestionCard(question || '')
-    setAnswerCard(answer || '')
+    if (titleButton === 'Learn to pack') return <Navigate to={PATHS.learn} />
+    else {
+      setOpen(true)
+      setQuestionCard(question || '')
+      setAnswerCard(answer || '')
+    }
   }
   const handleClose = () => {
     setOpen(false)
@@ -61,6 +66,7 @@ export const CardModal = ({
   }
 
   let titleModal
+
   if (typeButton === 'deleteIcon') titleModal = 'Delete card'
   else if (typeButton === 'superButton') titleModal = 'Add new card'
   else titleModal = 'Edit card'
