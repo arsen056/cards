@@ -1,6 +1,6 @@
 import {AxiosError} from 'axios'
 
-import {AddCardType, cardsAPI, CardType, UpdateCardType} from './CardsAPI'
+import {AddCardType, cardsAPI, CardType, LearnCardType, UpdateCardType} from './CardsAPI'
 
 import {setStatus} from 'app/appReducer'
 import {AppThunk} from 'app/store'
@@ -51,6 +51,8 @@ export const cardsReducer = (
             return {...state, isDeleted: action.deleted}
         case 'CARDS/SET_CARD_QUESTION':
             return {...state, cardQuestion: action.cardQuestion}
+        case 'CARD/GRADE-UPDATE':
+            return { ...state, cards: state.cards.filter(c => (c._id === action.id ? { ...c, grade: action.grade } : c)) }
         default:
             return state
     }
@@ -80,6 +82,7 @@ export const setIsDeleted = (deleted: boolean) =>
     ({type: 'CARDS/SET_IS_DELETED', deleted} as const)
 export const setCardQuestion = (cardQuestion: string) =>
     ({type: 'CARDS/SET_CARD_QUESTION', cardQuestion} as const)
+export const gradeCardUpdateAC = (grade: number, id: string) => ({ type: 'CARD/GRADE-UPDATE', grade, id } as const)
 
 //thunks
 export const getCards =
@@ -207,6 +210,18 @@ export const deletePackInCards =
             }
         }
 
+export const gradeCardUpdateTC = (data: LearnCardType): AppThunk => async dispatch => {
+    dispatch(setStatus('loading'))
+    try {
+        await cardsAPI.gradeUpdate(data)
+            dispatch(gradeCardUpdateAC(data.grade, data.card_id))
+    }finally {
+        dispatch(setStatus('success'))
+    }
+}
+
+
+
 //types
 export type CardsActionsType =
     | ReturnType<typeof setCards>
@@ -216,3 +231,4 @@ export type CardsActionsType =
     | ReturnType<typeof updatePackName>
     | ReturnType<typeof setIsDeleted>
     | ReturnType<typeof setCardQuestion>
+    | ReturnType<typeof gradeCardUpdateAC>

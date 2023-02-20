@@ -13,6 +13,9 @@ export const cardsAPI = {
   updateCard(data: UpdateCardType) {
     return instance.put('cards/card', data)
   },
+  gradeUpdate(data: LearnCardType) {
+    return instance.put<ResponseGradeUpdateCardType>(`/cards/grade`, data)
+  },
 }
 
 export type CardsResponseType = {
@@ -33,7 +36,7 @@ export type CardType = {
   questionImg?: string
   answerImg?: string
   grade: number
-  shots: number
+  shots?: number
   user_id: string
   created: string
   updated: string
