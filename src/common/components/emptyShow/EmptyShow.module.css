@@ -1,0 +1,14 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  color: #318CE7;
+}
+
+.img {
+  width: 500px;
+}

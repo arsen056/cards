@@ -24,7 +24,7 @@ import s from './packList.module.css'
 
 import { AppDispatch } from 'app/store'
 import sortArrow from 'assets/sort-arrow.svg'
-import { EmptyArray } from 'common/components/emptyArray/EmptyArray'
+import { EmptyShow } from 'common/components/emptyShow/EmptyShow'
 import { SuperPagination } from 'common/components/superPagination/SuperPagination'
 
 export const PackList = () => {
@@ -51,11 +51,11 @@ export const PackList = () => {
   }
 
   if (!packName && !packs.length) {
-    return <EmptyArray message={'Pack list empty'} />
+    return <EmptyShow message={'Pack list empty'} />
   }
 
   if (packName && !packs.length) {
-    return <EmptyArray message={'Check your query'} />
+    return <EmptyShow message={'Check your query'} />
   }
 
   const sortClassName = sortPacks === '1updated' ? s.sortArrowDown : ''
