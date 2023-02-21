@@ -4,16 +4,17 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { AppDispatch } from '../../app/store'
-import { BackToPacksList } from '../../common/components/backToPacksList/BackToPacksList'
-import { SuperButton } from '../../common/components/SuperButton'
-import { SuperRadio } from '../../common/components/superRadio/SuperRadio'
-import { selectIsLoggedIn } from '../../common/selectors'
 import { CardType } from '../cards/CardsAPI'
 import { getCards, setCardGradeTC, setCardsPageCount } from '../cards/cardsReducer'
 import { selectCards } from '../cards/selectors'
 import { selectCardPacks, selectCardPacksTotaCount } from '../packs/selectors'
 
 import s from './Learn.module.css'
+
+import { BackToPacksList } from 'common/components/backToPacksList/BackToPacksList'
+import { SuperButton } from 'common/components/SuperButton'
+import { SuperRadio } from 'common/components/superRadio/SuperRadio'
+import { selectIsLoggedIn } from 'common/selectors'
 
 export const getCard = (cards: CardType[]) => {
   const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
