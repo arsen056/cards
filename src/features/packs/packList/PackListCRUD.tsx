@@ -12,6 +12,9 @@ import s from './packList.module.css'
 import educationIcon from 'assets/learn.svg'
 import { PATHS } from 'common/routes/PATHS'
 import { PackModal } from 'features/modal/packModal/PackModal'
+import {AppDispatch} from "../../../app/store";
+import {getCards, setCardsPageCount} from "../../cards/cardsReducer";
+import {selectCardsTotalCount} from "../../cards/selectors";
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
   id,
@@ -33,6 +36,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
   }
 
   const navigate = useNavigate()
+  // const cardsPack_id = useSelector(selectIsCardsPackId)
 
   const learnPack = () => {
     navigate(`${PATHS.learn}`)

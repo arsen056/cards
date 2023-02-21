@@ -1,0 +1,39 @@
+.radio {
+    width: 20px;
+    height: 20px;
+    margin: 0 13px 0 0;
+
+    color: black;
+
+    background-color: black;
+}
+
+.radio::before {
+}
+
+.radio:hover{
+    cursor: pointer;
+}
+
+.radio:checked::before {
+}
+
+.label {
+    display: flex;
+
+    padding-top: 15px;
+}
+
+.label:hover {
+    cursor:pointer;
+}
+
+.span{
+    display: inline-block;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    line-height: 20px;
+}

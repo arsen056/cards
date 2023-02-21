@@ -8,7 +8,7 @@ import MenuList from '@mui/material/MenuList'
 import Paper from '@mui/material/Paper'
 import Popper from '@mui/material/Popper'
 
-import { deletePackInCards, updatePackNameTC } from '../../cardsReducer'
+import {deletePackInCards, getCards, setCardsPageCount, updatePackNameTC} from '../../cardsReducer'
 
 import style from './CardMenu.module.css'
 
@@ -20,6 +20,8 @@ import learn from 'assets/learn.svg'
 import s from 'common/components/header/avatar/Avatar.module.css'
 import {useNavigate} from "react-router-dom";
 import {PATHS} from "../../../../common/routes/PATHS";
+import {useSelector} from "react-redux";
+import {selectCardsTotalCount} from "../../selectors";
 
 type CardMenuPropsType = {
   packID: string

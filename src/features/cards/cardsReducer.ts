@@ -1,6 +1,6 @@
 import {AxiosError} from 'axios'
 
-import {AddCardType, cardsAPI, CardType, LearnCardType, UpdateCardType} from './CardsAPI'
+import {AddCardType, cardsAPI, CardType, LearnCardType, ResponseUpdatedGradeType, UpdateCardType} from './CardsAPI'
 
 import {setStatus} from 'app/appReducer'
 import {AppThunk} from 'app/store'
@@ -53,6 +53,19 @@ export const cardsReducer = (
             return {...state, cardQuestion: action.cardQuestion}
         case 'CARD/GRADE-UPDATE':
             return { ...state, cards: state.cards.filter(c => (c._id === action.id ? { ...c, grade: action.grade } : c)) }
+        case 'cards/SET_GRADE':
+            return {
+                ...state,
+                cards: state.cards.map(item =>
+                    item._id === action.updatedGrade.updatedGrade.card_id
+                        ? {
+                            ...item,
+                            grade: action.updatedGrade.updatedGrade.grade,
+                            shots: action.updatedGrade.updatedGrade.shots,
+                        }
+                        : item
+                ),
+            }
         default:
             return state
     }
@@ -83,6 +96,8 @@ export const setIsDeleted = (deleted: boolean) =>
 export const setCardQuestion = (cardQuestion: string) =>
     ({type: 'CARDS/SET_CARD_QUESTION', cardQuestion} as const)
 export const gradeCardUpdateAC = (grade: number, id: string) => ({ type: 'CARD/GRADE-UPDATE', grade, id } as const)
+export const setGrade = (updatedGrade: ResponseUpdatedGradeType) =>
+    ({ type: 'cards/SET_GRADE', updatedGrade } as const)
 
 //thunks
 export const getCards =
@@ -209,19 +224,37 @@ export const deletePackInCards =
             }
         }
 
-export const gradeCardUpdateTC = (data: LearnCardType): AppThunk => async dispatch => {
-    dispatch(setStatus('loading'))
-    try {
-        await cardsAPI.gradeUpdate(data)
-        dispatch(gradeCardUpdateAC(data.grade, data.card_id))
-       /* dispatch(getCards(data.card_id))*/
-    } catch (e) {
-            const err = e as Error | AxiosError<{ error: string }>
-            errorUtils(err, dispatch)
-        } finally {
-        dispatch(setStatus('success'))
-    }
-}
+// export const gradeCardUpdateTC = (data: LearnCardType): AppThunk => async dispatch => {
+//     dispatch(setStatus('loading'))
+//     try {
+//         await cardsAPI.gradeUpdate(data)
+//         dispatch(gradeCardUpdateAC(data.grade, data.card_id))
+//        /* dispatch(getCards(data.card_id))*/
+//     } catch (e) {
+//             const err = e as Error | AxiosError<{ error: string }>
+//             errorUtils(err, dispatch)
+//         } finally {
+//         dispatch(setStatus('success'))
+//     }
+// }
+
+
+export const setCardGradeTC =
+    (value: string, id: string): AppThunk =>
+        async dispatch => {
+            dispatch(setStatus('loading'))
+            const card_id = id
+            try {
+                const data = { grade: value, card_id }
+                const response = await cardsAPI.setGrades(data)
+                dispatch(setGrade(response.data))
+            } catch (error) {
+                const err = error as Error | AxiosError<{ error: string }>
+                errorUtils(err, dispatch)
+            } finally {
+                dispatch(setStatus('success'))
+            }
+        }
 
 //types
 export type CardsActionsType =
@@ -233,3 +266,4 @@ export type CardsActionsType =
     | ReturnType<typeof setIsDeleted>
     | ReturnType<typeof setCardQuestion>
     | ReturnType<typeof gradeCardUpdateAC>
+    | ReturnType<typeof setGrade>
