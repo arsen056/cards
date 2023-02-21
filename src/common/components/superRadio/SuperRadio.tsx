@@ -1,11 +1,9 @@
-import React, { ChangeEvent, InputHTMLAttributes, DetailedHTMLProps, HTMLAttributes } from 'react'
+import React, {ChangeEvent, InputHTMLAttributes, DetailedHTMLProps, HTMLAttributes} from 'react'
 
 import s from './SuperRadio.module.css'
 
-type DefaultRadioPropsType = DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-    >
+type DefaultRadioPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement>
 
 type DefaultSpanPropsType = DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
 
