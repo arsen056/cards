@@ -3,7 +3,7 @@ import React, { memo, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 
-import { selectIsLoggedIn, selectStatus } from '../../common/selectors'
+import { selectIsLoggedIn } from '../../common/selectors'
 import { selectUserID } from '../packs/selectors'
 
 import { CardsList } from './cardsList/CardsList'

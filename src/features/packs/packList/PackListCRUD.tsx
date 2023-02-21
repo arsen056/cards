@@ -1,20 +1,18 @@
-import React, { MouseEvent } from 'react'
+import React from 'react'
 
-import { IconButton } from '@mui/material'
-import { useSelector } from 'react-redux'
-import {Link, Navigate, useNavigate} from 'react-router-dom'
+import {IconButton} from '@mui/material'
+import {useSelector} from 'react-redux'
+import {Link} from 'react-router-dom'
 
-import { UpdatePackType } from '../PacksAPI'
-import { selectUserID } from '../selectors'
+import {UpdatePackType} from '../PacksAPI'
+import {selectUserID} from '../selectors'
 
 import s from './packList.module.css'
 
 import educationIcon from 'assets/learn.svg'
-import { PATHS } from 'common/routes/PATHS'
-import { PackModal } from 'features/modal/packModal/PackModal'
+import {PackModal} from 'features/modal/packModal/PackModal'
 import {AppDispatch} from "../../../app/store";
-import {getCards, setCardsCards, setCardsPageCount} from "../../cards/cardsReducer";
-import {selectCardsTotalCount} from "../../cards/selectors";
+import {setCardsCards, setCardsPageCount} from "../../cards/cardsReducer";
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
   id,

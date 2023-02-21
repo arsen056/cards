@@ -1,6 +1,6 @@
 import {AxiosError} from 'axios'
 
-import {AddCardType, cardsAPI, CardType, LearnCardType, ResponseUpdatedGradeType, UpdateCardType} from './CardsAPI'
+import {AddCardType, cardsAPI, CardType, ResponseUpdatedGradeType, UpdateCardType} from './CardsAPI'
 
 import {setStatus} from 'app/appReducer'
 import {AppThunk} from 'app/store'

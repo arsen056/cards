@@ -3,13 +3,13 @@ import {CardType} from "../cards/CardsAPI";
 import {useSelector} from "react-redux";
 import {selectCardPacks, selectCardPacksTotaCount} from "../packs/selectors";
 import s from './Learn.module.css'
-import {selectCards, selectCardsPackName, selectCardsTotalCount, selectPackUserId} from "../cards/selectors";
+import {selectCards} from "../cards/selectors";
 import {AppDispatch} from "../../app/store";
 import {useParams} from "react-router-dom";
 import {BackToPacksList} from "../../common/components/backToPacksList/BackToPacksList";
 import {SuperButton} from "../../common/components/SuperButton";
 import {SuperRadio} from "../../common/components/superRadio/SuperRadio";
-import {getCards, setCardGradeTC, setCards, setCardsCards, setCardsPageCount} from "../cards/cardsReducer";
+import {getCards, setCardGradeTC, setCardsPageCount} from "../cards/cardsReducer";
 import {selectIsLoggedIn} from "../../common/selectors";
 
 export const getCard = (cards: CardType[]) => {
@@ -45,9 +45,6 @@ export const Learn = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
     const [cardAnswer, setCardAnswer] = useState<CardType>()
     const {packId : packID} = useParams()
-   /* const cardsTotalCount = useSelector(selectCardsTotalCount)
-    const cardsPackName = useSelector(selectCardsPackName)
-    const packUserId = useSelector(selectPackUserId)*/
 
     useEffect(() => {
         dispatch(setCardsPageCount(cardsCount))
