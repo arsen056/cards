@@ -2,7 +2,10 @@ import React from 'react'
 
 import { IconButton } from '@mui/material'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
+import { AppDispatch } from '../../../app/store'
+import { setCardsCards, setCardsPageCount } from '../../cards/cardsReducer'
 import { UpdatePackType } from '../PacksAPI'
 import { selectUserID } from '../selectors'
 
@@ -30,6 +33,19 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
     editAction && editAction({ cardsPack: { _id: id, name: packName, private: statusPrivate } })
   }
 
+  // const navigate = useNavigate()
+  // // const cardsPack_id = useSelector(selectIsCardsPackId)
+  //
+  // const learnPack = () => {
+  //   navigate(`${PATHS.learn}`)
+  // }
+  const dispatch = AppDispatch()
+
+  const learnPack = () => {
+    dispatch(setCardsPageCount(cardsCount))
+    dispatch(setCardsCards([]))
+  }
+
   return (
     <div>
       {educationsAction && (
@@ -37,8 +53,11 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
           size="small"
           disabled={cardsCount === 0}
           className={cardsCount === 0 ? s.disabled : s.button}
+          onClick={learnPack}
         >
-          <img src={educationIcon} alt="education icon" />
+          <Link to={`/learn/${id}`}>
+            <img src={educationIcon} alt="education icon" />
+          </Link>
         </IconButton>
       )}
 

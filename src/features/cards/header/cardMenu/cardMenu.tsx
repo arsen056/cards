@@ -7,8 +7,9 @@ import MenuItem from '@mui/material/MenuItem'
 import MenuList from '@mui/material/MenuList'
 import Paper from '@mui/material/Paper'
 import Popper from '@mui/material/Popper'
+import { useNavigate } from 'react-router-dom'
 
-import { deletePackInCards, updatePackNameTC } from '../../cardsReducer'
+import { deletePackInCards, setCardsCards, updatePackNameTC } from '../../cardsReducer'
 
 import style from './CardMenu.module.css'
 
@@ -67,6 +68,13 @@ export const CardMenu = ({ packID }: CardMenuPropsType) => {
     dispatch(deletePackInCards(packID))
   }
 
+  const navigate = useNavigate()
+
+  const learnPack = () => {
+    dispatch(setCardsCards([]))
+    navigate(`/learn/${packID}`)
+  }
+
   return (
     <div className={style.menu}>
       <Button
@@ -119,7 +127,7 @@ export const CardMenu = ({ packID }: CardMenuPropsType) => {
                     Delete
                   </MenuItem>
 
-                  <MenuItem onClick={() => {}}>
+                  <MenuItem onClick={learnPack}>
                     <img src={learn} alt="learn icon" />
                     Learn
                   </MenuItem>

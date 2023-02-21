@@ -15,6 +15,7 @@ import {
   selectPacksUserID,
   selectPage,
   selectPageCount,
+  selectSortPacks,
 } from './selectors'
 
 import { AppDispatch } from 'app/store'
@@ -29,6 +30,7 @@ export const Packs = memo(() => {
   const packName = useSelector(selectPackName)
   const page = useSelector(selectPage)
   const pageCount = useSelector(selectPageCount)
+  const sortPacks = useSelector(selectSortPacks)
 
   useEffect(() => {
     // const params = Object.fromEntries(searchParams)
@@ -39,7 +41,7 @@ export const Packs = memo(() => {
 
   useEffect(() => {
     dispatch(getPacks())
-  }, [packName, userID, min, max, pageCount, page])
+  }, [packName, userID, min, max, pageCount, page, sortPacks])
 
   if (!isLoggedIn) {
     return <Navigate to={'/login'} />

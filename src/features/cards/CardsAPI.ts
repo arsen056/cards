@@ -13,6 +13,9 @@ export const cardsAPI = {
   updateCard(data: UpdateCardType) {
     return instance.put('cards/card', data)
   },
+  setGrades(data: { grade: string; card_id: string }) {
+    return instance.put<ResponseGradeUpdateCardType>(`/cards/grade`, data)
+  },
 }
 
 export type CardsResponseType = {
@@ -27,15 +30,23 @@ export type CardsResponseType = {
 }
 
 export type CardType = {
+  _id: string
   answer: string
   question: string
   cardsPack_id: string
+  questionImg?: string
+  answerImg?: string
   grade: number
-  shots: number
+  shots?: number
   user_id: string
   created: string
   updated: string
-  _id: string
+
+  comments?: string
+  type?: string
+  rating?: number
+  more_id?: string
+  card_id?: string
 }
 
 export type AddCardType = {
@@ -57,5 +68,37 @@ export type UpdateCardType = {
     _id: string
     question: string // не обязательно
     answer: string
+  }
+}
+
+export type LearnCardType = {
+  grade: number
+  card_id: string
+}
+
+export interface UpdatedGrade {
+  card_id: string
+  user_id: string
+  cardsPack_id: string
+  grade: number
+  shots: number
+  more_id: string
+  _id: string
+  created: string
+  updated: string
+  __v: number
+}
+
+export interface ResponseGradeUpdateCardType {
+  updatedGrade: UpdatedGrade
+  token: string
+  tokenDeathTime: number
+}
+
+export type ResponseUpdatedGradeType = {
+  updatedGrade: {
+    card_id: string
+    grade: number
+    shots: number
   }
 }

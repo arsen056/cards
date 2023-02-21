@@ -18,3 +18,4 @@ export const selectPageCount = (state: AppRootStateType): number =>
   state.packs.searchParams.pageCount
 export const selectUserID = (state: AppRootStateType) => state.profile._id
 export const selectPacksUserID = (state: AppRootStateType) => state.packs.searchParams.user_id
+export const selectSortPacks = (state: AppRootStateType) => state.packs.searchParams.sortPacks
