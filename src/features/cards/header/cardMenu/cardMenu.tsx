@@ -18,7 +18,7 @@ import deleteIcon from 'assets/delete.svg'
 import edit from 'assets/edit.svg'
 import learn from 'assets/learn.svg'
 import s from 'common/components/header/avatar/Avatar.module.css'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {PATHS} from "../../../../common/routes/PATHS";
 import {useSelector} from "react-redux";
 import {selectCardsTotalCount} from "../../selectors";

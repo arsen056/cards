@@ -50,7 +50,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
 
   return (
     <div>
-      <Link to={`${PATHS.learn}${id}`} className={cardsCount ? s.link : s.disabledLink}>
+
       {educationsAction && (
         <IconButton
           size="small"
@@ -58,10 +58,12 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
           className={cardsCount === 0 ? s.disabled : s.button}
           onClick={learnPack}
         >
+          <Link to={`${PATHS.learn}${id}`} >
           <img src={educationIcon} alt="education icon" />
+          </Link>
         </IconButton>
       )}
-      </Link>
+
       {userId === userProfileID && editAction && (
         <div style={{ display: 'inline-block' }}>
           <PackModal
