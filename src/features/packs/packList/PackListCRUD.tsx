@@ -1,18 +1,18 @@
 import React from 'react'
 
-import {IconButton} from '@mui/material'
-import {useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
+import { IconButton } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import {UpdatePackType} from '../PacksAPI'
-import {selectUserID} from '../selectors'
+import { AppDispatch } from '../../../app/store'
+import { setCardsCards, setCardsPageCount } from '../../cards/cardsReducer'
+import { UpdatePackType } from '../PacksAPI'
+import { selectUserID } from '../selectors'
 
 import s from './packList.module.css'
 
 import educationIcon from 'assets/learn.svg'
-import {PackModal} from 'features/modal/packModal/PackModal'
-import {AppDispatch} from "../../../app/store";
-import {setCardsCards, setCardsPageCount} from "../../cards/cardsReducer";
+import { PackModal } from 'features/modal/packModal/PackModal'
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
   id,
@@ -48,7 +48,6 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
 
   return (
     <div>
-
       {educationsAction && (
         <IconButton
           size="small"
@@ -56,8 +55,8 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
           className={cardsCount === 0 ? s.disabled : s.button}
           onClick={learnPack}
         >
-          <Link to={`/learn/${id}`} >
-          <img src={educationIcon} alt="education icon" />
+          <Link to={`/learn/${id}`}>
+            <img src={educationIcon} alt="education icon" />
           </Link>
         </IconButton>
       )}

@@ -1,24 +1,24 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
-import {Button} from '@mui/material'
+import { Button } from '@mui/material'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
 import Grow from '@mui/material/Grow'
 import MenuItem from '@mui/material/MenuItem'
 import MenuList from '@mui/material/MenuList'
 import Paper from '@mui/material/Paper'
 import Popper from '@mui/material/Popper'
+import { useNavigate } from 'react-router-dom'
 
-import {deletePackInCards, setCardsCards, updatePackNameTC} from '../../cardsReducer'
+import { deletePackInCards, setCardsCards, updatePackNameTC } from '../../cardsReducer'
 
 import style from './CardMenu.module.css'
 
-import {AppDispatch} from 'app/store'
+import { AppDispatch } from 'app/store'
 import cardMenu from 'assets/cardMenu.svg'
 import deleteIcon from 'assets/delete.svg'
 import edit from 'assets/edit.svg'
 import learn from 'assets/learn.svg'
 import s from 'common/components/header/avatar/Avatar.module.css'
-import {useNavigate} from "react-router-dom";
 
 type CardMenuPropsType = {
   packID: string
