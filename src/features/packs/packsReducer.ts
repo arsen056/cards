@@ -14,7 +14,7 @@ const initState = {
   isDisabled: false,
   cardsCount: [1, 30] as Array<number>,
   searchParams: {
-    sortPacks: null as string | null,
+    sortPacks: '0updated' as string | null,
     min: 0 as number,
     max: 0 as number,
     packName: '' as string,
@@ -72,6 +72,8 @@ export const packsReducer = (
       return { ...state, searchParams: { ...state.searchParams, isMyPacks: action.isMyPacks } }
     case 'PACK/SET_RESET_FILTERS':
       return { ...state, searchParams: { ...state.searchParams, ...action.filters } }
+    case 'PACKS/SET_SORT_PACKS':
+      return { ...state, searchParams: { ...state.searchParams, sortPacks: action.sortPacks } }
     default:
       return state
   }
@@ -97,6 +99,8 @@ export const setUserId = (userID: string | null) => ({ type: 'PACKS/SET_USER_ID'
 export const setMin = (min: number) => ({ type: 'PACKS/SET_MIN', min } as const)
 export const setMax = (max: number) => ({ type: 'PACKS/SET_MAX', max } as const)
 export const setPage = (page: number) => ({ type: 'PACKS/SET_PAGE', page } as const)
+export const setSortPacks = (sortPacks: string) =>
+  ({ type: 'PACKS/SET_SORT_PACKS', sortPacks } as const)
 export const setPageCount = (pageCount: number) =>
   ({ type: 'PACKS/SET_PAGE_COUNT', pageCount } as const)
 export const addPackAC = (newCardsPack: PackType) =>
@@ -134,6 +138,7 @@ export type PacksActionsType =
   | ReturnType<typeof getCardsPackAC>
   | ReturnType<typeof setIsMyPacks>
   | ReturnType<typeof setResetFilters>
+  | ReturnType<typeof setSortPacks>
 
 export const getPacks = (): AppThunk => async (dispatch, getState) => {
   const { sortPacks, pageCount, page, packName, min, max, user_id } = getState().packs.searchParams

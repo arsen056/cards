@@ -21,3 +21,18 @@
 .tableContainer {
   margin-bottom: 20px;
 }
+
+.sortArrow {
+  cursor: pointer;
+
+  transform: rotate(180deg);
+
+  margin-left: 5px;
+
+  transition: transform .3s linear;
+}
+
+.sortArrowDown {
+  transform: rotate(0deg);
+}
+

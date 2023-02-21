@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { PATHS } from './PATHS'
 
-import { Error404 } from 'common/components/Error404'
+import { Error404 } from 'common/components/error404/Error404'
 import { CheckEmail } from 'features/auth/forgotPassword/CheckEmail'
 import { ForgotPassword } from 'features/auth/forgotPassword/ForgotPassword'
 import { NewPassword } from 'features/auth/newPassword/NewPassword'
