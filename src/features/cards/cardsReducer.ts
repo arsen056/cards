@@ -243,9 +243,8 @@ export const setCardGradeTC =
     (value: string, id: string): AppThunk =>
         async dispatch => {
             dispatch(setStatus('loading'))
-            const card_id = id
             try {
-                const data = { grade: value, card_id }
+                const data = { grade: value, card_id: id }
                 const response = await cardsAPI.setGrades(data)
                 dispatch(setGrade(response.data))
             } catch (error) {

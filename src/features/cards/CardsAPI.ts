@@ -46,6 +46,7 @@ export type CardType = {
   type?: string
   rating?: number
   more_id?: string
+  card_id?: string
 }
 
 export type AddCardType = {

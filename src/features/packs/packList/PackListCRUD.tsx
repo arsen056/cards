@@ -2,7 +2,7 @@ import React, { MouseEvent } from 'react'
 
 import { IconButton } from '@mui/material'
 import { useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
+import {Link, Navigate, useNavigate} from 'react-router-dom'
 
 import { UpdatePackType } from '../PacksAPI'
 import { selectUserID } from '../selectors'
@@ -35,15 +35,22 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
     editAction && editAction({ cardsPack: { _id: id, name: packName, private: statusPrivate } })
   }
 
-  const navigate = useNavigate()
-  // const cardsPack_id = useSelector(selectIsCardsPackId)
+  // const navigate = useNavigate()
+  // // const cardsPack_id = useSelector(selectIsCardsPackId)
+  //
+  // const learnPack = () => {
+  //   navigate(`${PATHS.learn}`)
+  // }
+  const dispatch = AppDispatch()
 
   const learnPack = () => {
-    navigate(`${PATHS.learn}`)
+    dispatch(setCardsPageCount(cardsCount))
+    dispatch(getCards(id))
   }
 
   return (
     <div>
+      <Link to={`${PATHS.learn}${id}`} className={cardsCount ? s.link : s.disabledLink}>
       {educationsAction && (
         <IconButton
           size="small"
@@ -54,7 +61,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
           <img src={educationIcon} alt="education icon" />
         </IconButton>
       )}
-
+      </Link>
       {userId === userProfileID && editAction && (
         <div style={{ display: 'inline-block' }}>
           <PackModal
