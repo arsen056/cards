@@ -3,13 +3,14 @@ import {CardType} from "../cards/CardsAPI";
 import {useSelector} from "react-redux";
 import {selectCardPacks, selectCardPacksTotaCount} from "../packs/selectors";
 import s from './Learn.module.css'
-import {selectCardQuestion, selectCards, selectCardsPage, selectCardsPageCount} from "../cards/selectors";
+import {selectCards, selectCardsPackName, selectCardsTotalCount, selectPackUserId} from "../cards/selectors";
 import {AppDispatch} from "../../app/store";
 import {useParams} from "react-router-dom";
 import {BackToPacksList} from "../../common/components/backToPacksList/BackToPacksList";
 import {SuperButton} from "../../common/components/SuperButton";
 import {SuperRadio} from "../../common/components/superRadio/SuperRadio";
-import {getCards, setCardGradeTC, setCardsPageCount} from "../cards/cardsReducer";
+import {getCards, setCardGradeTC, setCards, setCardsCards, setCardsPageCount} from "../cards/cardsReducer";
+import {selectIsLoggedIn} from "../../common/selectors";
 
 export const getCard = (cards: CardType[]) => {
     const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
@@ -30,6 +31,7 @@ export const Learn = () => {
     const cards = useSelector(selectCards)
     const packName = useSelector(selectCardPacks)
     const cardsCount = useSelector(selectCardPacksTotaCount)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
 
     const answerArr = [
         {id: '1', value: 'Did not know'},
@@ -42,16 +44,26 @@ export const Learn = () => {
     let [value, onChangeOption] = useState<string>('0')
     const [isShow, setIsShow] = useState<boolean>(false)
     const [cardAnswer, setCardAnswer] = useState<CardType>()
-    const {id} = useParams()
+    const {packId : packID} = useParams()
+   /* const cardsTotalCount = useSelector(selectCardsTotalCount)
+    const cardsPackName = useSelector(selectCardsPackName)
+    const packUserId = useSelector(selectPackUserId)*/
 
     useEffect(() => {
         dispatch(setCardsPageCount(cardsCount))
-        id && dispatch(getCards(id))
+        if (cards?.length <= 0) {
+            packID && dispatch(getCards(packID, 1000))
+        }
     }, [])
 
+
     useEffect(() => {
-        setCardAnswer(getCard(cards))
+        if (cards?.length > 0) {
+            setCardAnswer(getCard(cards))
+            console.log(cards)
+        }
     }, [cards])
+
 
     useEffect(() => {
         onChangeOption('0')
@@ -60,7 +72,12 @@ export const Learn = () => {
     const onClickHandler = (grade: string) => {
         setIsShow(false)
         dispatch(setCardGradeTC(grade, cardAnswer!._id))
+
         console.log(cardAnswer!._id)
+    }
+
+    if (!isLoggedIn) {
+        return <div> Not login user</div>
     }
 
     return (

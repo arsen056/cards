@@ -13,7 +13,7 @@ import educationIcon from 'assets/learn.svg'
 import { PATHS } from 'common/routes/PATHS'
 import { PackModal } from 'features/modal/packModal/PackModal'
 import {AppDispatch} from "../../../app/store";
-import {getCards, setCardsPageCount} from "../../cards/cardsReducer";
+import {getCards, setCardsCards, setCardsPageCount} from "../../cards/cardsReducer";
 import {selectCardsTotalCount} from "../../cards/selectors";
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
@@ -45,7 +45,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
 
   const learnPack = () => {
     dispatch(setCardsPageCount(cardsCount))
-    dispatch(getCards(id))
+    dispatch(setCardsCards([]))
   }
 
   return (
@@ -58,7 +58,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
           className={cardsCount === 0 ? s.disabled : s.button}
           onClick={learnPack}
         >
-          <Link to={`${PATHS.learn}${id}`} >
+          <Link to={`/learn/${id}`} >
           <img src={educationIcon} alt="education icon" />
           </Link>
         </IconButton>

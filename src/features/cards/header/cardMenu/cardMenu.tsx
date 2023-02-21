@@ -8,7 +8,7 @@ import MenuList from '@mui/material/MenuList'
 import Paper from '@mui/material/Paper'
 import Popper from '@mui/material/Popper'
 
-import {deletePackInCards, getCards, setCardsPageCount, updatePackNameTC} from '../../cardsReducer'
+import {deletePackInCards, getCards, setCardsCards, setCardsPageCount, updatePackNameTC} from '../../cardsReducer'
 
 import style from './CardMenu.module.css'
 
@@ -74,7 +74,8 @@ export const CardMenu = ({ packID }: CardMenuPropsType) => {
   const navigate = useNavigate()
 
   const learnPack = () => {
-    navigate(`${PATHS.learn}`)
+    dispatch(setCardsCards([]))
+    navigate(`/learn/${packID}`)
   }
 
   return (

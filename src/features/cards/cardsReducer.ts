@@ -40,6 +40,11 @@ export const cardsReducer = (
                 ...state,
                 page: action.pageCardsNumber,
             }
+        case 'CARDS/SET_CARDS_CARDS':
+            return  {
+                ...state,
+                cards: action.cards
+            }
         case 'CARDS/SET_PAGE_COUNT':
             return {
                 ...state,
@@ -87,6 +92,8 @@ export const setCards = (
     } as const)
 export const setCardsPage = (pageCardsNumber: number) =>
     ({type: 'CARDS/SET_PAGE', pageCardsNumber} as const)
+export const setCardsCards = (cards:  CardType[]) =>
+    ({type: 'CARDS/SET_CARDS_CARDS', cards} as const)
 export const setCardsPageCount = (cardsPageCount: number) =>
     ({type: 'CARDS/SET_PAGE_COUNT', cardsPageCount} as const)
 export const addCard = (newCard: CardType) => ({type: 'CARDS/ADD_CARD', newCard} as const)
@@ -101,9 +108,9 @@ export const setGrade = (updatedGrade: ResponseUpdatedGradeType) =>
 
 //thunks
 export const getCards =
-    (packId: string | undefined): AppThunk =>
+    (packId: string | undefined, pageCount = 4): AppThunk =>
         async (dispatch, getState) => {
-            const {page, pageCount, sortPacks, cardQuestion} = getState().cards
+            const {page, sortPacks, cardQuestion} = getState().cards
 
             dispatch(setStatus('loading'))
             if (packId) {
@@ -266,3 +273,4 @@ export type CardsActionsType =
     | ReturnType<typeof setCardQuestion>
     | ReturnType<typeof gradeCardUpdateAC>
     | ReturnType<typeof setGrade>
+    | ReturnType<typeof setCardsCards>
