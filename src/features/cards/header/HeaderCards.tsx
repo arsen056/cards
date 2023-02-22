@@ -34,12 +34,13 @@ export const HeaderCards: FC<HeaderCardsPropsType> = ({
         <div className={style.titleAndButton}>
           <div className={style.menu}>
             <h2>{title}</h2>
-            {isEdited && <CardMenu packID={packID} />}
+            {isEdited && <CardMenu packID={packID} title={title} />}
           </div>
           <CardModal
             typeButton={'superButton'}
             titleButton={titleButton}
             cardModalFunctional={cardModalFunctional}
+            packID={packID}
           />
         </div>
 

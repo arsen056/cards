@@ -3,9 +3,10 @@ import { ChangeEvent, useState } from 'react'
 
 import { Box, IconButton, TextField } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-import { PATHS } from '../../../common/routes/PATHS'
+import { AppDispatch } from '../../../app/store'
+import { setCardsCards } from '../../cards/cardsReducer'
 import { BasicModal } from '../BasicModal'
 import { TypeButton } from '../packModal/PackModal'
 import s from '../packModal/PackModal.module.css'
@@ -19,6 +20,7 @@ type Props = {
   titleButton?: string
   question?: string
   answer?: string
+  packID?: string
 }
 
 export const CardModal = ({
@@ -27,14 +29,19 @@ export const CardModal = ({
   titleButton,
   answer,
   question,
+  packID,
 }: Props) => {
   const [open, setOpen] = useState<boolean>(false)
   const [questionCard, setQuestionCard] = useState<string>('')
   const [answerCard, setAnswerCard] = useState<string>('')
   const [error, setError] = useState<boolean>(false)
+  const dispatch = AppDispatch()
+  const navigate = useNavigate()
   const handleOpen = () => {
-    if (titleButton === 'Learn to pack') return <Navigate to={PATHS.learn} />
-    else {
+    if (titleButton === 'Learn to pack') {
+      dispatch(setCardsCards([]))
+      navigate(`/learn/${packID}`)
+    } else {
       setOpen(true)
       setQuestionCard(question || '')
       setAnswerCard(answer || '')

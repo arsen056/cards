@@ -9,22 +9,22 @@ import Paper from '@mui/material/Paper'
 import Popper from '@mui/material/Popper'
 import { useNavigate } from 'react-router-dom'
 
+import { PackModal } from '../../../modal/packModal/PackModal'
 import { deletePackInCards, setCardsCards, updatePackNameTC } from '../../cardsReducer'
 
 import style from './CardMenu.module.css'
 
 import { AppDispatch } from 'app/store'
 import cardMenu from 'assets/cardMenu.svg'
-import deleteIcon from 'assets/delete.svg'
-import edit from 'assets/edit.svg'
 import learn from 'assets/learn.svg'
 import s from 'common/components/header/avatar/Avatar.module.css'
 
 type CardMenuPropsType = {
   packID: string
+  title: string
 }
 
-export const CardMenu = ({ packID }: CardMenuPropsType) => {
+export const CardMenu = ({ packID, title }: CardMenuPropsType) => {
   const [open, setOpen] = useState(false)
   const anchorRef = useRef<HTMLButtonElement>(null)
 
@@ -61,8 +61,9 @@ export const CardMenu = ({ packID }: CardMenuPropsType) => {
     prevOpen.current = open
   }, [open])
 
-  const editPack = () => {
-    dispatch(updatePackNameTC('Edited pack', packID))
+  const editPack = (packName: string, statusPrivate: boolean) => {
+    dispatch(updatePackNameTC(packName, packID, statusPrivate))
+    setOpen(false)
   }
   const deletePack = () => {
     dispatch(deletePackInCards(packID))
@@ -117,17 +118,23 @@ export const CardMenu = ({ packID }: CardMenuPropsType) => {
                   onKeyDown={handleListKeyDown}
                   className={style.imgStyle}
                 >
-                  <MenuItem onClick={editPack}>
-                    <img src={edit} alt="edit icon" />
-                    Edit
+                  <MenuItem>
+                    <PackModal
+                      packModalFunctional={editPack}
+                      typeButton={'editIcon'}
+                      nameValue={title}
+                      helpText={'Edit'}
+                    />
                   </MenuItem>
-
-                  <MenuItem onClick={deletePack}>
-                    <img src={deleteIcon} alt="delete icon" />
-                    Delete
+                  <MenuItem>
+                    <PackModal
+                      packModalFunctional={deletePack}
+                      typeButton={'deleteIcon'}
+                      nameValue={title}
+                      helpText={'Delete'}
+                    />
                   </MenuItem>
-
-                  <MenuItem onClick={learnPack}>
+                  <MenuItem onClick={learnPack} style={{ marginLeft: 5 }}>
                     <img src={learn} alt="learn icon" />
                     Learn
                   </MenuItem>

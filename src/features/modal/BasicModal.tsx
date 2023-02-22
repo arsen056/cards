@@ -33,6 +33,7 @@ type Props = {
   handleOpen: () => void
   handleClose: () => void
   typeButton: TypeButton
+  helpText?: string
 }
 
 export const BasicModal = ({
@@ -42,6 +43,7 @@ export const BasicModal = ({
   handleOpen,
   handleClose,
   typeButton,
+  helpText,
 }: Props) => {
   let button
 
@@ -49,12 +51,14 @@ export const BasicModal = ({
     button = (
       <IconButton onClick={handleOpen} size="small">
         <img src={editIcon} alt="edit icon" />
+        {helpText}
       </IconButton>
     )
   } else if (typeButton === 'deleteIcon') {
     button = (
       <IconButton onClick={handleOpen} size="small">
         <img src={deleteIcon} alt="delete icon" />
+        {helpText}
       </IconButton>
     )
   } else button = <SuperButton onClick={handleOpen}>{titleButton}</SuperButton>

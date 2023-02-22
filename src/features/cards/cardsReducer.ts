@@ -204,13 +204,14 @@ export const updateCardTC =
   }
 
 export const updatePackNameTC =
-  (name: string, id: string): AppThunk =>
+  (name: string, id: string, packStatus: boolean): AppThunk =>
   async dispatch => {
     dispatch(setStatus('loading'))
     const data = {
       cardsPack: {
         _id: id,
         name: name,
+        private: packStatus,
       },
     }
 

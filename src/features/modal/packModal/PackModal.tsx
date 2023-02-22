@@ -19,9 +19,16 @@ type Props = {
   typeButton: TypeButton
   titleButton?: string
   nameValue?: string
+  helpText?: string
 }
 
-export const PackModal = ({ packModalFunctional, typeButton, titleButton, nameValue }: Props) => {
+export const PackModal = ({
+  packModalFunctional,
+  typeButton,
+  titleButton,
+  nameValue,
+  helpText,
+}: Props) => {
   const [open, setOpen] = useState<boolean>(false)
   const [privatePackStatus, setPrivatePackStatus] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
@@ -67,6 +74,7 @@ export const PackModal = ({ packModalFunctional, typeButton, titleButton, nameVa
         handleOpen={handleOpen}
         handleClose={handleClose}
         typeButton={typeButton}
+        helpText={helpText}
       >
         <div>
           <div className={s.titleAndCloseBlock}>
