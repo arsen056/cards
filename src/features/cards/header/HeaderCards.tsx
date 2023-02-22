@@ -15,6 +15,7 @@ type HeaderCardsPropsType = {
   packUserId: string
   userId: string
   packID: string
+  cardsLength?: number
 }
 
 export const HeaderCards: FC<HeaderCardsPropsType> = ({
@@ -23,6 +24,7 @@ export const HeaderCards: FC<HeaderCardsPropsType> = ({
   packUserId,
   packID,
   title,
+  cardsLength,
 }) => {
   const isEdited = userId === packUserId
 
@@ -41,6 +43,7 @@ export const HeaderCards: FC<HeaderCardsPropsType> = ({
             titleButton={titleButton}
             cardModalFunctional={cardModalFunctional}
             packID={packID}
+            cardsLength={cardsLength}
           />
         </div>
 

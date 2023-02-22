@@ -34,6 +34,7 @@ type Props = {
   handleClose: () => void
   typeButton: TypeButton
   helpText?: string
+  cardsLength?: number
 }
 
 export const BasicModal = ({
@@ -44,7 +45,10 @@ export const BasicModal = ({
   handleClose,
   typeButton,
   helpText,
+  cardsLength,
 }: Props) => {
+  const disableButton = cardsLength === 0 && titleButton === 'Learn to pack'
+
   let button
 
   if (typeButton === 'editIcon') {
@@ -61,7 +65,12 @@ export const BasicModal = ({
         {helpText}
       </IconButton>
     )
-  } else button = <SuperButton onClick={handleOpen}>{titleButton}</SuperButton>
+  } else
+    button = (
+      <SuperButton disabled={disableButton} onClick={handleOpen}>
+        {titleButton}
+      </SuperButton>
+    )
 
   return (
     <div>

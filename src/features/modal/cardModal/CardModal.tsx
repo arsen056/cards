@@ -5,12 +5,12 @@ import { Box, IconButton, TextField } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 
-import { AppDispatch } from '../../../app/store'
 import { setCardsCards } from '../../cards/cardsReducer'
 import { BasicModal } from '../BasicModal'
 import { TypeButton } from '../packModal/PackModal'
 import s from '../packModal/PackModal.module.css'
 
+import { AppDispatch } from 'app/store'
 import close from 'assets/close.svg'
 import { SuperButton } from 'common/components/SuperButton'
 
@@ -21,6 +21,7 @@ type Props = {
   question?: string
   answer?: string
   packID?: string
+  cardsLength?: number
 }
 
 export const CardModal = ({
@@ -30,6 +31,7 @@ export const CardModal = ({
   answer,
   question,
   packID,
+  cardsLength,
 }: Props) => {
   const [open, setOpen] = useState<boolean>(false)
   const [questionCard, setQuestionCard] = useState<string>('')
@@ -94,6 +96,7 @@ export const CardModal = ({
       handleOpen={handleOpen}
       handleClose={handleClose}
       typeButton={typeButton}
+      cardsLength={cardsLength}
     >
       <div>
         <div className={s.titleAndCloseBlock}>
