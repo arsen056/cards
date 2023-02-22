@@ -5,14 +5,13 @@ import { Box, IconButton, TextField } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 
-import { setCardsCards } from '../../cards/cardsReducer'
-import { BasicModal } from '../BasicModal'
-import { TypeButton } from '../packModal/PackModal'
-import s from '../packModal/PackModal.module.css'
-
 import { AppDispatch } from 'app/store'
 import close from 'assets/close.svg'
 import { SuperButton } from 'common/components/SuperButton'
+import { setCardsCards } from 'features/cards/cardsReducer'
+import { BasicModal } from 'features/modal/BasicModal'
+import { TypeButton } from 'features/modal/packModal/PackModal'
+import s from 'features/modal/packModal/PackModal.module.css'
 
 type Props = {
   cardModalFunctional: (question: string, answer: string) => void

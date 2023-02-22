@@ -5,11 +5,10 @@ import { IconButton } from '@mui/material'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 
-import { TypeButton } from './packModal/PackModal'
-
 import deleteIcon from 'assets/delete.svg'
 import editIcon from 'assets/edit.svg'
 import { SuperButton } from 'common/components/SuperButton'
+import { TypeButton } from 'features/modal/packModal/PackModal'
 
 const style = {
   position: 'absolute' as 'absolute',

@@ -3,12 +3,6 @@ import React, { memo, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 
-import { selectUserID } from '../packs/selectors'
-
-import { CardsList } from './cardsList/CardsList'
-import { addCardTC, getCards, setCardsPage, setCardsPageCount } from './cardsReducer'
-import { EmptyPack } from './header/emptyPack/EmptyPack'
-import { HeaderCards } from './header/HeaderCards'
 import {
   selectCardQuestion,
   selectCards,
@@ -25,6 +19,11 @@ import { BackToPacksList } from 'common/components/backToPacksList/BackToPacksLi
 import { SuperPagination } from 'common/components/superPagination/SuperPagination'
 import { PATHS } from 'common/routes/PATHS'
 import { selectIsLoggedIn } from 'common/selectors'
+import { CardsList } from 'features/cards/cardsList/CardsList'
+import { addCardTC, getCards, setCardsPage, setCardsPageCount } from 'features/cards/cardsReducer'
+import { EmptyPack } from 'features/cards/header/emptyPack/EmptyPack'
+import { HeaderCards } from 'features/cards/header/HeaderCards'
+import { selectUserID } from 'features/packs/selectors'
 
 export const Cards = memo(() => {
   const dispatch = AppDispatch()

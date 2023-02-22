@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { CardModal } from '../../../modal/cardModal/CardModal'
-
 import s from './EmptyPack.module.css'
+
+import { CardModal } from 'features/modal/cardModal/CardModal'
 
 type EmptyPackPropsType = {
   addCard: (question: string, answer: string) => void
