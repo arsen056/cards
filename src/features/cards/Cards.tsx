@@ -3,7 +3,6 @@ import React, { memo, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 
-import { selectIsLoggedIn } from 'common/selectors'
 import { selectUserID } from '../packs/selectors'
 
 import { CardsList } from './cardsList/CardsList'
@@ -25,6 +24,7 @@ import { AppDispatch } from 'app/store'
 import { BackToPacksList } from 'common/components/backToPacksList/BackToPacksList'
 import { SuperPagination } from 'common/components/superPagination/SuperPagination'
 import { PATHS } from 'common/routes/PATHS'
+import { selectIsLoggedIn } from 'common/selectors'
 
 export const Cards = memo(() => {
   const dispatch = AppDispatch()
