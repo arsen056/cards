@@ -64,6 +64,7 @@ export const CardModal = ({
   const handleClose = () => {
     setOpen(false)
     setError(false)
+    setTypeQuestion('text')
   }
 
   const onChangeHandlerQuestion = (event: ChangeEvent<HTMLInputElement>) => {
