@@ -18,7 +18,7 @@ export type AppStateType = {
   error: string
 }
 
-export type AppStatusType = 'idle' | 'loading' | 'success'
+export type AppStatusType = 'idle' | 'loading' | 'success' | 'failed'
 
 export const appReducer = (state = initState, action: AppActionsType) => {
   switch (action.type) {
