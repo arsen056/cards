@@ -1,7 +1,66 @@
-import React from 'react'
+import React, { ChangeEvent, memo, useEffect, useRef, useState } from 'react'
 
-const Avatar = () => {
-  return <div></div>
+import { Avatar, Fab } from '@mui/material'
+import { useSelector } from 'react-redux'
+
+import { AppDispatch } from '../../../app/store'
+import avatarImg from '../../../assets/avatar.png'
+import { convertFileToBase64 } from '../../../common/utils/convertFileToBase64'
+import { ProfileType } from '../../auth/authAPI'
+import { selectAvatarFromState } from '../../auth/selectors'
+import { changeProfile } from '../profileReducer'
+
+import s from './Avatar.module.css'
+
+export const AvatarComponent = memo(({ user }: AvatarComponentType) => {
+  const avatarFromState = useSelector(selectAvatarFromState)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const dispatch = AppDispatch()
+  const [avatar, setAvatar] = useState<string>(avatarFromState as string)
+
+  const selectFileHandler = () => {
+    inputRef && inputRef.current?.click()
+  }
+
+  //
+  useEffect(() => {
+    if (avatarFromState) {
+      dispatch(changeProfile('', avatar))
+    }
+  }, [avatar])
+
+  const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      if (file.size < 4000000) {
+        convertFileToBase64(file, setAvatar)
+      } else {
+        console.error('Error: ', 'Файл слишком большого размера')
+      }
+    }
+  }
+
+  return (
+    <div className={s.avatarContainer}>
+      <Avatar
+        alt="avatar"
+        src={user.avatar ? user.avatar : avatarImg}
+        sx={{ width: 96, height: 96, left: 17 }}
+      />
+      <input
+        type="file"
+        name="myImage"
+        accept="image/*"
+        ref={inputRef}
+        style={{ display: 'none' }}
+        onChange={uploadHandler}
+      />
+      <Fab size={'small'} sx={{ left: '-17px' }} onClick={selectFileHandler}></Fab>
+    </div>
+  )
+})
+
+type AvatarComponentType = {
+  user: ProfileType
 }
-
-export default Avatar

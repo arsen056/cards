@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 
 import { logoutTC } from '../auth/signIn/loginReducer'
 
-import Avatar from './avatar/Avatar'
+import { AvatarComponent } from './avatar/Avatar'
 import { EditableSpan } from './editableSpan/EditableSpan'
 import s from './Profile.module.css'
 import { changeProfile } from './profileReducer'
@@ -44,7 +44,7 @@ export const Profile = () => {
           <SkeletonCustom />
         ) : (
           <Box title={'Personal Information'}>
-            <Avatar />
+            <AvatarComponent user={user} />
             <EditableSpan title={user.name} changeTitle={editNameHandler} />
             <div id="email" className={s.email}>
               {user.email}
