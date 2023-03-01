@@ -25,7 +25,7 @@ export const AvatarComponent = memo(({ user }: AvatarComponentType) => {
 
   //
   useEffect(() => {
-    if (avatarFromState) {
+    if (avatar) {
       dispatch(changeProfile('', avatar))
     }
   }, [avatar])

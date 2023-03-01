@@ -34,13 +34,17 @@ export const editAvatar = (avatar: string) => ({ type: 'PROFILE/EDIT_AVATAR', av
 export const changeProfile =
   (name: string, avatar: string): AppThunk =>
   async dispatch => {
+    console.log('1')
     setStatus('loading')
     try {
+      console.log('1')
       const res = await ProfileAPI.changeProfile(name, avatar)
 
+      console.log('2')
       dispatch(editName(res.data.updatedUser.name))
       dispatch(editAvatar(res.data.updatedUser.avatar))
     } catch (e) {
+      console.log(e)
       const err = e as Error | AxiosError<{ error: string }>
 
       errorUtils(err, dispatch)
