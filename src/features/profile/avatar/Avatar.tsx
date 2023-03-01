@@ -19,6 +19,7 @@ export const AvatarComponent = memo(({ user }: AvatarComponentType) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const dispatch = AppDispatch()
   const [avatar, setAvatar] = useState<string>(avatarFromState as string)
+  const [isAvaBroken, setIsAvaBroken] = useState(false)
 
   const selectFileHandler = () => {
     inputRef && inputRef.current?.click()
@@ -36,11 +37,18 @@ export const AvatarComponent = memo(({ user }: AvatarComponentType) => {
       const file = e.target.files[0]
 
       if (file.size < 4000000) {
-        convertFileToBase64(file, setAvatar)
+        convertFileToBase64(file, (file64: string) => {
+          setAvatar(file64)
+        })
       } else {
         dispatch(setError(`The file is too large`))
       }
     }
+  }
+
+  const errorHandler = () => {
+    setIsAvaBroken(true)
+    dispatch(setError('Incorrect image'))
   }
 
   return (
@@ -49,6 +57,7 @@ export const AvatarComponent = memo(({ user }: AvatarComponentType) => {
         alt="avatar"
         src={user.avatar ? user.avatar : avatarImg}
         sx={{ width: 96, height: 96, left: 17 }}
+        onError={errorHandler}
       />
       <input
         type="file"
