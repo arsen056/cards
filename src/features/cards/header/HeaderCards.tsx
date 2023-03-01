@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
 
-import { CardModal } from 'common/components/modals/cardModal/CardModal'
 import { setCardQuestion } from '../cardsReducer'
 
 import { CardMenu } from './cardMenu/cardMenu'
 import style from './HeaderCards.module.css'
 
+import { CardModal } from 'common/components/modals/cardModal/CardModal'
 import { Search } from 'common/components/search/Search'
 import s from 'features/packs/header/HeaderPacks.module.css'
 

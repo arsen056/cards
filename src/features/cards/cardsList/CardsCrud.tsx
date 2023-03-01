@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { CardModal } from 'common/components/modals/cardModal/CardModal'
 import { deleteCardTC, updateCardTC } from '../cardsReducer'
 
 import { AppDispatch } from 'app/store'
+import { CardModal } from 'common/components/modals/cardModal/CardModal'
 
 type CardsCrudType = {
   cardId: string
