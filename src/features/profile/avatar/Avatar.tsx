@@ -1,5 +1,6 @@
 import React, { ChangeEvent, memo, useEffect, useRef, useState } from 'react'
 
+import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined'
 import { Avatar, Fab } from '@mui/material'
 import { useSelector } from 'react-redux'
 
@@ -56,7 +57,9 @@ export const AvatarComponent = memo(({ user }: AvatarComponentType) => {
         style={{ display: 'none' }}
         onChange={uploadHandler}
       />
-      <Fab size={'small'} sx={{ left: '-17px' }} onClick={selectFileHandler}></Fab>
+      <Fab size={'small'} sx={{ left: '-17px' }} onClick={selectFileHandler}>
+        <PhotoCameraOutlinedIcon fontSize={'small'} />
+      </Fab>
     </div>
   )
 })
