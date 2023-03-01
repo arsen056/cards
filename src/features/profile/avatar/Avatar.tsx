@@ -4,7 +4,6 @@ import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined'
 import { Avatar, Fab } from '@mui/material'
 import { useSelector } from 'react-redux'
 
-import { setError } from '../../../app/appReducer'
 import { AppDispatch } from '../../../app/store'
 import avatarImg from '../../../assets/avatar.png'
 import { convertFileToBase64 } from '../../../common/utils/convertFileToBase64'
@@ -38,8 +37,6 @@ export const AvatarComponent = memo(({ user }: AvatarComponentType) => {
 
       if (fileSizeMB < 1) {
         convertFileToBase64(file, setAvatar)
-      } else {
-        dispatch(setError('Файл слишком большого размера'))
       }
     }
   }
