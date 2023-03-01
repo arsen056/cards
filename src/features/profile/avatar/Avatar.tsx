@@ -4,8 +4,10 @@ import { Camera } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 
 import { AppDispatch } from '../../../app/store'
+import { onChangeImg } from '../../../common/utils/convertToBase64'
 
 import s from './Avatar.module.css'
+import { useUserAvatar } from './useUserAvatar'
 
 type ProfileAvatarProps = {
   withButton?: boolean
