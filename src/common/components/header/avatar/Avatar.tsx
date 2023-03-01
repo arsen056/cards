@@ -10,6 +10,8 @@ import Popper from '@mui/material/Popper'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { selectAvatarFromState } from '../../../../features/auth/selectors'
+
 import s from './Avatar.module.css'
 
 import { AppDispatch } from 'app/store'
@@ -23,6 +25,7 @@ export const Avatar = () => {
 
   const dispatch = AppDispatch()
   const name = useSelector(selectName)
+  const userAvatar = useSelector(selectAvatarFromState)
 
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen)
@@ -74,7 +77,7 @@ export const Avatar = () => {
       >
         <span className={s.name}>{name}</span>
         <div id="avatar" className={s.avatar}>
-          <img src={avatar} alt="avatar" />
+          <img src={userAvatar ? userAvatar : avatar} alt="avatar" />
         </div>
       </Button>
 

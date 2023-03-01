@@ -3,6 +3,11 @@
   align-items: flex-end;
 }
 
+.avatar {
+  width: 100%;
+  border-radius: 50%;
+}
+
 /*.avatarWrapper {
   position: relative;
 
