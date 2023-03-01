@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 
 import { logoutTC } from '../auth/signIn/loginReducer'
 
-import { Avatar } from './avatar/Avatar'
+import Avatar from './avatar/Avatar'
 import { EditableSpan } from './editableSpan/EditableSpan'
 import s from './Profile.module.css'
 import { changeProfile } from './profileReducer'

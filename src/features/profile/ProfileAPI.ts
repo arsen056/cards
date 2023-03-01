@@ -13,3 +13,8 @@ type ChangeProfileResponseType = {
   token: string
   tokenDeathTime: number
 }
+
+export type ChangeUserDataPayload = {
+  name?: string
+  avatar?: string
+}

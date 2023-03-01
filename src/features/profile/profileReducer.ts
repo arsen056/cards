@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
 
-import { ProfileAPI } from './ProfileAPI'
+import { ChangeUserDataPayload, ProfileAPI } from './ProfileAPI'
 
 import { setStatus } from 'app/appReducer'
 import { AppThunk } from 'app/store'
