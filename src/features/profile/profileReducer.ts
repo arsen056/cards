@@ -21,6 +21,8 @@ export const profileReducer = (state = initState, action: ProfileActionsType) =>
       return { ...state, name: action.name }
     case 'PROFILE/EDIT_AVATAR':
       return { ...state, avatar: action.avatar }
+    case 'PROFILE/SET_MESSAGE':
+      return { ...state, message: action.message }
     default:
       return state
   }
@@ -30,6 +32,7 @@ export const setProfile = (profile: ProfileType) =>
   ({ type: 'PROFILE/SET_PROFILE', profile } as const)
 export const editName = (name: string) => ({ type: 'PROFILE/EDIT_NAME', name } as const)
 export const editAvatar = (avatar: string) => ({ type: 'PROFILE/EDIT_AVATAR', avatar } as const)
+export const setMessage = (message: string) => ({ type: 'PROFILE/SET_MESSAGE', message } as const)
 
 export const changeProfile =
   (name: string, avatar: string): AppThunk =>
@@ -53,3 +56,4 @@ export type ProfileActionsType =
   | ReturnType<typeof setProfile>
   | ReturnType<typeof editName>
   | ReturnType<typeof editAvatar>
+  | ReturnType<typeof setMessage>
