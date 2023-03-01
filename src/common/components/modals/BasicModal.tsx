@@ -7,8 +7,8 @@ import Modal from '@mui/material/Modal'
 
 import deleteIcon from 'assets/delete.svg'
 import editIcon from 'assets/edit.svg'
+import { TypeButton } from 'common/components/modals/packModal/PackModal'
 import { SuperButton } from 'common/components/SuperButton'
-import { TypeButton } from 'features/modal/packModal/PackModal'
 
 const style = {
   position: 'absolute' as 'absolute',

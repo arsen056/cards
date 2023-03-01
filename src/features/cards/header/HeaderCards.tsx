@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { CardModal } from '../../modal/cardModal/CardModal'
+import { CardModal } from 'common/components/modals/cardModal/CardModal'
 import { setCardQuestion } from '../cardsReducer'
 
 import { CardMenu } from './cardMenu/cardMenu'

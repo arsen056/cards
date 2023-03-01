@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { AppDispatch } from '../../../app/store'
+import { AppDispatch } from 'app/store'
 import { setCardsCards, setCardsPageCount } from '../../cards/cardsReducer'
 import { UpdatePackType } from '../PacksAPI'
 import { selectUserID } from '../selectors'
@@ -12,7 +12,7 @@ import { selectUserID } from '../selectors'
 import s from './packList.module.css'
 
 import educationIcon from 'assets/learn.svg'
-import { PackModal } from 'features/modal/packModal/PackModal'
+import { PackModal } from 'common/components/modals/packModal/PackModal'
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
   id,

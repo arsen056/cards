@@ -5,13 +5,17 @@ import { Box, IconButton, TextField } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 
+import style from './CardsModal.module.css'
+
 import { AppDispatch } from 'app/store'
 import close from 'assets/close.svg'
+import { InputTypeFile } from 'common/components/inputTypeFileCard/InputTypeFileCard'
+import { BasicModal } from 'common/components/modals/BasicModal'
+import { TypeButton } from 'common/components/modals/packModal/PackModal'
+import s from 'common/components/modals/packModal/PackModal.module.css'
 import { SuperButton } from 'common/components/SuperButton'
+import SuperSelect from 'common/components/superSelect/SuperSelect'
 import { setCardsCards } from 'features/cards/cardsReducer'
-import { BasicModal } from 'features/modal/BasicModal'
-import { TypeButton } from 'features/modal/packModal/PackModal'
-import s from 'features/modal/packModal/PackModal.module.css'
 
 type Props = {
   cardModalFunctional: (question: string, answer: string) => void
@@ -22,6 +26,13 @@ type Props = {
   packID?: string
   cardsLength?: number
 }
+
+type SelectQuestionType = 'text' | 'picture'
+
+const selectOptions = [
+  { id: 'text', value: 'Text' as SelectQuestionType },
+  { id: 'picture', value: 'Picture' as SelectQuestionType },
+]
 
 export const CardModal = ({
   cardModalFunctional,
@@ -36,6 +47,8 @@ export const CardModal = ({
   const [questionCard, setQuestionCard] = useState<string>('')
   const [answerCard, setAnswerCard] = useState<string>('')
   const [error, setError] = useState<boolean>(false)
+  const [typeQuestion, setTypeQuestion] = useState<SelectQuestionType>('text')
+
   const dispatch = AppDispatch()
   const navigate = useNavigate()
   const handleOpen = () => {
@@ -71,6 +84,10 @@ export const CardModal = ({
       if (questionCard === '' || answerCard === '') setError(true)
       else onClickHandlerElseCondition()
     } else onClickHandlerElseCondition()
+  }
+
+  const onChangeOptionSelect = (value: SelectQuestionType) => {
+    setTypeQuestion(value)
   }
 
   let titleModal
@@ -124,26 +141,61 @@ export const CardModal = ({
             </Typography>
           ) : (
             <>
-              <TextField
-                id="standard-basic"
-                label="Question"
-                variant="standard"
-                onChange={onChangeHandlerQuestion}
-                style={{ marginBottom: 10 }}
-                value={questionCard}
-                error={error && questionCard === ''}
-                helperText={error && questionCard === '' ? 'Please enter the question' : ' '}
+              <Typography id="modal-modal-description" style={{ opacity: 0.5, marginBottom: 5 }}>
+                Choose a question format
+              </Typography>
+              <SuperSelect
+                options={selectOptions}
+                style={{ width: '100%' }}
+                onChangeOption={onChangeOptionSelect}
               />
-              <TextField
-                id="standard-basic"
-                label="Answer"
-                variant="standard"
-                onChange={onChangeHandlerAnswer}
-                style={{ marginBottom: 10 }}
-                value={answerCard}
-                error={error && answerCard === ''}
-                helperText={error && answerCard === '' ? 'Please enter the answer' : ' '}
-              />
+              {typeQuestion === 'text' ? (
+                <>
+                  <TextField
+                    id="standard-basic"
+                    label="Question"
+                    variant="standard"
+                    onChange={onChangeHandlerQuestion}
+                    style={{ marginBottom: 10 }}
+                    value={questionCard}
+                    error={error && questionCard === ''}
+                    helperText={error && questionCard === '' ? 'Please enter the question' : ' '}
+                  />
+                  <TextField
+                    id="standard-basic"
+                    label="Answer"
+                    variant="standard"
+                    onChange={onChangeHandlerAnswer}
+                    style={{ marginBottom: 10 }}
+                    value={answerCard}
+                    error={error && answerCard === ''}
+                    helperText={error && answerCard === '' ? 'Please enter the answer' : ' '}
+                  />
+                </>
+              ) : (
+                <div>
+                  <div className={style.inputFileBlock}>
+                    <Typography
+                      id="modal-modal-description"
+                      style={{ marginBottom: 5, fontWeight: 'bolder' }}
+                      variant="subtitle1"
+                    >
+                      Question:
+                    </Typography>
+                    <InputTypeFile />
+                  </div>
+                  <div className={style.inputFileBlock}>
+                    <Typography
+                      id="modal-modal-description"
+                      style={{ marginBottom: 5, fontWeight: 'bolder' }}
+                      variant="subtitle1"
+                    >
+                      Answer:
+                    </Typography>
+                    <InputTypeFile />
+                  </div>
+                </div>
+              )}
             </>
           )}
         </Box>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CardModal } from '../../modal/cardModal/CardModal'
+import { CardModal } from 'common/components/modals/cardModal/CardModal'
 import { deleteCardTC, updateCardTC } from '../cardsReducer'
 
 import { AppDispatch } from 'app/store'

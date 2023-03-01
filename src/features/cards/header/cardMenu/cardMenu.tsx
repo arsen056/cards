@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper'
 import Popper from '@mui/material/Popper'
 import { useNavigate } from 'react-router-dom'
 
-import { PackModal } from '../../../modal/packModal/PackModal'
+import { PackModal } from 'common/components/modals/packModal/PackModal'
 import { deletePackInCards, setCardsCards, updatePackNameTC } from '../../cardsReducer'
 
 import style from './CardMenu.module.css'
@@ -88,7 +88,7 @@ export const CardMenu = ({ packID, title }: CardMenuPropsType) => {
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
       >
-        <div id="avatar" className={`${s.avatar}`}>
+        <div id="avatar" className={style.imgStyle}>
           <img src={cardMenu} alt="avatar" />
         </div>
       </Button>

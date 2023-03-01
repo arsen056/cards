@@ -4,11 +4,9 @@ import { ChangeEvent, useState } from 'react'
 import { Box, IconButton, TextField } from '@mui/material'
 import Typography from '@mui/material/Typography'
 
-import { BasicModal } from '../BasicModal'
-
-import s from './PackModal.module.css'
-
 import close from 'assets/close.svg'
+import { BasicModal } from 'common/components/modals/BasicModal'
+import s from 'common/components/modals/packModal/PackModal.module.css'
 import { SuperButton } from 'common/components/SuperButton'
 import { SuperCheckbox } from 'common/components/superCheckbox/SuperCheckbox'
 

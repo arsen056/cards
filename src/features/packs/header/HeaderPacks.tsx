@@ -11,8 +11,8 @@ import { RangeSlider } from './rangeSlider/RangeSlider'
 
 import { AppDispatch } from 'app/store'
 import resetIcon from 'assets/reset.svg'
+import { PackModal } from 'common/components/modals/packModal/PackModal'
 import { Search } from 'common/components/search/Search'
-import { PackModal } from 'features/modal/packModal/PackModal'
 
 export const HeaderPacks = () => {
   const dispatch = AppDispatch()
