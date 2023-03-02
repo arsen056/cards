@@ -26,7 +26,7 @@ export const CardsList = ({ cards, userId, packUserId, packID }: CardsListPropsT
         <TableHead>
           <TableRow>
             <TableCell>Question</TableCell>
-            <TableCell align="right">Answer</TableCell>
+            <TableCell align="center">Answer</TableCell>
             <TableCell align="right">Last Updated</TableCell>
             <TableCell align="right">Grade</TableCell>
             {userId === packUserId && <TableCell align="right">Actions</TableCell>}

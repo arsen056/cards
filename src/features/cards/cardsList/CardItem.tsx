@@ -26,14 +26,18 @@ export const CardItem = ({ card, packID, userId, packUserId }: CardItemPropsType
     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
       <TableCell component="th" scope="row">
         {card.questionImg ? (
-          <Picture deckCover={card.questionImg} defaultCover={ImageNotAvailable} />
+          <div style={{ display: 'inline-block' }}>
+            <Picture deckCover={card.questionImg} defaultCover={ImageNotAvailable} />
+          </div>
         ) : (
           <p>{card.question}</p>
         )}
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="center">
         {card.answerImg ? (
-          <Picture deckCover={card.answerImg} defaultCover={ImageNotAvailable} />
+          <div style={{ display: 'inline-block' }}>
+            <Picture deckCover={card.answerImg} defaultCover={ImageNotAvailable} />
+          </div>
         ) : (
           <p>{card.answer}</p>
         )}

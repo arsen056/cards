@@ -9,7 +9,6 @@ import Paper from '@mui/material/Paper'
 import Popper from '@mui/material/Popper'
 import { useNavigate } from 'react-router-dom'
 
-import { PackModal } from 'common/components/modals/packModal/PackModal'
 import { deletePackInCards, setCardsCards, updatePackNameTC } from '../../cardsReducer'
 
 import style from './CardMenu.module.css'
@@ -18,6 +17,7 @@ import { AppDispatch } from 'app/store'
 import cardMenu from 'assets/cardMenu.svg'
 import learn from 'assets/learn.svg'
 import s from 'common/components/header/avatar/Avatar.module.css'
+import { PackModal } from 'common/components/modals/packModal/PackModal'
 
 type CardMenuPropsType = {
   packID: string
