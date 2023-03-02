@@ -4,14 +4,14 @@ import { IconButton } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { AppDispatch } from 'app/store'
-import { setCardsCards, setCardsPageCount } from '../../cards/cardsReducer'
 import { UpdatePackType } from '../PacksAPI'
 import { selectUserID } from '../selectors'
 
 import s from './packList.module.css'
 
+import { AppDispatch } from 'app/store'
 import educationIcon from 'assets/learn.svg'
+import { setCardsCards, setCardsPageCount } from 'features/cards/cardsReducer'
 import { PackModal } from 'common/components/modals/packModal/PackModal'
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
@@ -22,6 +22,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
   editAction,
   deleteAction,
   packName,
+  deckCover,
 }) => {
   const userProfileID = useSelector(selectUserID)
 
@@ -29,16 +30,11 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
     deleteAction && deleteAction(id)
   }
 
-  const editCallback = (packName: string, statusPrivate: boolean) => {
-    editAction && editAction({ cardsPack: { _id: id, name: packName, private: statusPrivate } })
+  const editCallback = (packName: string, statusPrivate: boolean, deckCover: string) => {
+    editAction &&
+      editAction({ cardsPack: { _id: id, name: packName, private: statusPrivate, deckCover } })
   }
 
-  // const navigate = useNavigate()
-  // // const cardsPack_id = useSelector(selectIsCardsPackId)
-  //
-  // const learnPack = () => {
-  //   navigate(`${PATHS.learn}`)
-  // }
   const dispatch = AppDispatch()
 
   const learnPack = () => {
@@ -67,6 +63,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
             packModalFunctional={editCallback}
             typeButton={'editIcon'}
             nameValue={packName}
+            coverPack={deckCover}
           />
         </div>
       )}
@@ -92,4 +89,5 @@ export type ActionButtonsContainerType = {
   deleteAction?: (id: string) => void
   cardsCount: number
   packName: string
+  deckCover: string
 }

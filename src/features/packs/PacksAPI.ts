@@ -19,9 +19,9 @@ export const PacksAPI = {
 
 export type AddCardsPack = {
   cardsPack: {
-    name?: string // если не отправить будет таким
-    deckCover?: string // не обязателен
-    private?: boolean // если не отправить будет такой
+    name?: string
+    deckCover?: string
+    private?: boolean
   }
 }
 
@@ -36,6 +36,7 @@ export type UpdatePackType = {
     _id: string
     name?: string
     private?: boolean
+    deckCover?: string
   }
 }
 
@@ -58,7 +59,7 @@ export type GetPacksPayloadType = {
   sortPacks?: string
   page?: number
   pageCount?: number
-  user_id?: string // чьи колоды,если не передан то придут все
+  user_id?: string
   block?: boolean
 }
 

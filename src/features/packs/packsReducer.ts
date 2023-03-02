@@ -33,6 +33,8 @@ export const packsReducer = (
 ): PacksStateType => {
   switch (action.type) {
     case 'PACKS/SET_PACKS':
+      console.log('Set-Packs')
+
       return {
         ...state,
         cardPacks: action.packs,
@@ -143,6 +145,7 @@ export type PacksActionsType =
 export const getPacks = (): AppThunk => async (dispatch, getState) => {
   const { sortPacks, pageCount, page, packName, min, max, user_id } = getState().packs.searchParams
 
+  console.log('getPacks')
   try {
     dispatch(setStatus('loading'))
     const res = await PacksAPI.fetchPacks({
@@ -194,24 +197,12 @@ export const addPackTC =
 export const updatePackTC =
   (data: UpdatePackType): AppThunk =>
   async (dispatch, getState) => {
-    const { sortPacks, pageCount, page, packName, min, max, user_id } =
-      getState().packs.searchParams
-
     dispatch(setStatus('loading'))
     try {
       await PacksAPI.editPack(data)
-      const res = await PacksAPI.fetchPacks({
-        sortPacks,
-        pageCount,
-        page,
-        min,
-        max,
-        user_id,
-        packName,
-      })
-      const { cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount } = res.data
 
-      dispatch(setPacks(cardPacks, cardPacksTotalCount, maxCardsCount, minCardsCount))
+      dispatch(getPacks())
+
       dispatch(setStatus('success'))
     } catch (err) {
       errorUtils(err as Error | AxiosError, dispatch)

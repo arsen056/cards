@@ -19,13 +19,13 @@ import {
   selectSortPacks,
 } from '../selectors'
 
-import { PackItem } from './PackItem'
 import s from './packList.module.css'
 
 import { AppDispatch } from 'app/store'
 import sortArrow from 'assets/sort-arrow.svg'
 import { EmptyShow } from 'common/components/emptyShow/EmptyShow'
 import { SuperPagination } from 'common/components/superPagination/SuperPagination'
+import { PackItem } from 'features/packs/packList/packItem/PackItem'
 
 export const PackList = () => {
   const dispatch = AppDispatch()
@@ -67,6 +67,7 @@ export const PackList = () => {
           <TableHead>
             <TableRow className={s.thead}>
               <TableCell>Name</TableCell>
+              <TableCell>Cover</TableCell>
               <TableCell align="right">Cards</TableCell>
               <TableCell sx={{ cursor: 'pointer' }} align="right" onClick={setSortUpdated}>
                 Last Updated

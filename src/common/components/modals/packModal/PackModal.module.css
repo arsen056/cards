@@ -1,7 +1,7 @@
-
 .titleAndCloseBlock {
     display: flex;
     justify-content: space-between;
+
     margin-bottom: 30px;
 }
 
@@ -12,3 +12,14 @@
     margin-top: 30px;
 }
 
+.packCoverWrapper {
+    overflow: hidden;
+
+    width: 70px;
+}
+
+.packCoverWrapper img {
+    width: 100%;
+
+    border-radius: 10px;
+}

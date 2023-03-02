@@ -1,0 +1,10 @@
+
+
+.packName {
+  overflow: hidden;
+
+  max-width: 25vw;
+
+  word-break: break-word;
+  white-space: nowrap;
+}
