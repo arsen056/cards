@@ -22,6 +22,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
   editAction,
   deleteAction,
   packName,
+  deckCover,
 }) => {
   const userProfileID = useSelector(selectUserID)
 
@@ -29,8 +30,9 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
     deleteAction && deleteAction(id)
   }
 
-  const editCallback = (packName: string, statusPrivate: boolean) => {
-    editAction && editAction({ cardsPack: { _id: id, name: packName, private: statusPrivate } })
+  const editCallback = (packName: string, statusPrivate: boolean, deckCover: string) => {
+    editAction &&
+      editAction({ cardsPack: { _id: id, name: packName, private: statusPrivate, deckCover } })
   }
 
   const dispatch = AppDispatch()
@@ -61,6 +63,7 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
             packModalFunctional={editCallback}
             typeButton={'editIcon'}
             nameValue={packName}
+            coverPack={deckCover}
           />
         </div>
       )}
@@ -86,4 +89,5 @@ export type ActionButtonsContainerType = {
   deleteAction?: (id: string) => void
   cardsCount: number
   packName: string
+  deckCover: string
 }

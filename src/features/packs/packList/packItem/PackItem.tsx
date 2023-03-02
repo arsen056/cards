@@ -12,14 +12,12 @@ import { PackListCrud } from 'features/packs/packList/PackListCRUD'
 import { PackType, UpdatePackType } from 'features/packs/PacksAPI'
 import { deletePackTC, updatePackTC } from 'features/packs/packsReducer'
 
-type PackItemPropsType = {
+type Props = {
   pack: PackType
 }
 
-export const PackItem: FC<PackItemPropsType> = ({ pack }) => {
+export const PackItem: FC<Props> = ({ pack }) => {
   const dispatch = AppDispatch()
-
-  const [cover, setCover] = useState<string>(pack.deckCover)
 
   const updatePack = (data: UpdatePackType) => {
     dispatch(updatePackTC(data))
@@ -29,8 +27,6 @@ export const PackItem: FC<PackItemPropsType> = ({ pack }) => {
     dispatch(deletePackTC(id))
   }
 
-  const errorPicture = () => setCover(defaultCover)
-
   const date = isoToDate(pack.updated)
 
   return (
@@ -39,9 +35,7 @@ export const PackItem: FC<PackItemPropsType> = ({ pack }) => {
         <Link to={pack._id}>{pack.name}</Link>
       </TableCell>
       <TableCell align="right">
-        <div className={s.packCoverWrapper}>
-          <img src={cover ? cover : defaultCover} alt="pack cover" onError={errorPicture} />
-        </div>
+        <Cover deckCover={pack.deckCover} defaultCover={defaultCover} />
       </TableCell>
       <TableCell align="right">{pack.cardsCount}</TableCell>
       <TableCell align="right">{date}</TableCell>
@@ -53,10 +47,32 @@ export const PackItem: FC<PackItemPropsType> = ({ pack }) => {
           userId={pack.user_id}
           educationsAction={() => {}}
           packName={pack.name}
+          deckCover={pack.deckCover}
           editAction={updatePack}
           deleteAction={deletePack}
         />
       </TableCell>
     </TableRow>
+  )
+}
+
+type CoverType = {
+  deckCover: string
+  defaultCover: string
+}
+
+const Cover: FC<CoverType> = ({ deckCover, defaultCover }) => {
+  const [isError, setIsError] = useState<boolean>(false)
+
+  const errorPicture = () => setIsError(true)
+
+  let picture = deckCover
+
+  if (!deckCover) picture = defaultCover
+
+  return (
+    <div className={s.packCoverWrapper}>
+      <img src={picture} alt="pack cover" onError={errorPicture} />
+    </div>
   )
 }

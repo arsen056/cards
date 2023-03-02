@@ -22,6 +22,7 @@ type Props = {
   typeButton: TypeButton
   titleButton?: string
   nameValue?: string
+  coverPack?: string
   helpText?: string
 }
 
@@ -30,11 +31,13 @@ export const PackModal = ({
   typeButton,
   titleButton,
   nameValue,
+  coverPack,
   helpText,
 }: Props) => {
   const [open, setOpen] = useState<boolean>(false)
   const [privatePackStatus, setPrivatePackStatus] = useState<boolean>(false)
-  const [deckCover, setDeckCover] = useState<string>('')
+  const [deckCover, setDeckCover] = useState<string>(coverPack || '')
+
   const [value, setValue] = useState<string>('')
   const [error, setError] = useState<boolean>(false)
   const dispatch = AppDispatch()
@@ -127,6 +130,10 @@ export const PackModal = ({
                     <PhotoCamera />
                   </IconButton>
                 </span>
+
+                <div className={s.packCoverWrapper}>
+                  <img src={deckCover} alt="pack cover" />
+                </div>
               </>
             )}
           </Box>

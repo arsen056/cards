@@ -26,7 +26,6 @@ export const AvatarComponent = memo(({ user }: AvatarComponentType) => {
     inputRef && inputRef.current?.click()
   }
 
-  //
   useEffect(() => {
     if (avatar) {
       dispatch(changeProfile('', avatar))
