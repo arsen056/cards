@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 import { AppDispatch } from 'app/store'
 import defaultCover from 'assets/defaultCoverPack.png'
+import { Picture } from 'common/components/picture/Picture'
 import { isoToDate } from 'common/utils/time'
 import s from 'features/packs/packList/packItem/PackItem.module.css'
 import { PackListCrud } from 'features/packs/packList/PackListCRUD'
@@ -31,11 +32,13 @@ export const PackItem: FC<Props> = ({ pack }) => {
 
   return (
     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-      <TableCell component="th" scope="row">
-        <Link to={pack._id}>{pack.name}</Link>
+      <TableCell className={s.packName} component="th" scope="row">
+        <Link style={{ wordBreak: 'break-word' }} to={pack._id}>
+          {pack.name}
+        </Link>
       </TableCell>
       <TableCell align="right">
-        <Cover deckCover={pack.deckCover} defaultCover={defaultCover} />
+        <Picture deckCover={pack.deckCover} defaultCover={defaultCover} />
       </TableCell>
       <TableCell align="right">{pack.cardsCount}</TableCell>
       <TableCell align="right">{date}</TableCell>
@@ -53,26 +56,5 @@ export const PackItem: FC<Props> = ({ pack }) => {
         />
       </TableCell>
     </TableRow>
-  )
-}
-
-type CoverType = {
-  deckCover: string
-  defaultCover: string
-}
-
-export const Cover: FC<CoverType> = ({ deckCover, defaultCover }) => {
-  const [isError, setIsError] = useState<boolean>(false)
-
-  const errorPicture = () => setIsError(true)
-
-  let picture = deckCover
-
-  if (!deckCover) picture = defaultCover
-
-  return (
-    <div className={s.packCoverWrapper}>
-      <img src={picture} alt="pack cover" onError={errorPicture} />
-    </div>
   )
 }

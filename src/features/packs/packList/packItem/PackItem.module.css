@@ -1,11 +1,10 @@
-.packCoverWrapper {
+
+
+.packName {
   overflow: hidden;
 
-  width: 70px;
-}
+  max-width: 25vw;
 
-.packCoverWrapper img {
-  width: 100%;
-
-  border-radius: 10px;
+  word-break: break-word;
+  white-space: nowrap;
 }

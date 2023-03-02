@@ -12,10 +12,10 @@ import s from './PackModal.module.css'
 import { AppDispatch } from 'app/store'
 import close from 'assets/close.svg'
 import defaultCover from 'assets/defaultCoverPack.png'
+import { Picture } from 'common/components/picture/Picture'
 import { SuperButton } from 'common/components/SuperButton'
 import { SuperCheckbox } from 'common/components/superCheckbox/SuperCheckbox'
 import { uploadPicture } from 'common/utils/uploadPicture'
-import { Cover } from 'features/packs/packList/packItem/PackItem'
 
 export type TypeButton = 'editIcon' | 'superButton' | 'deleteIcon'
 
@@ -133,7 +133,7 @@ export const PackModal = ({
                   </IconButton>
                 </span>
 
-                <Cover deckCover={deckCover} defaultCover={defaultCover} />
+                <Picture deckCover={deckCover} defaultCover={defaultCover} />
               </>
             )}
           </Box>
