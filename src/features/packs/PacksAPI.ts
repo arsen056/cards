@@ -19,9 +19,9 @@ export const PacksAPI = {
 
 export type AddCardsPack = {
   cardsPack: {
-    name?: string // если не отправить будет таким
-    deckCover?: string // не обязателен
-    private?: boolean // если не отправить будет такой
+    name?: string
+    deckCover?: string
+    private?: boolean
   }
 }
 

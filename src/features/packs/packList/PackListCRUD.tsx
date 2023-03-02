@@ -4,14 +4,14 @@ import { IconButton } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { AppDispatch } from '../../../app/store'
-import { setCardsCards, setCardsPageCount } from '../../cards/cardsReducer'
 import { UpdatePackType } from '../PacksAPI'
 import { selectUserID } from '../selectors'
 
 import s from './packList.module.css'
 
+import { AppDispatch } from 'app/store'
 import educationIcon from 'assets/learn.svg'
+import { setCardsCards, setCardsPageCount } from 'features/cards/cardsReducer'
 import { PackModal } from 'features/modal/packModal/PackModal'
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
@@ -33,12 +33,6 @@ export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
     editAction && editAction({ cardsPack: { _id: id, name: packName, private: statusPrivate } })
   }
 
-  // const navigate = useNavigate()
-  // // const cardsPack_id = useSelector(selectIsCardsPackId)
-  //
-  // const learnPack = () => {
-  //   navigate(`${PATHS.learn}`)
-  // }
   const dispatch = AppDispatch()
 
   const learnPack = () => {

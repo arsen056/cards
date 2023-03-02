@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ChangeEvent, useState } from 'react'
 
+import { PhotoCamera } from '@mui/icons-material'
 import { Box, IconButton, TextField } from '@mui/material'
 import Typography from '@mui/material/Typography'
 
@@ -8,14 +9,16 @@ import { BasicModal } from '../BasicModal'
 
 import s from './PackModal.module.css'
 
+import { AppDispatch } from 'app/store'
 import close from 'assets/close.svg'
 import { SuperButton } from 'common/components/SuperButton'
 import { SuperCheckbox } from 'common/components/superCheckbox/SuperCheckbox'
+import { uploadPicture } from 'common/utils/uploadPicture'
 
 export type TypeButton = 'editIcon' | 'superButton' | 'deleteIcon'
 
 type Props = {
-  packModalFunctional: (namePack: string, statusPrivate: boolean) => void
+  packModalFunctional: (namePack: string, statusPrivate: boolean, deckCover: string) => void
   typeButton: TypeButton
   titleButton?: string
   nameValue?: string
@@ -31,8 +34,10 @@ export const PackModal = ({
 }: Props) => {
   const [open, setOpen] = useState<boolean>(false)
   const [privatePackStatus, setPrivatePackStatus] = useState<boolean>(false)
+  const [deckCover, setDeckCover] = useState<string>('')
   const [value, setValue] = useState<string>('')
   const [error, setError] = useState<boolean>(false)
+  const dispatch = AppDispatch()
   const handleOpen = () => {
     setOpen(true)
     setValue(nameValue || '')
@@ -54,11 +59,13 @@ export const PackModal = ({
     if (value === '') {
       setError(true)
     } else {
-      packModalFunctional(value, privatePackStatus)
+      packModalFunctional(value, privatePackStatus, deckCover)
       setError(false)
       setOpen(false)
     }
   }
+
+  const uploadHandler = uploadPicture(setDeckCover, dispatch)
 
   let titleModal
 
@@ -102,16 +109,25 @@ export const PackModal = ({
                 All cards will be deleted.
               </Typography>
             ) : (
-              <TextField
-                id="standard-basic"
-                label="Name pack"
-                variant="standard"
-                onChange={onChangeHandler}
-                style={{ marginBottom: 10 }}
-                value={value}
-                error={error}
-                helperText={error ? 'Please enter the name of the pack' : ' '}
-              />
+              <>
+                <TextField
+                  id="standard-basic"
+                  label="Name pack"
+                  variant="standard"
+                  onChange={onChangeHandler}
+                  style={{ marginBottom: 10 }}
+                  value={value}
+                  error={error}
+                  helperText={error ? 'Please enter the name of the pack' : ' '}
+                />
+                <span>
+                  Upload cover
+                  <IconButton color="primary" aria-label="upload picture" component="label">
+                    <input hidden accept="image/*" type="file" onChange={uploadHandler} />
+                    <PhotoCamera />
+                  </IconButton>
+                </span>
+              </>
             )}
           </Box>
           {typeButton === 'deleteIcon' ? (

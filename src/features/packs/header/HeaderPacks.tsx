@@ -24,8 +24,8 @@ export const HeaderPacks = () => {
     dispatch(setResetFilters(maxValue))
   }
 
-  const addPack = (namePack: string, statusPrivate: boolean) => {
-    dispatch(addPackTC({ cardsPack: { name: namePack, private: statusPrivate } }))
+  const addPack = (namePack: string, statusPrivate: boolean, deckCover: string) => {
+    dispatch(addPackTC({ cardsPack: { name: namePack, private: statusPrivate, deckCover } }))
   }
 
   return (
