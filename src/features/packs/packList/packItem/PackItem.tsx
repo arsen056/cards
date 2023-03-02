@@ -61,7 +61,7 @@ type CoverType = {
   defaultCover: string
 }
 
-const Cover: FC<CoverType> = ({ deckCover, defaultCover }) => {
+export const Cover: FC<CoverType> = ({ deckCover, defaultCover }) => {
   const [isError, setIsError] = useState<boolean>(false)
 
   const errorPicture = () => setIsError(true)
