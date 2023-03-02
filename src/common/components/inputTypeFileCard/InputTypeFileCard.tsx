@@ -1,21 +1,18 @@
-import React, { ChangeEvent, useState } from 'react'
+import React from 'react'
 
 import { Button } from '@mui/material'
 
-import { convertFileToBase64 } from 'common/utils/convertFileToBase64'
+import { AppDispatch } from 'app/store'
+import { uploadPicture } from 'common/utils/uploadPicture'
 
-export const InputTypeFile = () => {
-  const [image, setImage] = useState<undefined | string>(undefined)
+type Props = {
+  setImage: (image: string) => void
+}
 
-  const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      const file = e.target.files[0]
+export const InputTypeFile = ({ setImage }: Props) => {
+  const dispatch = AppDispatch()
 
-      convertFileToBase64(file, (file64: string) => {
-        setImage(file64)
-      })
-    }
-  }
+  const uploadHandler = uploadPicture(setImage, dispatch)
 
   return (
     <label>
@@ -23,7 +20,6 @@ export const InputTypeFile = () => {
       <Button variant="text" component="span">
         Change cover
       </Button>
-      {image && <img src={image} style={{ width: '300px', height: 300 }} alt="image" />}
     </label>
   )
 }

@@ -47,13 +47,15 @@ export const Cards = memo(() => {
     dispatch(setCardsPageCount(pageCardsCount))
   }
 
-  const addCard = (question: string, answer: string) => {
+  const addCard = (question: string, answer: string, questionImg: string, answerImg: string) => {
     dispatch(
       addCardTC({
         card: {
           cardsPack_id: packID as string,
           question,
           answer,
+          questionImg,
+          answerImg,
           grade: 0,
         },
       })

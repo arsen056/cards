@@ -4,12 +4,13 @@ import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import { Link } from 'react-router-dom'
 
+import { PackListCrud } from '../PackListCRUD'
+
 import { AppDispatch } from 'app/store'
 import defaultCover from 'assets/defaultCoverPack.png'
 import { Picture } from 'common/components/picture/Picture'
 import { isoToDate } from 'common/utils/time'
 import s from 'features/packs/packList/packItem/PackItem.module.css'
-import { PackListCrud } from 'features/packs/packList/PackListCRUD'
 import { PackType, UpdatePackType } from 'features/packs/PacksAPI'
 import { deletePackTC, updatePackTC } from 'features/packs/packsReducer'
 

@@ -18,7 +18,12 @@ import SuperSelect from 'common/components/superSelect/SuperSelect'
 import { setCardsCards } from 'features/cards/cardsReducer'
 
 type Props = {
-  cardModalFunctional: (question: string, answer: string) => void
+  cardModalFunctional: (
+    question: string,
+    answer: string,
+    questionImg: string,
+    answerImg: string
+  ) => void
   typeButton: TypeButton
   titleButton?: string
   question?: string
@@ -48,6 +53,8 @@ export const CardModal = ({
   const [answerCard, setAnswerCard] = useState<string>('')
   const [error, setError] = useState<boolean>(false)
   const [typeQuestion, setTypeQuestion] = useState<SelectQuestionType>('text')
+  const [imageQuestion, setImageQuestion] = useState<string>('')
+  const [imageAnswer, setImageAnswer] = useState<string>('')
 
   const dispatch = AppDispatch()
   const navigate = useNavigate()
@@ -65,6 +72,8 @@ export const CardModal = ({
     setOpen(false)
     setError(false)
     setTypeQuestion('text')
+    setImageQuestion('')
+    setImageAnswer('')
   }
 
   const onChangeHandlerQuestion = (event: ChangeEvent<HTMLInputElement>) => {
@@ -75,12 +84,13 @@ export const CardModal = ({
   }
 
   const onClickHandlerElseCondition = () => {
-    cardModalFunctional(questionCard, answerCard)
+    cardModalFunctional(questionCard, answerCard, imageQuestion, imageAnswer)
     setError(false)
     setOpen(false)
   }
 
   const onClickHandler = () => {
+    if (imageAnswer !== '' && imageQuestion !== '') onClickHandlerElseCondition()
     if (typeButton !== 'deleteIcon') {
       if (questionCard === '' || answerCard === '') setError(true)
       else onClickHandlerElseCondition()
@@ -183,7 +193,16 @@ export const CardModal = ({
                     >
                       Question:
                     </Typography>
-                    <InputTypeFile />
+                    <InputTypeFile setImage={setImageQuestion} />
+                  </div>
+                  <div>
+                    {imageQuestion && (
+                      <img
+                        src={imageQuestion}
+                        style={{ width: '100%', borderRadius: 10, maxHeight: '30vh' }}
+                        alt="image"
+                      />
+                    )}
                   </div>
                   <div className={style.inputFileBlock}>
                     <Typography
@@ -193,7 +212,16 @@ export const CardModal = ({
                     >
                       Answer:
                     </Typography>
-                    <InputTypeFile />
+                    <InputTypeFile setImage={setImageAnswer} />
+                  </div>
+                  <div>
+                    {imageAnswer && (
+                      <img
+                        src={imageAnswer}
+                        style={{ width: '100%', borderRadius: 10, maxHeight: '30vh' }}
+                        alt="image"
+                      />
+                    )}
                   </div>
                 </div>
               )}

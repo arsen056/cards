@@ -11,8 +11,8 @@ import s from './packList.module.css'
 
 import { AppDispatch } from 'app/store'
 import educationIcon from 'assets/learn.svg'
-import { setCardsCards, setCardsPageCount } from 'features/cards/cardsReducer'
 import { PackModal } from 'common/components/modals/packModal/PackModal'
+import { setCardsCards, setCardsPageCount } from 'features/cards/cardsReducer'
 
 export const PackListCrud: React.FC<ActionButtonsContainerType> = ({
   id,

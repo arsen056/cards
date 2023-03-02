@@ -11,7 +11,12 @@ import s from 'features/packs/header/HeaderPacks.module.css'
 
 type HeaderCardsPropsType = {
   title: string
-  cardModalFunctional: (question: string, answer: string) => void
+  cardModalFunctional: (
+    question: string,
+    answer: string,
+    questionImg: string,
+    answerImg: string
+  ) => void
   packUserId: string
   userId: string
   packID: string

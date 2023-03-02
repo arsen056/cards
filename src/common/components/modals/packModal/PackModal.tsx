@@ -7,12 +7,10 @@ import Typography from '@mui/material/Typography'
 
 import { BasicModal } from '../BasicModal'
 
-import s from './PackModal.module.css'
-
 import { AppDispatch } from 'app/store'
 import close from 'assets/close.svg'
-import s from 'common/components/modals/packModal/PackModal.module.css'
 import defaultCover from 'assets/defaultCoverPack.png'
+import s from 'common/components/modals/packModal/PackModal.module.css'
 import { Picture } from 'common/components/picture/Picture'
 import { SuperButton } from 'common/components/SuperButton'
 import { SuperCheckbox } from 'common/components/superCheckbox/SuperCheckbox'

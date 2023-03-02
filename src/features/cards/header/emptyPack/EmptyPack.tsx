@@ -5,7 +5,7 @@ import s from './EmptyPack.module.css'
 import { CardModal } from 'common/components/modals/cardModal/CardModal'
 
 type EmptyPackPropsType = {
-  addCard: (question: string, answer: string) => void
+  addCard: (question: string, answer: string, questionImg: string, answerImg: string) => void
   userId: string
   packUserId: string
 }
