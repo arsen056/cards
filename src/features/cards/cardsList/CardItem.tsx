@@ -53,6 +53,8 @@ export const CardItem = ({ card, packID, userId, packUserId }: CardItemPropsType
             packID={packID}
             cardAnswer={card.answer}
             cardQuestion={card.question}
+            cardQuestionImage={card.questionImg}
+            cardAnswerImage={card.answerImg}
           />
         </TableCell>
       )}

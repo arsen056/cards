@@ -10,16 +10,27 @@ type CardsCrudType = {
   packID: string
   cardAnswer: string
   cardQuestion: string
+  cardQuestionImage?: string
+  cardAnswerImage?: string
 }
 
-export const CardsCrud = ({ cardId, packID, cardQuestion, cardAnswer }: CardsCrudType) => {
+export const CardsCrud = ({
+  cardId,
+  packID,
+  cardQuestion,
+  cardAnswer,
+  cardQuestionImage,
+  cardAnswerImage,
+}: CardsCrudType) => {
   const dispatch = AppDispatch()
   const deleteCard = () => {
     dispatch(deleteCardTC(cardId, packID))
   }
 
-  const updateCard = (question: string, answer: string) => {
-    dispatch(updateCardTC({ card: { _id: cardId, question, answer } }, packID))
+  const updateCard = (question: string, answer: string, questionImg: string, answerImg: string) => {
+    dispatch(
+      updateCardTC({ card: { _id: cardId, question, answer, questionImg, answerImg } }, packID)
+    )
   }
 
   return (
@@ -30,6 +41,8 @@ export const CardsCrud = ({ cardId, packID, cardQuestion, cardAnswer }: CardsCru
           cardModalFunctional={updateCard}
           answer={cardAnswer}
           question={cardQuestion}
+          cardQuestionImage={cardQuestionImage}
+          cardAnswerImage={cardAnswerImage}
         />
       </div>
       <div style={{ display: 'inline-block' }}>
@@ -37,6 +50,7 @@ export const CardsCrud = ({ cardId, packID, cardQuestion, cardAnswer }: CardsCru
           typeButton={'deleteIcon'}
           cardModalFunctional={deleteCard}
           question={cardQuestion}
+          cardQuestionImage={cardQuestionImage}
         />
       </div>
     </div>

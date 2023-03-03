@@ -13,6 +13,7 @@ import { InputTypeFile } from 'common/components/inputTypeFileCard/InputTypeFile
 import { BasicModal } from 'common/components/modals/BasicModal'
 import { TypeButton } from 'common/components/modals/packModal/PackModal'
 import s from 'common/components/modals/packModal/PackModal.module.css'
+import { Picture } from 'common/components/picture/Picture'
 import { SuperButton } from 'common/components/SuperButton'
 import SuperSelect from 'common/components/superSelect/SuperSelect'
 import { setCardsCards } from 'features/cards/cardsReducer'
@@ -30,6 +31,8 @@ type Props = {
   answer?: string
   packID?: string
   cardsLength?: number
+  cardQuestionImage?: string
+  cardAnswerImage?: string
 }
 
 type SelectQuestionType = 'text' | 'picture'
@@ -47,33 +50,46 @@ export const CardModal = ({
   question,
   packID,
   cardsLength,
+  cardQuestionImage,
+  cardAnswerImage,
 }: Props) => {
   const [open, setOpen] = useState<boolean>(false)
   const [questionCard, setQuestionCard] = useState<string>('')
   const [answerCard, setAnswerCard] = useState<string>('')
   const [error, setError] = useState<boolean>(false)
-  const [typeQuestion, setTypeQuestion] = useState<SelectQuestionType>('text')
+  const [typeQuestion, setTypeQuestion] = useState<SelectQuestionType>('picture')
   const [imageQuestion, setImageQuestion] = useState<string>('')
   const [imageAnswer, setImageAnswer] = useState<string>('')
 
   const dispatch = AppDispatch()
   const navigate = useNavigate()
+
   const handleOpen = () => {
+    if (typeButton === 'superButton') {
+      setTypeQuestion('text')
+    }
     if (titleButton === 'Learn to pack') {
       dispatch(setCardsCards([]))
       navigate(`/learn/${packID}`)
-    } else {
-      setOpen(true)
+    }
+    if (typeButton === 'editIcon' && !cardQuestionImage) {
+      setTypeQuestion('text')
       setQuestionCard(question || '')
       setAnswerCard(answer || '')
+    } else {
+      {
+        cardQuestionImage ? setImageQuestion(cardQuestionImage) : setImageQuestion('')
+      }
+      {
+        cardAnswerImage ? setImageAnswer(cardAnswerImage) : setImageAnswer('')
+      }
     }
+    setOpen(true)
   }
+
   const handleClose = () => {
     setOpen(false)
     setError(false)
-    setTypeQuestion('text')
-    setImageQuestion('')
-    setImageAnswer('')
   }
 
   const onChangeHandlerQuestion = (event: ChangeEvent<HTMLInputElement>) => {
@@ -137,29 +153,54 @@ export const CardModal = ({
         <Box
           component="form"
           sx={{
-            '& > :not(style)': { m: 0, width: '40ch' },
+            '& > :not(style)': { m: 0, width: '100%' },
           }}
           noValidate
           autoComplete="off"
         >
           {typeButton === 'deleteIcon' ? (
-            <Typography id="modal-modal-description">
-              Do you really want to remove this question?
-              <React.Fragment>
-                <br />
-              </React.Fragment>
-              <b>&#34;{question}&#34;</b>
-            </Typography>
+            <div>
+              <Typography id="modal-modal-description">
+                Do you really want to remove this question?
+                <React.Fragment>
+                  <br />
+                </React.Fragment>
+              </Typography>
+              {cardQuestionImage ? (
+                <img
+                  src={cardQuestionImage}
+                  style={{
+                    width: '100%',
+                    borderRadius: 10,
+                    maxHeight: '30vh',
+                    display: 'block',
+                    marginTop: 20,
+                  }}
+                  alt="image"
+                />
+              ) : (
+                <b>&#34;{question}&#34;</b>
+              )}
+            </div>
           ) : (
             <>
-              <Typography id="modal-modal-description" style={{ opacity: 0.5, marginBottom: 5 }}>
-                Choose a question format
-              </Typography>
-              <SuperSelect
-                options={selectOptions}
-                style={{ width: '100%' }}
-                onChangeOption={onChangeOptionSelect}
-              />
+              {typeButton === 'editIcon' ? (
+                ''
+              ) : (
+                <>
+                  <Typography
+                    id="modal-modal-description"
+                    style={{ opacity: 0.5, marginBottom: 5 }}
+                  >
+                    Choose a question format
+                  </Typography>
+                  <SuperSelect
+                    options={selectOptions}
+                    style={{ width: '100%' }}
+                    onChangeOption={onChangeOptionSelect}
+                  />
+                </>
+              )}
               {typeQuestion === 'text' ? (
                 <>
                   <TextField
@@ -196,9 +237,9 @@ export const CardModal = ({
                     <InputTypeFile setImage={setImageQuestion} />
                   </div>
                   <div>
-                    {imageQuestion && (
+                    {(imageQuestion !== '' || cardQuestionImage) && (
                       <img
-                        src={imageQuestion}
+                        src={imageQuestion !== '' ? imageQuestion : cardQuestionImage}
                         style={{ width: '100%', borderRadius: 10, maxHeight: '30vh' }}
                         alt="image"
                       />
@@ -215,9 +256,9 @@ export const CardModal = ({
                     <InputTypeFile setImage={setImageAnswer} />
                   </div>
                   <div>
-                    {imageAnswer && (
+                    {(imageAnswer !== '' || cardAnswerImage) && (
                       <img
-                        src={imageAnswer}
+                        src={imageAnswer !== '' ? imageAnswer : cardAnswerImage}
                         style={{ width: '100%', borderRadius: 10, maxHeight: '30vh' }}
                         alt="image"
                       />

@@ -67,7 +67,9 @@ export type UpdateCardType = {
   card: {
     _id: string
     question: string // не обязательно
-    answer: string
+    answer: string // не обязательно
+    answerImg: string // не обязателен
+    questionImg: string // не обязателен
   }
 }
 
